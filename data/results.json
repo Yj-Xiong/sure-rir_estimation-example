@@ -1,0 +1,15 @@
+{
+  "schema": "sure.rir.demo.preview.v1",
+  "note": "Browser-generated preview values; real reports are produced by sure-harness.",
+  "spacings_cm": [3, 6, 9, 12, 15, 18, 21, 24, 27, 30],
+  "samples_per_spacing": 2,
+  "pipeline_family": "rir.any",
+  "pipeline_ids": {
+    "single_channel": "rir.any.rir_nmse.rir_nmse_v1",
+    "binaural_iacc": "rir.any.rir_iacc_mae.rir_iacc_mae_v1",
+    "binaural_itd": "rir.any.rir_itd_mae.rir_itd_mae_v1",
+    "binaural_ild": "rir.any.rir_ild_mae.rir_ild_mae_v1",
+    "binaural_ipd": "rir.any.rir_ipd_mae.rir_ipd_mae_v1"
+  },
+  "spatial_metrics": ["rir_iacc_mae", "rir_itd_mae", "rir_ild_mae", "rir_ipd_mae"]
+}

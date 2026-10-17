@@ -1,0 +1,21 @@
+{
+  "schema": "sure.fixture_provenance.v2",
+  "task": "rir",
+  "dataset": {
+    "repository": "VariableMSpacingTest",
+    "revision": "external dataset; use the local manifest revision",
+    "configuration": "test",
+    "split": "test",
+    "license": "see the upstream dataset terms",
+    "source_id": "variable_mspacing_test"
+  },
+  "selection": {
+    "rule": "scene_0000 and scene_0001; two rows for each of ten microphone spacings",
+    "sample_ids": "materialized from the upstream test_manifest.jsonl"
+  },
+  "annotations": {
+    "source": "upstream manifest",
+    "ground_truth_path": "rir"
+  },
+  "redistribution": "This example contains no audio, checkpoints, generated RIRs, or private paths."
+}

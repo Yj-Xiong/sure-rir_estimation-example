@@ -30,7 +30,9 @@ const METRIC_META = {
   iacc_full_1s_mae: { label: "IACC full", unit: "coefficient", precision: 3, range: 1 },
   iacc_early_1s_mae: { label: "IACC early", unit: "coefficient", precision: 3, range: 1 },
   iacc_late_1s_mae: { label: "IACC late", unit: "coefficient", precision: 3, range: 1 },
-  interchannel_delay_1s_mae: { label: "ITD", unit: "samples", precision: 2, range: 64 },
+  itd_1s_mae: { label: "ITD", unit: "ms", precision: 3, range: 5 },
+  ild_1s_mae: { label: "ILD", unit: "dB", precision: 2, range: 20 },
+  ipd_1s_mae: { label: "IPD", unit: "rad", precision: 3, range: 3.2 },
 };
 
 let selectedGroup = "binaural";

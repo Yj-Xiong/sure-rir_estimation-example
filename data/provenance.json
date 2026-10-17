@@ -14,7 +14,7 @@
   },
   "browser_selection": {
     "snrs_db": [10, 20, 30],
-    "scenes": ["scene_0000", "scene_0003"],
+    "scenes": ["scene_0000", "scene_0099"],
     "spacings_cm": [3, 6, 9, 12, 15, 18, 21, 24, 27, 30],
     "rows_per_snr": 20,
     "total_rows": 60,

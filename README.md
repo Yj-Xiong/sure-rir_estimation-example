@@ -8,7 +8,7 @@ SURE's channel-aware RIR evaluation contract:
 - Rec-RIR -> single-channel inference, scoring channel 0;
 - Rec-RIR -> two independent mono inferences, merged as L/R;
 - NeuBIRE v1 -> channel 0 duplicated to both model inputs, scoring output channel 0;
-- NeuBIRE v1 -> native two-channel inference with IACC, ITD, ILD, and IPD.
+- NeuBIRE v1 -> native two-channel inference with IACC and ITD.
 
 This repository is the Example contribution only. The evaluation Pipeline
 contribution belongs in `PigeonDan1/sure-evaluation`; the later Harness
@@ -32,12 +32,12 @@ no node implementation and no replacement for an existing `pipeline_id`.
 The default RIR bundle uses NPM and RT60 before optional spatial metrics. Scores are comparable only when the
 canonical metric, channel branch, sample-rate/window policy, and pipeline ID
 match; mono reports must not be mixed with binaural spatial reports. The small
-sample evidence is the 20-row, ten-spacing VariableMSpacingTest selection
-described under `example/fixture/`.
+browser preview uses 60 direct RIR rows from the fixed-SNR set: 10/20/30 dB,
+scenes `scene_0000` and `scene_0096`, and ten microphone spacings.
 
-The page is a static GitHub Pages artifact. It loads four real 20-row SURE
-report cases. Model checkpoints and private paths stay outside the repository;
-bounded prediction outputs are included under `example/fixture/cases/`.
+The page is a static GitHub Pages artifact. It loads four real 60-row direct-RIR
+result cases. Model checkpoints and private paths stay outside the repository;
+the browser data contains only bounded waveform samples and scores.
 
 Repository layout follows the SURE example convention:
 

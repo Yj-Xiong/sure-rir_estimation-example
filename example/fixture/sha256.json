@@ -3,8 +3,13 @@
   "files": [
     {
       "path": "README.md",
-      "sha256": "2bbad5e179d25b68c78d65980b6e079953647686f92891ba3040d3a1c0cbe14d",
-      "bytes": 480
+      "sha256": "5fbdaae54dfb04363292da98a8a44191f610b2713263bf0423a7ddfb261c22c9",
+      "bytes": 697
+    },
+    {
+      "path": "case_manifest.json",
+      "sha256": "47b17c1bf6c69d4f8ecb938e5b8942430db154b5c5f883cf629cc58f7011fde9",
+      "bytes": 1182
     },
     {
       "path": "cases/neubire-v1-native/predictions/scene_0000_mic03cm.wav",
@@ -633,8 +638,8 @@
     },
     {
       "path": "model_examples.yaml",
-      "sha256": "648c52dd680d531f6ea876801b653bee0d556ab71444645785e9f4c7d1fe93ba",
-      "bytes": 1098
+      "sha256": "a7d84e822137350610482fa26a449af6bbc5100b021105473034c86afaae30c1",
+      "bytes": 1143
     },
     {
       "path": "original_mixture/scene_0000_mic03cm.wav",
@@ -838,8 +843,8 @@
     },
     {
       "path": "provenance.json",
-      "sha256": "de80fbe6bd8323082bea1c8998ee69b29350d3ad0e1ce44b19df99430d3349eb",
-      "bytes": 706
+      "sha256": "89e720653d1164b3f6329271803a087b1cdc3303cb2ee450ec8969d982133590",
+      "bytes": 785
     },
     {
       "path": "reference_channel0/scene_0000_mic03cm.npy",

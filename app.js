@@ -21,12 +21,16 @@ const MODELS = {
 };
 
 const METRIC_META = {
+  rir_l1_mae: { label: "RIR L1 MAE", unit: "normalized", precision: 4, range: 0.1 },
   rir_npm: { label: "NPM", unit: "dB", precision: 2, range: 30 },
-  rt60_mae: { label: "RT60 MAE", unit: "ms", precision: 2, scale: 1000, range: 0.6 },
-  rir_iacc_mae: { label: "IACC MAE", unit: "coefficient", precision: 3, range: 1 },
-  rir_itd_mae: { label: "ITD MAE", unit: "ms", precision: 2, scale: 1000, range: 0.001 },
-  rir_ild_mae: { label: "ILD MAE", unit: "dB", precision: 2, range: 10 },
-  rir_ipd_mae: { label: "IPD MAE", unit: "rad", precision: 2, range: Math.PI },
+  rt60_1s_mae: { label: "RT60 MAE", unit: "ms", precision: 2, scale: 1000, range: 0.6 },
+  drr_1s_mae: { label: "DRR MAE", unit: "dB", precision: 2, range: 10 },
+  c50_1s_mae: { label: "C50 MAE", unit: "dB", precision: 2, range: 10 },
+  edc_1s_mae: { label: "EDC MAE", unit: "dB", precision: 2, range: 20 },
+  iacc_full_1s_mae: { label: "IACC full", unit: "coefficient", precision: 3, range: 1 },
+  iacc_early_1s_mae: { label: "IACC early", unit: "coefficient", precision: 3, range: 1 },
+  iacc_late_1s_mae: { label: "IACC late", unit: "coefficient", precision: 3, range: 1 },
+  interchannel_delay_1s_mae: { label: "Interchannel delay", unit: "samples", precision: 2, range: 64 },
 };
 
 let selectedGroup = "binaural";
@@ -128,26 +132,21 @@ function render() {
   $("wave-legend").innerHTML =
     '<span class="legend-item"><i class="legend-reference"></i>Reference</span>' +
     currentEntries.map((entry, index) => '<span class="legend-item"><i style="background:' + group().colors[index] + '"></i>' + MODELS[entry.caseId] + "</span>").join("");
-  $("scoreboard").innerHTML =
-    '<table><thead><tr><th>Estimate</th>' +
-    metrics.map((name) => "<th>" + metricMeta(name).label + "</th>").join("") +
-    "</tr></thead><tbody>" +
-    currentEntries
-      .map((entry) => {
-        return "<tr><th>" + MODELS[entry.caseId] + "</th>" +
-          metrics.map((name) => "<td>" + displayMetric(name, entry.sample.scores[name]) + "</td>").join("") +
-          "</tr>";
-      })
-      .join("") +
-    "</tbody></table>";
+  $("scoreboard").innerHTML = currentEntries
+    .map((entry) => {
+      return '<div class="scoreboard-row"><strong>' + MODELS[entry.caseId] + '</strong><div class="scoreboard-metrics">' +
+        metrics.map((name) => '<span><b>' + metricMeta(name).label + '</b><em>' + displayMetric(name, entry.sample.scores[name]) + '</em></span>').join("") +
+        "</div></div>";
+    })
+    .join("");
   draw();
 }
 
 async function boot() {
   try {
     actualData = await (await fetch(dataUrl)).json();
-    document.querySelector(".preview-badge").textContent = "ACTUAL REPORTS / 4 CASES";
-    document.querySelector("#inspect .section-line>p").textContent = "Shared references with multiple estimate branches.";
+    document.querySelector(".preview-badge").textContent = "REC-BIR DIRECT RIR / 20 SAMPLES";
+    document.querySelector("#inspect .section-line>p").textContent = "Shared references with multiple direct RIR estimate branches.";
     document.querySelector(".sample-note").textContent = "Dashed line is the reference; solid lines are estimates. Scoreboard values come from the same report sample.";
     $("spacing").innerHTML = Array.from(new Set(actualData.cases.rec_rir_single.samples.map((sample) => sample.spacing_cm)))
       .map((spacing) => '<option value="' + spacing + '">' + String(spacing).padStart(2, "0") + " cm</option>")

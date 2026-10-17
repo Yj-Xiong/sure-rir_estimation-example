@@ -23,18 +23,18 @@
     },
     {
       "path": "README.md",
-      "sha256": "be741c9e99c6e3491fdcc71db00b82e2999c4034b98a7688807ef0b5e8834e12",
-      "bytes": 2786
+      "sha256": "bf15e1e8a7e7beff9f4182f374b7158fb4378fa962a14fe0b03159f249446f77",
+      "bytes": 2943
     },
     {
       "path": "app.js",
-      "sha256": "62d95345c6a3362d488c293f81875d87d59fc4d75168a1a46d8abd9b46a8c43e",
-      "bytes": 10655
+      "sha256": "2624bb0f7048d6ab6fd92e9562ccd638b96e337e0d89b3118a13a9973d49121f",
+      "bytes": 10925
     },
     {
       "path": "data/results.json",
-      "sha256": "aaa2803464c8fbd9251e8ad1da1d7ab96832dd368babcd3a185e917afa0224f7",
-      "bytes": 6212949
+      "sha256": "2cd38dab9545f5e4c8e79abc6c96c4d3d368f5ccdf47325b15f08a85cc93a93e",
+      "bytes": 6553814
     },
     {
       "path": "example/README.md",
@@ -48,8 +48,8 @@
     },
     {
       "path": "example/fixture/README.md",
-      "sha256": "5fbdaae54dfb04363292da98a8a44191f610b2713263bf0423a7ddfb261c22c9",
-      "bytes": 697
+      "sha256": "b20bae15a89ce43dbfd78c3025290502c51c54ac67b7d205affb8efbc1664a9e",
+      "bytes": 752
     },
     {
       "path": "example/fixture/case_manifest.json",

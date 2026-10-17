@@ -17,5 +17,5 @@
     "source": "upstream manifest",
     "ground_truth_path": "rir"
   },
-  "redistribution": "This example contains no audio, checkpoints, generated RIRs, or private paths."
+  "redistribution": "This bounded example contains selected source audio, reference RIRs, metadata, and generated predictions; it contains no checkpoint or private absolute path."
 }

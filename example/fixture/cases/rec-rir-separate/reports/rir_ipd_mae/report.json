@@ -1,0 +1,326 @@
+{
+  "task": "RIR",
+  "language": "n/a",
+  "metric": "rir_ipd_mae",
+  "score": 1.2170893983269504,
+  "pipeline_id": "rir.any.rir_ipd_mae.rir_ipd_mae_v1",
+  "pipeline_kind": "atomic",
+  "member_pipeline_ids": [],
+  "computation_node_ids": [
+    "scoring/rir_ipd_mae"
+  ],
+  "pipeline_trace": [
+    {
+      "stage": "scoring",
+      "node_id": "scoring/rir_ipd_mae",
+      "version": "v1",
+      "details": {
+        "result": {
+          "metric_name": "rir_ipd_mae",
+          "score": 1.2170893983269504,
+          "per_sample": [
+            {
+              "sample_id": "scene_0000_mic03cm",
+              "score": 1.7510800809402192,
+              "unit": "radians"
+            },
+            {
+              "sample_id": "scene_0001_mic03cm",
+              "score": 0.727817795022818,
+              "unit": "radians"
+            },
+            {
+              "sample_id": "scene_0000_mic06cm",
+              "score": 1.453796172835554,
+              "unit": "radians"
+            },
+            {
+              "sample_id": "scene_0001_mic06cm",
+              "score": 0.7941209207805522,
+              "unit": "radians"
+            },
+            {
+              "sample_id": "scene_0000_mic09cm",
+              "score": 1.577360318488945,
+              "unit": "radians"
+            },
+            {
+              "sample_id": "scene_0001_mic09cm",
+              "score": 0.802135525716816,
+              "unit": "radians"
+            },
+            {
+              "sample_id": "scene_0000_mic12cm",
+              "score": 1.6079095191951058,
+              "unit": "radians"
+            },
+            {
+              "sample_id": "scene_0001_mic12cm",
+              "score": 0.8197427745777925,
+              "unit": "radians"
+            },
+            {
+              "sample_id": "scene_0000_mic15cm",
+              "score": 1.528711045951562,
+              "unit": "radians"
+            },
+            {
+              "sample_id": "scene_0001_mic15cm",
+              "score": 0.8442286470970229,
+              "unit": "radians"
+            },
+            {
+              "sample_id": "scene_0000_mic18cm",
+              "score": 1.5855005651284835,
+              "unit": "radians"
+            },
+            {
+              "sample_id": "scene_0001_mic18cm",
+              "score": 0.8804219640158227,
+              "unit": "radians"
+            },
+            {
+              "sample_id": "scene_0000_mic21cm",
+              "score": 1.5709092341859583,
+              "unit": "radians"
+            },
+            {
+              "sample_id": "scene_0001_mic21cm",
+              "score": 0.8779741880542121,
+              "unit": "radians"
+            },
+            {
+              "sample_id": "scene_0000_mic24cm",
+              "score": 1.53753118640881,
+              "unit": "radians"
+            },
+            {
+              "sample_id": "scene_0001_mic24cm",
+              "score": 0.9050320677050528,
+              "unit": "radians"
+            },
+            {
+              "sample_id": "scene_0000_mic27cm",
+              "score": 1.602564131158129,
+              "unit": "radians"
+            },
+            {
+              "sample_id": "scene_0001_mic27cm",
+              "score": 0.9484587189416155,
+              "unit": "radians"
+            },
+            {
+              "sample_id": "scene_0000_mic30cm",
+              "score": 1.5794166219969232,
+              "unit": "radians"
+            },
+            {
+              "sample_id": "scene_0001_mic30cm",
+              "score": 0.9470764883376163,
+              "unit": "radians"
+            }
+          ],
+          "higher_is_better": false,
+          "unit": "radians"
+        }
+      },
+      "internal_stages": []
+    }
+  ],
+  "input_contract": {
+    "metric_id": "rir_samples_jsonl",
+    "required_roles": [
+      "prediction_rir",
+      "reference_rir"
+    ],
+    "optional_roles": [
+      "sample_rate",
+      "channel_layout",
+      "metadata"
+    ],
+    "row_format": "binaural_rir_samples_jsonl",
+    "alignment_key": "sample_id",
+    "aggregation": "per_sample_then_metric_mean",
+    "main_report": true,
+    "purpose": "rir_estimation_and_spatial_audio_quality"
+  },
+  "input_files": {
+    "prediction_rir": "batch",
+    "reference_rir": "batch"
+  },
+  "details": {
+    "channel_mode": "auto",
+    "results": {
+      "rir_ipd_mae": {
+        "metric_name": "rir_ipd_mae",
+        "score": 1.2170893983269504,
+        "per_sample": [
+          {
+            "sample_id": "scene_0000_mic03cm",
+            "score": 1.7510800809402192,
+            "unit": "radians"
+          },
+          {
+            "sample_id": "scene_0001_mic03cm",
+            "score": 0.727817795022818,
+            "unit": "radians"
+          },
+          {
+            "sample_id": "scene_0000_mic06cm",
+            "score": 1.453796172835554,
+            "unit": "radians"
+          },
+          {
+            "sample_id": "scene_0001_mic06cm",
+            "score": 0.7941209207805522,
+            "unit": "radians"
+          },
+          {
+            "sample_id": "scene_0000_mic09cm",
+            "score": 1.577360318488945,
+            "unit": "radians"
+          },
+          {
+            "sample_id": "scene_0001_mic09cm",
+            "score": 0.802135525716816,
+            "unit": "radians"
+          },
+          {
+            "sample_id": "scene_0000_mic12cm",
+            "score": 1.6079095191951058,
+            "unit": "radians"
+          },
+          {
+            "sample_id": "scene_0001_mic12cm",
+            "score": 0.8197427745777925,
+            "unit": "radians"
+          },
+          {
+            "sample_id": "scene_0000_mic15cm",
+            "score": 1.528711045951562,
+            "unit": "radians"
+          },
+          {
+            "sample_id": "scene_0001_mic15cm",
+            "score": 0.8442286470970229,
+            "unit": "radians"
+          },
+          {
+            "sample_id": "scene_0000_mic18cm",
+            "score": 1.5855005651284835,
+            "unit": "radians"
+          },
+          {
+            "sample_id": "scene_0001_mic18cm",
+            "score": 0.8804219640158227,
+            "unit": "radians"
+          },
+          {
+            "sample_id": "scene_0000_mic21cm",
+            "score": 1.5709092341859583,
+            "unit": "radians"
+          },
+          {
+            "sample_id": "scene_0001_mic21cm",
+            "score": 0.8779741880542121,
+            "unit": "radians"
+          },
+          {
+            "sample_id": "scene_0000_mic24cm",
+            "score": 1.53753118640881,
+            "unit": "radians"
+          },
+          {
+            "sample_id": "scene_0001_mic24cm",
+            "score": 0.9050320677050528,
+            "unit": "radians"
+          },
+          {
+            "sample_id": "scene_0000_mic27cm",
+            "score": 1.602564131158129,
+            "unit": "radians"
+          },
+          {
+            "sample_id": "scene_0001_mic27cm",
+            "score": 0.9484587189416155,
+            "unit": "radians"
+          },
+          {
+            "sample_id": "scene_0000_mic30cm",
+            "score": 1.5794166219969232,
+            "unit": "radians"
+          },
+          {
+            "sample_id": "scene_0001_mic30cm",
+            "score": 0.9470764883376163,
+            "unit": "radians"
+          }
+        ],
+        "higher_is_better": false,
+        "unit": "radians"
+      }
+    },
+    "rows": [
+      {
+        "sample_id": "scene_0000_mic03cm"
+      },
+      {
+        "sample_id": "scene_0001_mic03cm"
+      },
+      {
+        "sample_id": "scene_0000_mic06cm"
+      },
+      {
+        "sample_id": "scene_0001_mic06cm"
+      },
+      {
+        "sample_id": "scene_0000_mic09cm"
+      },
+      {
+        "sample_id": "scene_0001_mic09cm"
+      },
+      {
+        "sample_id": "scene_0000_mic12cm"
+      },
+      {
+        "sample_id": "scene_0001_mic12cm"
+      },
+      {
+        "sample_id": "scene_0000_mic15cm"
+      },
+      {
+        "sample_id": "scene_0001_mic15cm"
+      },
+      {
+        "sample_id": "scene_0000_mic18cm"
+      },
+      {
+        "sample_id": "scene_0001_mic18cm"
+      },
+      {
+        "sample_id": "scene_0000_mic21cm"
+      },
+      {
+        "sample_id": "scene_0001_mic21cm"
+      },
+      {
+        "sample_id": "scene_0000_mic24cm"
+      },
+      {
+        "sample_id": "scene_0001_mic24cm"
+      },
+      {
+        "sample_id": "scene_0000_mic27cm"
+      },
+      {
+        "sample_id": "scene_0001_mic27cm"
+      },
+      {
+        "sample_id": "scene_0000_mic30cm"
+      },
+      {
+        "sample_id": "scene_0001_mic30cm"
+      }
+    ]
+  }
+}

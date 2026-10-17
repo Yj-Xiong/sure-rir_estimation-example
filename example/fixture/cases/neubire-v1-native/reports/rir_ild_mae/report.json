@@ -1,0 +1,326 @@
+{
+  "task": "RIR",
+  "language": "n/a",
+  "metric": "rir_ild_mae",
+  "score": 2.680368277766795,
+  "pipeline_id": "rir.any.rir_ild_mae.rir_ild_mae_v1",
+  "pipeline_kind": "atomic",
+  "member_pipeline_ids": [],
+  "computation_node_ids": [
+    "scoring/rir_ild_mae"
+  ],
+  "pipeline_trace": [
+    {
+      "stage": "scoring",
+      "node_id": "scoring/rir_ild_mae",
+      "version": "v1",
+      "details": {
+        "result": {
+          "metric_name": "rir_ild_mae",
+          "score": 2.680368277766795,
+          "per_sample": [
+            {
+              "sample_id": "scene_0000_mic03cm",
+              "score": 1.5672929549295245,
+              "unit": "dB"
+            },
+            {
+              "sample_id": "scene_0001_mic03cm",
+              "score": 4.199278143942205,
+              "unit": "dB"
+            },
+            {
+              "sample_id": "scene_0000_mic06cm",
+              "score": 1.6602159626569453,
+              "unit": "dB"
+            },
+            {
+              "sample_id": "scene_0001_mic06cm",
+              "score": 3.569686678816802,
+              "unit": "dB"
+            },
+            {
+              "sample_id": "scene_0000_mic09cm",
+              "score": 1.7987146399161447,
+              "unit": "dB"
+            },
+            {
+              "sample_id": "scene_0001_mic09cm",
+              "score": 3.521611319889081,
+              "unit": "dB"
+            },
+            {
+              "sample_id": "scene_0000_mic12cm",
+              "score": 1.6272085985566707,
+              "unit": "dB"
+            },
+            {
+              "sample_id": "scene_0001_mic12cm",
+              "score": 3.5046742059917353,
+              "unit": "dB"
+            },
+            {
+              "sample_id": "scene_0000_mic15cm",
+              "score": 1.7495147814900691,
+              "unit": "dB"
+            },
+            {
+              "sample_id": "scene_0001_mic15cm",
+              "score": 3.284935877287913,
+              "unit": "dB"
+            },
+            {
+              "sample_id": "scene_0000_mic18cm",
+              "score": 2.1714804767542155,
+              "unit": "dB"
+            },
+            {
+              "sample_id": "scene_0001_mic18cm",
+              "score": 3.0857102195253887,
+              "unit": "dB"
+            },
+            {
+              "sample_id": "scene_0000_mic21cm",
+              "score": 1.9826897061900792,
+              "unit": "dB"
+            },
+            {
+              "sample_id": "scene_0001_mic21cm",
+              "score": 3.3952124612194585,
+              "unit": "dB"
+            },
+            {
+              "sample_id": "scene_0000_mic24cm",
+              "score": 1.7265145132448407,
+              "unit": "dB"
+            },
+            {
+              "sample_id": "scene_0001_mic24cm",
+              "score": 3.427570414152233,
+              "unit": "dB"
+            },
+            {
+              "sample_id": "scene_0000_mic27cm",
+              "score": 2.58725568986663,
+              "unit": "dB"
+            },
+            {
+              "sample_id": "scene_0001_mic27cm",
+              "score": 3.1224949164941838,
+              "unit": "dB"
+            },
+            {
+              "sample_id": "scene_0000_mic30cm",
+              "score": 2.7029082234717845,
+              "unit": "dB"
+            },
+            {
+              "sample_id": "scene_0001_mic30cm",
+              "score": 2.922395770939989,
+              "unit": "dB"
+            }
+          ],
+          "higher_is_better": false,
+          "unit": "dB"
+        }
+      },
+      "internal_stages": []
+    }
+  ],
+  "input_contract": {
+    "metric_id": "rir_samples_jsonl",
+    "required_roles": [
+      "prediction_rir",
+      "reference_rir"
+    ],
+    "optional_roles": [
+      "sample_rate",
+      "channel_layout",
+      "metadata"
+    ],
+    "row_format": "binaural_rir_samples_jsonl",
+    "alignment_key": "sample_id",
+    "aggregation": "per_sample_then_metric_mean",
+    "main_report": true,
+    "purpose": "rir_estimation_and_spatial_audio_quality"
+  },
+  "input_files": {
+    "prediction_rir": "batch",
+    "reference_rir": "batch"
+  },
+  "details": {
+    "channel_mode": "auto",
+    "results": {
+      "rir_ild_mae": {
+        "metric_name": "rir_ild_mae",
+        "score": 2.680368277766795,
+        "per_sample": [
+          {
+            "sample_id": "scene_0000_mic03cm",
+            "score": 1.5672929549295245,
+            "unit": "dB"
+          },
+          {
+            "sample_id": "scene_0001_mic03cm",
+            "score": 4.199278143942205,
+            "unit": "dB"
+          },
+          {
+            "sample_id": "scene_0000_mic06cm",
+            "score": 1.6602159626569453,
+            "unit": "dB"
+          },
+          {
+            "sample_id": "scene_0001_mic06cm",
+            "score": 3.569686678816802,
+            "unit": "dB"
+          },
+          {
+            "sample_id": "scene_0000_mic09cm",
+            "score": 1.7987146399161447,
+            "unit": "dB"
+          },
+          {
+            "sample_id": "scene_0001_mic09cm",
+            "score": 3.521611319889081,
+            "unit": "dB"
+          },
+          {
+            "sample_id": "scene_0000_mic12cm",
+            "score": 1.6272085985566707,
+            "unit": "dB"
+          },
+          {
+            "sample_id": "scene_0001_mic12cm",
+            "score": 3.5046742059917353,
+            "unit": "dB"
+          },
+          {
+            "sample_id": "scene_0000_mic15cm",
+            "score": 1.7495147814900691,
+            "unit": "dB"
+          },
+          {
+            "sample_id": "scene_0001_mic15cm",
+            "score": 3.284935877287913,
+            "unit": "dB"
+          },
+          {
+            "sample_id": "scene_0000_mic18cm",
+            "score": 2.1714804767542155,
+            "unit": "dB"
+          },
+          {
+            "sample_id": "scene_0001_mic18cm",
+            "score": 3.0857102195253887,
+            "unit": "dB"
+          },
+          {
+            "sample_id": "scene_0000_mic21cm",
+            "score": 1.9826897061900792,
+            "unit": "dB"
+          },
+          {
+            "sample_id": "scene_0001_mic21cm",
+            "score": 3.3952124612194585,
+            "unit": "dB"
+          },
+          {
+            "sample_id": "scene_0000_mic24cm",
+            "score": 1.7265145132448407,
+            "unit": "dB"
+          },
+          {
+            "sample_id": "scene_0001_mic24cm",
+            "score": 3.427570414152233,
+            "unit": "dB"
+          },
+          {
+            "sample_id": "scene_0000_mic27cm",
+            "score": 2.58725568986663,
+            "unit": "dB"
+          },
+          {
+            "sample_id": "scene_0001_mic27cm",
+            "score": 3.1224949164941838,
+            "unit": "dB"
+          },
+          {
+            "sample_id": "scene_0000_mic30cm",
+            "score": 2.7029082234717845,
+            "unit": "dB"
+          },
+          {
+            "sample_id": "scene_0001_mic30cm",
+            "score": 2.922395770939989,
+            "unit": "dB"
+          }
+        ],
+        "higher_is_better": false,
+        "unit": "dB"
+      }
+    },
+    "rows": [
+      {
+        "sample_id": "scene_0000_mic03cm"
+      },
+      {
+        "sample_id": "scene_0001_mic03cm"
+      },
+      {
+        "sample_id": "scene_0000_mic06cm"
+      },
+      {
+        "sample_id": "scene_0001_mic06cm"
+      },
+      {
+        "sample_id": "scene_0000_mic09cm"
+      },
+      {
+        "sample_id": "scene_0001_mic09cm"
+      },
+      {
+        "sample_id": "scene_0000_mic12cm"
+      },
+      {
+        "sample_id": "scene_0001_mic12cm"
+      },
+      {
+        "sample_id": "scene_0000_mic15cm"
+      },
+      {
+        "sample_id": "scene_0001_mic15cm"
+      },
+      {
+        "sample_id": "scene_0000_mic18cm"
+      },
+      {
+        "sample_id": "scene_0001_mic18cm"
+      },
+      {
+        "sample_id": "scene_0000_mic21cm"
+      },
+      {
+        "sample_id": "scene_0001_mic21cm"
+      },
+      {
+        "sample_id": "scene_0000_mic24cm"
+      },
+      {
+        "sample_id": "scene_0001_mic24cm"
+      },
+      {
+        "sample_id": "scene_0000_mic27cm"
+      },
+      {
+        "sample_id": "scene_0001_mic27cm"
+      },
+      {
+        "sample_id": "scene_0000_mic30cm"
+      },
+      {
+        "sample_id": "scene_0001_mic30cm"
+      }
+    ]
+  }
+}

@@ -12,8 +12,11 @@ the visual example and reproduction pointers.
 
 The optional 20-row selection uses `VariableMSpacingTest`, with two scenes at
 each of the 3, 6, 9, 12, 15, 18, 21, 24, 27, and 30 cm microphone spacings.
-The dataset and its source licenses remain external to this example. No source
-audio, checkpoint, generated RIR, or private absolute path is redistributed.
+The dataset and its source licenses remain external to this example. This
+bounded subset includes the selected source mixture WAVs, reference RIR arrays,
+metadata, and four generated prediction sets. Checkpoints and private absolute
+paths are not redistributed; file hashes are recorded in
+`example/fixture/sha256.json`.
 
 ## Models
 

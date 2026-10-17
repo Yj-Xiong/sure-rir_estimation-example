@@ -1,0 +1,113 @@
+{
+  "task": "RIR",
+  "pipeline_id": "rir.any.multi.rir_nmse.rir_nmse_v1__rir_corr.rir_corr_v1__rt60_mae.rt60_mae_v1",
+  "pipeline_kind": "bundle",
+  "metric": "multi",
+  "language": "n/a",
+  "node_ids": [
+    "scoring/rir_nmse",
+    "scoring/rir_corr",
+    "scoring/rt60_mae"
+  ],
+  "computation_node_ids": [
+    "scoring/rir_nmse",
+    "scoring/rir_corr",
+    "scoring/rt60_mae"
+  ],
+  "member_pipeline_ids": [
+    "rir.any.rir_nmse.rir_nmse_v1",
+    "rir.any.rir_corr.rir_corr_v1",
+    "rir.any.rt60_mae.rt60_mae_v1"
+  ],
+  "execution_metrics": [
+    "rir_nmse",
+    "rir_corr",
+    "rt60_mae"
+  ],
+  "required_roles": [
+    "prediction_rir",
+    "reference_rir"
+  ],
+  "optional_roles": [
+    "metadata"
+  ],
+  "output_dir_required": true,
+  "contracts": [
+    {
+      "purpose": "rir_normalized_mean_square_error",
+      "required_roles": [
+        "prediction_rir",
+        "reference_rir"
+      ],
+      "optional_roles": [
+        "metadata"
+      ],
+      "row_format": "rir_samples_jsonl",
+      "alignment_key": "sample_id",
+      "aggregation": "mean",
+      "main_report": true,
+      "metric_id": "scoring/rir_nmse"
+    },
+    {
+      "purpose": "rir_channel_correlation",
+      "required_roles": [
+        "prediction_rir",
+        "reference_rir"
+      ],
+      "optional_roles": [
+        "metadata"
+      ],
+      "row_format": "rir_samples_jsonl",
+      "alignment_key": "sample_id",
+      "aggregation": "mean",
+      "main_report": true,
+      "metric_id": "scoring/rir_corr"
+    },
+    {
+      "purpose": "rir_reverberation_time_absolute_error",
+      "required_roles": [
+        "prediction_rir",
+        "reference_rir"
+      ],
+      "optional_roles": [
+        "metadata"
+      ],
+      "row_format": "rir_samples_jsonl",
+      "alignment_key": "sample_id",
+      "aggregation": "mean",
+      "main_report": true,
+      "metric_id": "scoring/rt60_mae"
+    }
+  ],
+  "task_config_path": "src/sure_eval/evaluation/tasks/rir/manifest.yaml",
+  "route_config_path": "src/sure_eval/evaluation/tasks/rir/routes.yaml",
+  "node_config_paths": [
+    "src/sure_eval/evaluation/nodes/scoring/rir_nmse/manifest.yaml",
+    "src/sure_eval/evaluation/nodes/scoring/rir_corr/manifest.yaml",
+    "src/sure_eval/evaluation/nodes/scoring/rt60_mae/manifest.yaml"
+  ],
+  "nodes": [
+    {
+      "node_id": "scoring/rir_nmse",
+      "stage": "scoring",
+      "version": "v1",
+      "manifest_path": "src/sure_eval/evaluation/nodes/scoring/rir_nmse/manifest.yaml"
+    },
+    {
+      "node_id": "scoring/rir_corr",
+      "stage": "scoring",
+      "version": "v1",
+      "manifest_path": "src/sure_eval/evaluation/nodes/scoring/rir_corr/manifest.yaml"
+    },
+    {
+      "node_id": "scoring/rt60_mae",
+      "stage": "scoring",
+      "version": "v1",
+      "manifest_path": "src/sure_eval/evaluation/nodes/scoring/rt60_mae/manifest.yaml"
+    }
+  ],
+  "conversion_steps": [],
+  "describe_entrypoint": "sure_eval.evaluation.scripts.rir.describe_pipeline",
+  "script_entrypoint": "sure_eval.evaluation.scripts.rir.run",
+  "executor": "sure_eval.evaluation.tasks.rir.pipeline.evaluate_rir_samples"
+}

@@ -1,0 +1,15 @@
+{
+  "schema": "sure.rir.example_run.v1",
+  "status": "completed",
+  "model": "Rec-RIR",
+  "sample_count": 20,
+  "pipeline_id": "rir.any.multi.rir_nmse.rir_nmse_v1__rir_corr.rir_corr_v1__rt60_mae.rt60_mae_v1",
+  "metrics": {
+    "rir_nmse": 143.7407759650647,
+    "rir_corr": -0.01973133199226543,
+    "rt60_mae": 0.11236837456109497
+  },
+  "source": "VariableMSpacingTest channel 0",
+  "report": "report.json",
+  "pipeline_description": "pipeline_description.json"
+}

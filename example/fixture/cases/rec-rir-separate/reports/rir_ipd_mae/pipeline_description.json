@@ -1,0 +1,59 @@
+{
+  "task": "RIR",
+  "pipeline_id": "rir.any.rir_ipd_mae.rir_ipd_mae_v1",
+  "pipeline_kind": "atomic",
+  "metric": "rir_ipd_mae",
+  "language": "n/a",
+  "node_ids": [
+    "scoring/rir_ipd_mae"
+  ],
+  "computation_node_ids": [
+    "scoring/rir_ipd_mae"
+  ],
+  "member_pipeline_ids": [],
+  "execution_metrics": [
+    "rir_ipd_mae"
+  ],
+  "required_roles": [
+    "prediction_rir",
+    "reference_rir"
+  ],
+  "optional_roles": [
+    "metadata"
+  ],
+  "output_dir_required": true,
+  "contracts": [
+    {
+      "purpose": "binaural_interaural_phase_difference_error",
+      "required_roles": [
+        "prediction_rir",
+        "reference_rir"
+      ],
+      "optional_roles": [
+        "metadata"
+      ],
+      "row_format": "binaural_rir_samples_jsonl",
+      "alignment_key": "sample_id",
+      "aggregation": "mean",
+      "main_report": true,
+      "metric_id": "scoring/rir_ipd_mae"
+    }
+  ],
+  "task_config_path": "src/sure_eval/evaluation/tasks/rir/manifest.yaml",
+  "route_config_path": "src/sure_eval/evaluation/tasks/rir/routes.yaml",
+  "node_config_paths": [
+    "src/sure_eval/evaluation/nodes/scoring/rir_ipd_mae/manifest.yaml"
+  ],
+  "nodes": [
+    {
+      "node_id": "scoring/rir_ipd_mae",
+      "stage": "scoring",
+      "version": "v1",
+      "manifest_path": "src/sure_eval/evaluation/nodes/scoring/rir_ipd_mae/manifest.yaml"
+    }
+  ],
+  "conversion_steps": [],
+  "describe_entrypoint": "sure_eval.evaluation.scripts.rir.describe_pipeline",
+  "script_entrypoint": "sure_eval.evaluation.scripts.rir.run",
+  "executor": "sure_eval.evaluation.tasks.rir.pipeline.evaluate_rir_samples"
+}

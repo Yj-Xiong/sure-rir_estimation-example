@@ -5,10 +5,10 @@
 This example follows the public structure of `sure-se-example`, and covers
 SURE's channel-aware RIR evaluation contract:
 
-- Rec-RIR: single-channel branch, scoring channel 0;
-- Rec-RIR-separate: two independent mono passes merged as L/R;
-- NeuBIRE-single: channel 0 duplicated to both model inputs, scoring output channel 0;
-- NeuBIRE-MINT: native two-channel branch with IACC, ITD, ILD, and IPD.
+- Rec-RIR -> single-channel inference, scoring channel 0;
+- Rec-RIR -> two independent mono inferences, merged as L/R;
+- NeuBIRE v1 -> channel 0 duplicated to both model inputs, scoring output channel 0;
+- NeuBIRE v1 -> native two-channel inference with IACC, ITD, ILD, and IPD.
 
 This repository is the Example contribution only. The evaluation Pipeline
 contribution belongs in `PigeonDan1/sure-evaluation`; the later Harness
@@ -34,17 +34,16 @@ match; mono reports must not be mixed with binaural spatial reports. The small
 sample evidence is the 20-row, ten-spacing VariableMSpacingTest selection
 described under `example/fixture/`.
 
-The page is a static GitHub Pages artifact. The displayed Rec-RIR values come
-from a real 20-row SURE report; NeuBIRE and the separate L/R branch remain
-explicitly marked as not run until their own reports exist. Model weights,
-private paths, and generated WAVs stay outside the repository.
+The page is a static GitHub Pages artifact. It loads four real 20-row SURE
+report cases. Model checkpoints and private paths stay outside the repository;
+bounded prediction outputs are included under `example/fixture/cases/`.
 
 Repository layout follows the SURE example convention:
 
 ```text
 index.html / styles.css / app.js   GitHub Pages demo
-data/results.json                   browser preview metadata
-example/fixture/                    model branches and dataset provenance
+data/results.json                   actual four-case report summary
+example/fixture/                    original data, predictions and provenance
 example/README.md                   reproducible SURE evaluation commands
 example/expected.json               pipeline identity and metric expectations
 ```

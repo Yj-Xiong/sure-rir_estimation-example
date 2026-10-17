@@ -1,0 +1,404 @@
+{
+  "task": "RIR",
+  "language": "n/a",
+  "metric": "rir_iacc_mae",
+  "score": 0.06989928490810389,
+  "pipeline_id": "rir.any.rir_iacc_mae.rir_iacc_mae_v1",
+  "pipeline_kind": "atomic",
+  "member_pipeline_ids": [],
+  "computation_node_ids": [
+    "scoring/rir_iacc_mae"
+  ],
+  "pipeline_trace": [
+    {
+      "stage": "scoring",
+      "node_id": "scoring/rir_iacc_mae",
+      "version": "v1",
+      "details": {
+        "result": {
+          "metric_name": "rir_iacc_mae",
+          "score": 0.06989928490810389,
+          "per_sample": [
+            {
+              "sample_id": "scene_0000_mic03cm",
+              "score": 0.0066006442469209725,
+              "prediction_iacc": 0.6219359096031041,
+              "reference_iacc": 0.6153352653561831,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0001_mic03cm",
+              "score": 0.1961182650544302,
+              "prediction_iacc": 0.3569734711233614,
+              "reference_iacc": 0.5530917361777916,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0000_mic06cm",
+              "score": 0.026548370433570168,
+              "prediction_iacc": 0.4828877418873205,
+              "reference_iacc": 0.4563393714537503,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0001_mic06cm",
+              "score": 0.056784642263661866,
+              "prediction_iacc": 0.3847583281185357,
+              "reference_iacc": 0.4415429703821976,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0000_mic09cm",
+              "score": 0.03947273874573276,
+              "prediction_iacc": 0.6139257870410901,
+              "reference_iacc": 0.5744530482953574,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0001_mic09cm",
+              "score": 0.07907122456802845,
+              "prediction_iacc": 0.3286687296955022,
+              "reference_iacc": 0.40773995426353066,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0000_mic12cm",
+              "score": 0.03742189774970406,
+              "prediction_iacc": 0.5534637071071855,
+              "reference_iacc": 0.5160418093574815,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0001_mic12cm",
+              "score": 0.07914108979555695,
+              "prediction_iacc": 0.3290847920281444,
+              "reference_iacc": 0.40822588182370134,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0000_mic15cm",
+              "score": 0.028249100155219142,
+              "prediction_iacc": 0.4530822784747139,
+              "reference_iacc": 0.42483317831949474,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0001_mic15cm",
+              "score": 0.08976927050077299,
+              "prediction_iacc": 0.30167519298782025,
+              "reference_iacc": 0.39144446348859324,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0000_mic18cm",
+              "score": 0.04813589656872985,
+              "prediction_iacc": 0.5957379953733324,
+              "reference_iacc": 0.5476020988046025,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0001_mic18cm",
+              "score": 0.09755684089262451,
+              "prediction_iacc": 0.28547023416399997,
+              "reference_iacc": 0.3830270750566245,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0000_mic21cm",
+              "score": 0.04045443379645619,
+              "prediction_iacc": 0.5433129683124988,
+              "reference_iacc": 0.5028585345160426,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0001_mic21cm",
+              "score": 0.08485989490908663,
+              "prediction_iacc": 0.3111130913657353,
+              "reference_iacc": 0.3959729862748219,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0000_mic24cm",
+              "score": 0.02912351970455873,
+              "prediction_iacc": 0.4090024351550089,
+              "reference_iacc": 0.37987891545045016,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0001_mic24cm",
+              "score": 0.09861818124196037,
+              "prediction_iacc": 0.28460501159572665,
+              "reference_iacc": 0.383223192837687,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0000_mic27cm",
+              "score": 0.04560049411639866,
+              "prediction_iacc": 0.5862984732586172,
+              "reference_iacc": 0.5406979791422185,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0001_mic27cm",
+              "score": 0.13896849089164612,
+              "prediction_iacc": 0.2204951248675007,
+              "reference_iacc": 0.3594636157591468,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0000_mic30cm",
+              "score": 0.04716823362157918,
+              "prediction_iacc": 0.5840763613332922,
+              "reference_iacc": 0.536908127711713,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0001_mic30cm",
+              "score": 0.1283224689054401,
+              "prediction_iacc": 0.22646851438238122,
+              "reference_iacc": 0.3547909832878213,
+              "unit": "coefficient"
+            }
+          ],
+          "higher_is_better": false
+        }
+      },
+      "internal_stages": []
+    }
+  ],
+  "input_contract": {
+    "metric_id": "rir_samples_jsonl",
+    "required_roles": [
+      "prediction_rir",
+      "reference_rir"
+    ],
+    "optional_roles": [
+      "sample_rate",
+      "channel_layout",
+      "metadata"
+    ],
+    "row_format": "binaural_rir_samples_jsonl",
+    "alignment_key": "sample_id",
+    "aggregation": "per_sample_then_metric_mean",
+    "main_report": true,
+    "purpose": "rir_estimation_and_spatial_audio_quality"
+  },
+  "input_files": {
+    "prediction_rir": "batch",
+    "reference_rir": "batch"
+  },
+  "details": {
+    "channel_mode": "auto",
+    "results": {
+      "rir_iacc_mae": {
+        "metric_name": "rir_iacc_mae",
+        "score": 0.06989928490810389,
+        "per_sample": [
+          {
+            "sample_id": "scene_0000_mic03cm",
+            "score": 0.0066006442469209725,
+            "prediction_iacc": 0.6219359096031041,
+            "reference_iacc": 0.6153352653561831,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0001_mic03cm",
+            "score": 0.1961182650544302,
+            "prediction_iacc": 0.3569734711233614,
+            "reference_iacc": 0.5530917361777916,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0000_mic06cm",
+            "score": 0.026548370433570168,
+            "prediction_iacc": 0.4828877418873205,
+            "reference_iacc": 0.4563393714537503,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0001_mic06cm",
+            "score": 0.056784642263661866,
+            "prediction_iacc": 0.3847583281185357,
+            "reference_iacc": 0.4415429703821976,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0000_mic09cm",
+            "score": 0.03947273874573276,
+            "prediction_iacc": 0.6139257870410901,
+            "reference_iacc": 0.5744530482953574,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0001_mic09cm",
+            "score": 0.07907122456802845,
+            "prediction_iacc": 0.3286687296955022,
+            "reference_iacc": 0.40773995426353066,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0000_mic12cm",
+            "score": 0.03742189774970406,
+            "prediction_iacc": 0.5534637071071855,
+            "reference_iacc": 0.5160418093574815,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0001_mic12cm",
+            "score": 0.07914108979555695,
+            "prediction_iacc": 0.3290847920281444,
+            "reference_iacc": 0.40822588182370134,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0000_mic15cm",
+            "score": 0.028249100155219142,
+            "prediction_iacc": 0.4530822784747139,
+            "reference_iacc": 0.42483317831949474,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0001_mic15cm",
+            "score": 0.08976927050077299,
+            "prediction_iacc": 0.30167519298782025,
+            "reference_iacc": 0.39144446348859324,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0000_mic18cm",
+            "score": 0.04813589656872985,
+            "prediction_iacc": 0.5957379953733324,
+            "reference_iacc": 0.5476020988046025,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0001_mic18cm",
+            "score": 0.09755684089262451,
+            "prediction_iacc": 0.28547023416399997,
+            "reference_iacc": 0.3830270750566245,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0000_mic21cm",
+            "score": 0.04045443379645619,
+            "prediction_iacc": 0.5433129683124988,
+            "reference_iacc": 0.5028585345160426,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0001_mic21cm",
+            "score": 0.08485989490908663,
+            "prediction_iacc": 0.3111130913657353,
+            "reference_iacc": 0.3959729862748219,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0000_mic24cm",
+            "score": 0.02912351970455873,
+            "prediction_iacc": 0.4090024351550089,
+            "reference_iacc": 0.37987891545045016,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0001_mic24cm",
+            "score": 0.09861818124196037,
+            "prediction_iacc": 0.28460501159572665,
+            "reference_iacc": 0.383223192837687,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0000_mic27cm",
+            "score": 0.04560049411639866,
+            "prediction_iacc": 0.5862984732586172,
+            "reference_iacc": 0.5406979791422185,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0001_mic27cm",
+            "score": 0.13896849089164612,
+            "prediction_iacc": 0.2204951248675007,
+            "reference_iacc": 0.3594636157591468,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0000_mic30cm",
+            "score": 0.04716823362157918,
+            "prediction_iacc": 0.5840763613332922,
+            "reference_iacc": 0.536908127711713,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0001_mic30cm",
+            "score": 0.1283224689054401,
+            "prediction_iacc": 0.22646851438238122,
+            "reference_iacc": 0.3547909832878213,
+            "unit": "coefficient"
+          }
+        ],
+        "higher_is_better": false
+      }
+    },
+    "rows": [
+      {
+        "sample_id": "scene_0000_mic03cm"
+      },
+      {
+        "sample_id": "scene_0001_mic03cm"
+      },
+      {
+        "sample_id": "scene_0000_mic06cm"
+      },
+      {
+        "sample_id": "scene_0001_mic06cm"
+      },
+      {
+        "sample_id": "scene_0000_mic09cm"
+      },
+      {
+        "sample_id": "scene_0001_mic09cm"
+      },
+      {
+        "sample_id": "scene_0000_mic12cm"
+      },
+      {
+        "sample_id": "scene_0001_mic12cm"
+      },
+      {
+        "sample_id": "scene_0000_mic15cm"
+      },
+      {
+        "sample_id": "scene_0001_mic15cm"
+      },
+      {
+        "sample_id": "scene_0000_mic18cm"
+      },
+      {
+        "sample_id": "scene_0001_mic18cm"
+      },
+      {
+        "sample_id": "scene_0000_mic21cm"
+      },
+      {
+        "sample_id": "scene_0001_mic21cm"
+      },
+      {
+        "sample_id": "scene_0000_mic24cm"
+      },
+      {
+        "sample_id": "scene_0001_mic24cm"
+      },
+      {
+        "sample_id": "scene_0000_mic27cm"
+      },
+      {
+        "sample_id": "scene_0001_mic27cm"
+      },
+      {
+        "sample_id": "scene_0000_mic30cm"
+      },
+      {
+        "sample_id": "scene_0001_mic30cm"
+      }
+    ]
+  }
+}

@@ -1,0 +1,406 @@
+{
+  "task": "RIR",
+  "language": "n/a",
+  "metric": "rir_itd_mae",
+  "score": 5.6250000000000005e-05,
+  "pipeline_id": "rir.any.rir_itd_mae.rir_itd_mae_v1",
+  "pipeline_kind": "atomic",
+  "member_pipeline_ids": [],
+  "computation_node_ids": [
+    "scoring/rir_itd_mae"
+  ],
+  "pipeline_trace": [
+    {
+      "stage": "scoring",
+      "node_id": "scoring/rir_itd_mae",
+      "version": "v1",
+      "details": {
+        "result": {
+          "metric_name": "rir_itd_mae",
+          "score": 5.6250000000000005e-05,
+          "per_sample": [
+            {
+              "sample_id": "scene_0000_mic03cm",
+              "score": 0.0,
+              "prediction_itd": 6.25e-05,
+              "reference_itd": 6.25e-05,
+              "unit": "seconds"
+            },
+            {
+              "sample_id": "scene_0001_mic03cm",
+              "score": 0.000125,
+              "prediction_itd": -0.000125,
+              "reference_itd": 0.0,
+              "unit": "seconds"
+            },
+            {
+              "sample_id": "scene_0000_mic06cm",
+              "score": 0.0,
+              "prediction_itd": 0.0001875,
+              "reference_itd": 0.0001875,
+              "unit": "seconds"
+            },
+            {
+              "sample_id": "scene_0001_mic06cm",
+              "score": 0.000125,
+              "prediction_itd": -0.000125,
+              "reference_itd": 0.0,
+              "unit": "seconds"
+            },
+            {
+              "sample_id": "scene_0000_mic09cm",
+              "score": 0.0,
+              "prediction_itd": 0.00025,
+              "reference_itd": 0.00025,
+              "unit": "seconds"
+            },
+            {
+              "sample_id": "scene_0001_mic09cm",
+              "score": 0.000125,
+              "prediction_itd": -0.000125,
+              "reference_itd": 0.0,
+              "unit": "seconds"
+            },
+            {
+              "sample_id": "scene_0000_mic12cm",
+              "score": 0.0,
+              "prediction_itd": 0.0003125,
+              "reference_itd": 0.0003125,
+              "unit": "seconds"
+            },
+            {
+              "sample_id": "scene_0001_mic12cm",
+              "score": 0.000125,
+              "prediction_itd": -0.000125,
+              "reference_itd": 0.0,
+              "unit": "seconds"
+            },
+            {
+              "sample_id": "scene_0000_mic15cm",
+              "score": 0.0,
+              "prediction_itd": 0.0004375,
+              "reference_itd": 0.0004375,
+              "unit": "seconds"
+            },
+            {
+              "sample_id": "scene_0001_mic15cm",
+              "score": 0.000125,
+              "prediction_itd": -0.000125,
+              "reference_itd": 0.0,
+              "unit": "seconds"
+            },
+            {
+              "sample_id": "scene_0000_mic18cm",
+              "score": 0.0,
+              "prediction_itd": 0.0005,
+              "reference_itd": 0.0005,
+              "unit": "seconds"
+            },
+            {
+              "sample_id": "scene_0001_mic18cm",
+              "score": 0.000125,
+              "prediction_itd": -0.000125,
+              "reference_itd": 0.0,
+              "unit": "seconds"
+            },
+            {
+              "sample_id": "scene_0000_mic21cm",
+              "score": 0.0,
+              "prediction_itd": 0.0005625,
+              "reference_itd": 0.0005625,
+              "unit": "seconds"
+            },
+            {
+              "sample_id": "scene_0001_mic21cm",
+              "score": 0.000125,
+              "prediction_itd": -0.000125,
+              "reference_itd": 0.0,
+              "unit": "seconds"
+            },
+            {
+              "sample_id": "scene_0000_mic24cm",
+              "score": 0.0,
+              "prediction_itd": 0.0006875,
+              "reference_itd": 0.0006875,
+              "unit": "seconds"
+            },
+            {
+              "sample_id": "scene_0001_mic24cm",
+              "score": 0.000125,
+              "prediction_itd": -0.000125,
+              "reference_itd": 0.0,
+              "unit": "seconds"
+            },
+            {
+              "sample_id": "scene_0000_mic27cm",
+              "score": 0.0,
+              "prediction_itd": 0.00075,
+              "reference_itd": 0.00075,
+              "unit": "seconds"
+            },
+            {
+              "sample_id": "scene_0001_mic27cm",
+              "score": 0.000125,
+              "prediction_itd": -0.000125,
+              "reference_itd": 0.0,
+              "unit": "seconds"
+            },
+            {
+              "sample_id": "scene_0000_mic30cm",
+              "score": 0.0,
+              "prediction_itd": 0.0008125,
+              "reference_itd": 0.0008125,
+              "unit": "seconds"
+            },
+            {
+              "sample_id": "scene_0001_mic30cm",
+              "score": 0.0,
+              "prediction_itd": 0.0,
+              "reference_itd": 0.0,
+              "unit": "seconds"
+            }
+          ],
+          "higher_is_better": false,
+          "unit": "seconds"
+        }
+      },
+      "internal_stages": []
+    }
+  ],
+  "input_contract": {
+    "metric_id": "rir_samples_jsonl",
+    "required_roles": [
+      "prediction_rir",
+      "reference_rir"
+    ],
+    "optional_roles": [
+      "sample_rate",
+      "channel_layout",
+      "metadata"
+    ],
+    "row_format": "binaural_rir_samples_jsonl",
+    "alignment_key": "sample_id",
+    "aggregation": "per_sample_then_metric_mean",
+    "main_report": true,
+    "purpose": "rir_estimation_and_spatial_audio_quality"
+  },
+  "input_files": {
+    "prediction_rir": "batch",
+    "reference_rir": "batch"
+  },
+  "details": {
+    "channel_mode": "auto",
+    "results": {
+      "rir_itd_mae": {
+        "metric_name": "rir_itd_mae",
+        "score": 5.6250000000000005e-05,
+        "per_sample": [
+          {
+            "sample_id": "scene_0000_mic03cm",
+            "score": 0.0,
+            "prediction_itd": 6.25e-05,
+            "reference_itd": 6.25e-05,
+            "unit": "seconds"
+          },
+          {
+            "sample_id": "scene_0001_mic03cm",
+            "score": 0.000125,
+            "prediction_itd": -0.000125,
+            "reference_itd": 0.0,
+            "unit": "seconds"
+          },
+          {
+            "sample_id": "scene_0000_mic06cm",
+            "score": 0.0,
+            "prediction_itd": 0.0001875,
+            "reference_itd": 0.0001875,
+            "unit": "seconds"
+          },
+          {
+            "sample_id": "scene_0001_mic06cm",
+            "score": 0.000125,
+            "prediction_itd": -0.000125,
+            "reference_itd": 0.0,
+            "unit": "seconds"
+          },
+          {
+            "sample_id": "scene_0000_mic09cm",
+            "score": 0.0,
+            "prediction_itd": 0.00025,
+            "reference_itd": 0.00025,
+            "unit": "seconds"
+          },
+          {
+            "sample_id": "scene_0001_mic09cm",
+            "score": 0.000125,
+            "prediction_itd": -0.000125,
+            "reference_itd": 0.0,
+            "unit": "seconds"
+          },
+          {
+            "sample_id": "scene_0000_mic12cm",
+            "score": 0.0,
+            "prediction_itd": 0.0003125,
+            "reference_itd": 0.0003125,
+            "unit": "seconds"
+          },
+          {
+            "sample_id": "scene_0001_mic12cm",
+            "score": 0.000125,
+            "prediction_itd": -0.000125,
+            "reference_itd": 0.0,
+            "unit": "seconds"
+          },
+          {
+            "sample_id": "scene_0000_mic15cm",
+            "score": 0.0,
+            "prediction_itd": 0.0004375,
+            "reference_itd": 0.0004375,
+            "unit": "seconds"
+          },
+          {
+            "sample_id": "scene_0001_mic15cm",
+            "score": 0.000125,
+            "prediction_itd": -0.000125,
+            "reference_itd": 0.0,
+            "unit": "seconds"
+          },
+          {
+            "sample_id": "scene_0000_mic18cm",
+            "score": 0.0,
+            "prediction_itd": 0.0005,
+            "reference_itd": 0.0005,
+            "unit": "seconds"
+          },
+          {
+            "sample_id": "scene_0001_mic18cm",
+            "score": 0.000125,
+            "prediction_itd": -0.000125,
+            "reference_itd": 0.0,
+            "unit": "seconds"
+          },
+          {
+            "sample_id": "scene_0000_mic21cm",
+            "score": 0.0,
+            "prediction_itd": 0.0005625,
+            "reference_itd": 0.0005625,
+            "unit": "seconds"
+          },
+          {
+            "sample_id": "scene_0001_mic21cm",
+            "score": 0.000125,
+            "prediction_itd": -0.000125,
+            "reference_itd": 0.0,
+            "unit": "seconds"
+          },
+          {
+            "sample_id": "scene_0000_mic24cm",
+            "score": 0.0,
+            "prediction_itd": 0.0006875,
+            "reference_itd": 0.0006875,
+            "unit": "seconds"
+          },
+          {
+            "sample_id": "scene_0001_mic24cm",
+            "score": 0.000125,
+            "prediction_itd": -0.000125,
+            "reference_itd": 0.0,
+            "unit": "seconds"
+          },
+          {
+            "sample_id": "scene_0000_mic27cm",
+            "score": 0.0,
+            "prediction_itd": 0.00075,
+            "reference_itd": 0.00075,
+            "unit": "seconds"
+          },
+          {
+            "sample_id": "scene_0001_mic27cm",
+            "score": 0.000125,
+            "prediction_itd": -0.000125,
+            "reference_itd": 0.0,
+            "unit": "seconds"
+          },
+          {
+            "sample_id": "scene_0000_mic30cm",
+            "score": 0.0,
+            "prediction_itd": 0.0008125,
+            "reference_itd": 0.0008125,
+            "unit": "seconds"
+          },
+          {
+            "sample_id": "scene_0001_mic30cm",
+            "score": 0.0,
+            "prediction_itd": 0.0,
+            "reference_itd": 0.0,
+            "unit": "seconds"
+          }
+        ],
+        "higher_is_better": false,
+        "unit": "seconds"
+      }
+    },
+    "rows": [
+      {
+        "sample_id": "scene_0000_mic03cm"
+      },
+      {
+        "sample_id": "scene_0001_mic03cm"
+      },
+      {
+        "sample_id": "scene_0000_mic06cm"
+      },
+      {
+        "sample_id": "scene_0001_mic06cm"
+      },
+      {
+        "sample_id": "scene_0000_mic09cm"
+      },
+      {
+        "sample_id": "scene_0001_mic09cm"
+      },
+      {
+        "sample_id": "scene_0000_mic12cm"
+      },
+      {
+        "sample_id": "scene_0001_mic12cm"
+      },
+      {
+        "sample_id": "scene_0000_mic15cm"
+      },
+      {
+        "sample_id": "scene_0001_mic15cm"
+      },
+      {
+        "sample_id": "scene_0000_mic18cm"
+      },
+      {
+        "sample_id": "scene_0001_mic18cm"
+      },
+      {
+        "sample_id": "scene_0000_mic21cm"
+      },
+      {
+        "sample_id": "scene_0001_mic21cm"
+      },
+      {
+        "sample_id": "scene_0000_mic24cm"
+      },
+      {
+        "sample_id": "scene_0001_mic24cm"
+      },
+      {
+        "sample_id": "scene_0000_mic27cm"
+      },
+      {
+        "sample_id": "scene_0001_mic27cm"
+      },
+      {
+        "sample_id": "scene_0000_mic30cm"
+      },
+      {
+        "sample_id": "scene_0001_mic30cm"
+      }
+    ]
+  }
+}

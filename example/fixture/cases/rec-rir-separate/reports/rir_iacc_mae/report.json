@@ -1,0 +1,1200 @@
+{
+  "task": "RIR",
+  "language": "n/a",
+  "metric": "multi",
+  "score": 135.26427238088053,
+  "pipeline_id": "rir.any.multi.rir_nmse.rir_nmse_v1__rir_corr.rir_corr_v1__rt60_mae.rt60_mae_v1__rir_iacc_mae.rir_iacc_mae_v1",
+  "pipeline_kind": "bundle",
+  "member_pipeline_ids": [
+    "rir.any.rir_nmse.rir_nmse_v1",
+    "rir.any.rir_corr.rir_corr_v1",
+    "rir.any.rt60_mae.rt60_mae_v1",
+    "rir.any.rir_iacc_mae.rir_iacc_mae_v1"
+  ],
+  "computation_node_ids": [
+    "scoring/rir_nmse",
+    "scoring/rir_corr",
+    "scoring/rt60_mae",
+    "scoring/rir_iacc_mae"
+  ],
+  "pipeline_trace": [
+    {
+      "stage": "scoring",
+      "node_id": "scoring/rir_nmse",
+      "version": "v1",
+      "details": {
+        "result": {
+          "metric_name": "rir_nmse",
+          "score": 135.26427238088053,
+          "per_sample": [
+            {
+              "sample_id": "scene_0000_mic03cm",
+              "score": 94.80261387403668
+            },
+            {
+              "sample_id": "scene_0001_mic03cm",
+              "score": 168.09071671640987
+            },
+            {
+              "sample_id": "scene_0000_mic06cm",
+              "score": 103.10613846262727
+            },
+            {
+              "sample_id": "scene_0001_mic06cm",
+              "score": 164.15285679320328
+            },
+            {
+              "sample_id": "scene_0000_mic09cm",
+              "score": 104.40609839809059
+            },
+            {
+              "sample_id": "scene_0001_mic09cm",
+              "score": 171.76463286890993
+            },
+            {
+              "sample_id": "scene_0000_mic12cm",
+              "score": 102.62665108432898
+            },
+            {
+              "sample_id": "scene_0001_mic12cm",
+              "score": 175.67943342468138
+            },
+            {
+              "sample_id": "scene_0000_mic15cm",
+              "score": 102.55668921705089
+            },
+            {
+              "sample_id": "scene_0001_mic15cm",
+              "score": 172.4099695272037
+            },
+            {
+              "sample_id": "scene_0000_mic18cm",
+              "score": 101.918743165986
+            },
+            {
+              "sample_id": "scene_0001_mic18cm",
+              "score": 168.02193857427412
+            },
+            {
+              "sample_id": "scene_0000_mic21cm",
+              "score": 100.2698269153903
+            },
+            {
+              "sample_id": "scene_0001_mic21cm",
+              "score": 169.56315471542638
+            },
+            {
+              "sample_id": "scene_0000_mic24cm",
+              "score": 100.97291465055967
+            },
+            {
+              "sample_id": "scene_0001_mic24cm",
+              "score": 169.8555291056191
+            },
+            {
+              "sample_id": "scene_0000_mic27cm",
+              "score": 101.02882511323729
+            },
+            {
+              "sample_id": "scene_0001_mic27cm",
+              "score": 167.3563509033957
+            },
+            {
+              "sample_id": "scene_0000_mic30cm",
+              "score": 99.22985086297633
+            },
+            {
+              "sample_id": "scene_0001_mic30cm",
+              "score": 167.47251324420324
+            }
+          ],
+          "higher_is_better": false
+        }
+      },
+      "internal_stages": []
+    },
+    {
+      "stage": "scoring",
+      "node_id": "scoring/rir_corr",
+      "version": "v1",
+      "details": {
+        "result": {
+          "metric_name": "rir_corr",
+          "score": 0.003063135895335675,
+          "per_sample": [
+            {
+              "sample_id": "scene_0000_mic03cm",
+              "score": 0.3668539198927443,
+              "channels": [
+                -0.018138147594240196,
+                0.7518459873797287
+              ]
+            },
+            {
+              "sample_id": "scene_0001_mic03cm",
+              "score": -0.0023857630227848287,
+              "channels": [
+                -0.011322050157283488,
+                0.006550524111713831
+              ]
+            },
+            {
+              "sample_id": "scene_0000_mic06cm",
+              "score": -0.07889069157760675,
+              "channels": [
+                -0.16185620264343492,
+                0.004074819488221404
+              ]
+            },
+            {
+              "sample_id": "scene_0001_mic06cm",
+              "score": -0.0004416935829092651,
+              "channels": [
+                -0.007246027576511981,
+                0.006362640410693451
+              ]
+            },
+            {
+              "sample_id": "scene_0000_mic09cm",
+              "score": -0.04487637517950365,
+              "channels": [
+                0.08497976220131116,
+                -0.17473251256031846
+              ]
+            },
+            {
+              "sample_id": "scene_0001_mic09cm",
+              "score": -0.009332887315992813,
+              "channels": [
+                -0.014269315682998922,
+                -0.004396458948986705
+              ]
+            },
+            {
+              "sample_id": "scene_0000_mic12cm",
+              "score": 0.03578179286204652,
+              "channels": [
+                -0.01591951686491611,
+                0.08748310258900914
+              ]
+            },
+            {
+              "sample_id": "scene_0001_mic12cm",
+              "score": -0.014204858082830313,
+              "channels": [
+                -0.013182606320442894,
+                -0.015227109845217732
+              ]
+            },
+            {
+              "sample_id": "scene_0000_mic15cm",
+              "score": -0.06556124065812007,
+              "channels": [
+                -0.11667612192029173,
+                -0.014446359395948403
+              ]
+            },
+            {
+              "sample_id": "scene_0001_mic15cm",
+              "score": -0.01881894498790549,
+              "channels": [
+                -0.021847698847744162,
+                -0.01579019112806682
+              ]
+            },
+            {
+              "sample_id": "scene_0000_mic18cm",
+              "score": -0.03837912010226575,
+              "channels": [
+                0.03499117953074897,
+                -0.11174941973528046
+              ]
+            },
+            {
+              "sample_id": "scene_0001_mic18cm",
+              "score": -0.01513115789547869,
+              "channels": [
+                -0.019061543698378158,
+                -0.011200772092579223
+              ]
+            },
+            {
+              "sample_id": "scene_0000_mic21cm",
+              "score": 0.018574397246764313,
+              "channels": [
+                0.0033172841871114828,
+                0.033831510306417144
+              ]
+            },
+            {
+              "sample_id": "scene_0001_mic21cm",
+              "score": -0.00987343836152229,
+              "channels": [
+                -0.002023879365033033,
+                -0.017722997358011545
+              ]
+            },
+            {
+              "sample_id": "scene_0000_mic24cm",
+              "score": -0.017949578853664112,
+              "channels": [
+                -0.06465246720300556,
+                0.028753309495677334
+              ]
+            },
+            {
+              "sample_id": "scene_0001_mic24cm",
+              "score": -0.010464576445686326,
+              "channels": [
+                -0.014341463385553957,
+                -0.006587689505818695
+              ]
+            },
+            {
+              "sample_id": "scene_0000_mic27cm",
+              "score": -0.016580323940778942,
+              "channels": [
+                0.02028042705999986,
+                -0.05344107494155774
+              ]
+            },
+            {
+              "sample_id": "scene_0001_mic27cm",
+              "score": -0.0018357722418973332,
+              "channels": [
+                -0.016988896027179633,
+                0.013317351543384967
+              ]
+            },
+            {
+              "sample_id": "scene_0000_mic30cm",
+              "score": 0.002677563462443657,
+              "channels": [
+                -0.01239408732800417,
+                0.017749214252891485
+              ]
+            },
+            {
+              "sample_id": "scene_0001_mic30cm",
+              "score": -0.01789853330833867,
+              "channels": [
+                -0.028275268209461288,
+                -0.007521798407216046
+              ]
+            }
+          ],
+          "higher_is_better": true
+        }
+      },
+      "internal_stages": []
+    },
+    {
+      "stage": "scoring",
+      "node_id": "scoring/rt60_mae",
+      "version": "v1",
+      "details": {
+        "result": {
+          "metric_name": "rt60_mae",
+          "score": 0.0960995351851302,
+          "per_sample": [
+            {
+              "sample_id": "scene_0000_mic03cm",
+              "score": 0.19207597636431717,
+              "prediction_rt60": 1.3734910720088978,
+              "reference_rt60": 1.565567048373215
+            },
+            {
+              "sample_id": "scene_0001_mic03cm",
+              "score": 0.008882607298081213,
+              "prediction_rt60": 1.1591124299430198,
+              "reference_rt60": 1.1502298226449386
+            },
+            {
+              "sample_id": "scene_0000_mic06cm",
+              "score": 0.17870916695478067,
+              "prediction_rt60": 1.3929181626634723,
+              "reference_rt60": 1.571627329618253
+            },
+            {
+              "sample_id": "scene_0001_mic06cm",
+              "score": 0.00963534391306875,
+              "prediction_rt60": 1.1567930108224267,
+              "reference_rt60": 1.147157666909358
+            },
+            {
+              "sample_id": "scene_0000_mic09cm",
+              "score": 0.1872095904859259,
+              "prediction_rt60": 1.3866496104969435,
+              "reference_rt60": 1.5738592009828694
+            },
+            {
+              "sample_id": "scene_0001_mic09cm",
+              "score": 0.0052732002138142775,
+              "prediction_rt60": 1.147126938804451,
+              "reference_rt60": 1.1418537385906367
+            },
+            {
+              "sample_id": "scene_0000_mic12cm",
+              "score": 0.18572740680195432,
+              "prediction_rt60": 1.3835276548786166,
+              "reference_rt60": 1.569255061680571
+            },
+            {
+              "sample_id": "scene_0001_mic12cm",
+              "score": 0.0007020964866690793,
+              "prediction_rt60": 1.1529815778632988,
+              "reference_rt60": 1.1522794813766297
+            },
+            {
+              "sample_id": "scene_0000_mic15cm",
+              "score": 0.19869876349592897,
+              "prediction_rt60": 1.3766303103333497,
+              "reference_rt60": 1.5753290738292787
+            },
+            {
+              "sample_id": "scene_0001_mic15cm",
+              "score": 0.01376832086626556,
+              "prediction_rt60": 1.1685910910891524,
+              "reference_rt60": 1.1548227702228868
+            },
+            {
+              "sample_id": "scene_0000_mic18cm",
+              "score": 0.1842706402155887,
+              "prediction_rt60": 1.3800882141146764,
+              "reference_rt60": 1.5643588543302651
+            },
+            {
+              "sample_id": "scene_0001_mic18cm",
+              "score": 0.023309891763185764,
+              "prediction_rt60": 1.1730516520310723,
+              "reference_rt60": 1.1497417602678865
+            },
+            {
+              "sample_id": "scene_0000_mic21cm",
+              "score": 0.17239614713808749,
+              "prediction_rt60": 1.398137619059265,
+              "reference_rt60": 1.5705337661973524
+            },
+            {
+              "sample_id": "scene_0001_mic21cm",
+              "score": 0.02192610069906431,
+              "prediction_rt60": 1.1641845177009613,
+              "reference_rt60": 1.142258417001897
+            },
+            {
+              "sample_id": "scene_0000_mic24cm",
+              "score": 0.1712328148642026,
+              "prediction_rt60": 1.4079838535405678,
+              "reference_rt60": 1.5792166684047704
+            },
+            {
+              "sample_id": "scene_0001_mic24cm",
+              "score": 0.022119623325732807,
+              "prediction_rt60": 1.159856054927019,
+              "reference_rt60": 1.1377364316012861
+            },
+            {
+              "sample_id": "scene_0000_mic27cm",
+              "score": 0.17107759548737533,
+              "prediction_rt60": 1.4128687077064543,
+              "reference_rt60": 1.5839463031938297
+            },
+            {
+              "sample_id": "scene_0001_mic27cm",
+              "score": 0.0008171844092279557,
+              "prediction_rt60": 1.1491066294133288,
+              "reference_rt60": 1.1482894450041008
+            },
+            {
+              "sample_id": "scene_0000_mic30cm",
+              "score": 0.1490923445717156,
+              "prediction_rt60": 1.4376519315383338,
+              "reference_rt60": 1.5867442761100494
+            },
+            {
+              "sample_id": "scene_0001_mic30cm",
+              "score": 0.025065888347617582,
+              "prediction_rt60": 1.1408441469020816,
+              "reference_rt60": 1.1659100352496992
+            }
+          ],
+          "higher_is_better": false,
+          "unit": "seconds"
+        }
+      },
+      "internal_stages": []
+    },
+    {
+      "stage": "scoring",
+      "node_id": "scoring/rir_iacc_mae",
+      "version": "v1",
+      "details": {
+        "result": {
+          "metric_name": "rir_iacc_mae",
+          "score": 0.2401844839063465,
+          "per_sample": [
+            {
+              "sample_id": "scene_0000_mic03cm",
+              "score": 0.14141848267402235,
+              "prediction_iacc": 0.7567537480302055,
+              "reference_iacc": 0.6153352653561831,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0001_mic03cm",
+              "score": 0.23508437964139006,
+              "prediction_iacc": 0.7881761158191817,
+              "reference_iacc": 0.5530917361777916,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0000_mic06cm",
+              "score": 0.2686229405629644,
+              "prediction_iacc": 0.7249623120167147,
+              "reference_iacc": 0.4563393714537503,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0001_mic06cm",
+              "score": 0.26800311972408297,
+              "prediction_iacc": 0.7095460901062806,
+              "reference_iacc": 0.4415429703821976,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0000_mic09cm",
+              "score": 0.13651694091621147,
+              "prediction_iacc": 0.7109699892115688,
+              "reference_iacc": 0.5744530482953574,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0001_mic09cm",
+              "score": 0.2740596922671041,
+              "prediction_iacc": 0.6817996465306347,
+              "reference_iacc": 0.40773995426353066,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0000_mic12cm",
+              "score": 0.1946366497149019,
+              "prediction_iacc": 0.7106784590723834,
+              "reference_iacc": 0.5160418093574815,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0001_mic12cm",
+              "score": 0.2635141480720834,
+              "prediction_iacc": 0.6717400298957847,
+              "reference_iacc": 0.40822588182370134,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0000_mic15cm",
+              "score": 0.27500106063871954,
+              "prediction_iacc": 0.6998342389582143,
+              "reference_iacc": 0.42483317831949474,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0001_mic15cm",
+              "score": 0.2800531292306134,
+              "prediction_iacc": 0.6714975927192066,
+              "reference_iacc": 0.39144446348859324,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0000_mic18cm",
+              "score": 0.15681560842852105,
+              "prediction_iacc": 0.7044177072331236,
+              "reference_iacc": 0.5476020988046025,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0001_mic18cm",
+              "score": 0.29419997970621325,
+              "prediction_iacc": 0.6772270547628377,
+              "reference_iacc": 0.3830270750566245,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0000_mic21cm",
+              "score": 0.1895533641607785,
+              "prediction_iacc": 0.6924118986768211,
+              "reference_iacc": 0.5028585345160426,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0001_mic21cm",
+              "score": 0.27620601932512356,
+              "prediction_iacc": 0.6721790055999455,
+              "reference_iacc": 0.3959729862748219,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0000_mic24cm",
+              "score": 0.3173357503522334,
+              "prediction_iacc": 0.6972146658026835,
+              "reference_iacc": 0.37987891545045016,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0001_mic24cm",
+              "score": 0.279337669385162,
+              "prediction_iacc": 0.662560862222849,
+              "reference_iacc": 0.383223192837687,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0000_mic27cm",
+              "score": 0.156997746467341,
+              "prediction_iacc": 0.6976957256095595,
+              "reference_iacc": 0.5406979791422185,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0001_mic27cm",
+              "score": 0.3035047692394382,
+              "prediction_iacc": 0.662968384998585,
+              "reference_iacc": 0.3594636157591468,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0000_mic30cm",
+              "score": 0.1778351426807292,
+              "prediction_iacc": 0.7147432703924422,
+              "reference_iacc": 0.536908127711713,
+              "unit": "coefficient"
+            },
+            {
+              "sample_id": "scene_0001_mic30cm",
+              "score": 0.31499308493929623,
+              "prediction_iacc": 0.6697840682271176,
+              "reference_iacc": 0.3547909832878213,
+              "unit": "coefficient"
+            }
+          ],
+          "higher_is_better": false
+        }
+      },
+      "internal_stages": []
+    }
+  ],
+  "input_contract": {
+    "metric_id": "rir_samples_jsonl",
+    "required_roles": [
+      "prediction_rir",
+      "reference_rir"
+    ],
+    "optional_roles": [
+      "sample_rate",
+      "channel_layout",
+      "metadata"
+    ],
+    "row_format": "binaural_rir_samples_jsonl",
+    "alignment_key": "sample_id",
+    "aggregation": "per_sample_then_metric_mean",
+    "main_report": true,
+    "purpose": "rir_estimation_and_spatial_audio_quality"
+  },
+  "input_files": {
+    "prediction_rir": "batch",
+    "reference_rir": "batch"
+  },
+  "details": {
+    "channel_mode": "auto",
+    "results": {
+      "rir_nmse": {
+        "metric_name": "rir_nmse",
+        "score": 135.26427238088053,
+        "per_sample": [
+          {
+            "sample_id": "scene_0000_mic03cm",
+            "score": 94.80261387403668
+          },
+          {
+            "sample_id": "scene_0001_mic03cm",
+            "score": 168.09071671640987
+          },
+          {
+            "sample_id": "scene_0000_mic06cm",
+            "score": 103.10613846262727
+          },
+          {
+            "sample_id": "scene_0001_mic06cm",
+            "score": 164.15285679320328
+          },
+          {
+            "sample_id": "scene_0000_mic09cm",
+            "score": 104.40609839809059
+          },
+          {
+            "sample_id": "scene_0001_mic09cm",
+            "score": 171.76463286890993
+          },
+          {
+            "sample_id": "scene_0000_mic12cm",
+            "score": 102.62665108432898
+          },
+          {
+            "sample_id": "scene_0001_mic12cm",
+            "score": 175.67943342468138
+          },
+          {
+            "sample_id": "scene_0000_mic15cm",
+            "score": 102.55668921705089
+          },
+          {
+            "sample_id": "scene_0001_mic15cm",
+            "score": 172.4099695272037
+          },
+          {
+            "sample_id": "scene_0000_mic18cm",
+            "score": 101.918743165986
+          },
+          {
+            "sample_id": "scene_0001_mic18cm",
+            "score": 168.02193857427412
+          },
+          {
+            "sample_id": "scene_0000_mic21cm",
+            "score": 100.2698269153903
+          },
+          {
+            "sample_id": "scene_0001_mic21cm",
+            "score": 169.56315471542638
+          },
+          {
+            "sample_id": "scene_0000_mic24cm",
+            "score": 100.97291465055967
+          },
+          {
+            "sample_id": "scene_0001_mic24cm",
+            "score": 169.8555291056191
+          },
+          {
+            "sample_id": "scene_0000_mic27cm",
+            "score": 101.02882511323729
+          },
+          {
+            "sample_id": "scene_0001_mic27cm",
+            "score": 167.3563509033957
+          },
+          {
+            "sample_id": "scene_0000_mic30cm",
+            "score": 99.22985086297633
+          },
+          {
+            "sample_id": "scene_0001_mic30cm",
+            "score": 167.47251324420324
+          }
+        ],
+        "higher_is_better": false
+      },
+      "rir_corr": {
+        "metric_name": "rir_corr",
+        "score": 0.003063135895335675,
+        "per_sample": [
+          {
+            "sample_id": "scene_0000_mic03cm",
+            "score": 0.3668539198927443,
+            "channels": [
+              -0.018138147594240196,
+              0.7518459873797287
+            ]
+          },
+          {
+            "sample_id": "scene_0001_mic03cm",
+            "score": -0.0023857630227848287,
+            "channels": [
+              -0.011322050157283488,
+              0.006550524111713831
+            ]
+          },
+          {
+            "sample_id": "scene_0000_mic06cm",
+            "score": -0.07889069157760675,
+            "channels": [
+              -0.16185620264343492,
+              0.004074819488221404
+            ]
+          },
+          {
+            "sample_id": "scene_0001_mic06cm",
+            "score": -0.0004416935829092651,
+            "channels": [
+              -0.007246027576511981,
+              0.006362640410693451
+            ]
+          },
+          {
+            "sample_id": "scene_0000_mic09cm",
+            "score": -0.04487637517950365,
+            "channels": [
+              0.08497976220131116,
+              -0.17473251256031846
+            ]
+          },
+          {
+            "sample_id": "scene_0001_mic09cm",
+            "score": -0.009332887315992813,
+            "channels": [
+              -0.014269315682998922,
+              -0.004396458948986705
+            ]
+          },
+          {
+            "sample_id": "scene_0000_mic12cm",
+            "score": 0.03578179286204652,
+            "channels": [
+              -0.01591951686491611,
+              0.08748310258900914
+            ]
+          },
+          {
+            "sample_id": "scene_0001_mic12cm",
+            "score": -0.014204858082830313,
+            "channels": [
+              -0.013182606320442894,
+              -0.015227109845217732
+            ]
+          },
+          {
+            "sample_id": "scene_0000_mic15cm",
+            "score": -0.06556124065812007,
+            "channels": [
+              -0.11667612192029173,
+              -0.014446359395948403
+            ]
+          },
+          {
+            "sample_id": "scene_0001_mic15cm",
+            "score": -0.01881894498790549,
+            "channels": [
+              -0.021847698847744162,
+              -0.01579019112806682
+            ]
+          },
+          {
+            "sample_id": "scene_0000_mic18cm",
+            "score": -0.03837912010226575,
+            "channels": [
+              0.03499117953074897,
+              -0.11174941973528046
+            ]
+          },
+          {
+            "sample_id": "scene_0001_mic18cm",
+            "score": -0.01513115789547869,
+            "channels": [
+              -0.019061543698378158,
+              -0.011200772092579223
+            ]
+          },
+          {
+            "sample_id": "scene_0000_mic21cm",
+            "score": 0.018574397246764313,
+            "channels": [
+              0.0033172841871114828,
+              0.033831510306417144
+            ]
+          },
+          {
+            "sample_id": "scene_0001_mic21cm",
+            "score": -0.00987343836152229,
+            "channels": [
+              -0.002023879365033033,
+              -0.017722997358011545
+            ]
+          },
+          {
+            "sample_id": "scene_0000_mic24cm",
+            "score": -0.017949578853664112,
+            "channels": [
+              -0.06465246720300556,
+              0.028753309495677334
+            ]
+          },
+          {
+            "sample_id": "scene_0001_mic24cm",
+            "score": -0.010464576445686326,
+            "channels": [
+              -0.014341463385553957,
+              -0.006587689505818695
+            ]
+          },
+          {
+            "sample_id": "scene_0000_mic27cm",
+            "score": -0.016580323940778942,
+            "channels": [
+              0.02028042705999986,
+              -0.05344107494155774
+            ]
+          },
+          {
+            "sample_id": "scene_0001_mic27cm",
+            "score": -0.0018357722418973332,
+            "channels": [
+              -0.016988896027179633,
+              0.013317351543384967
+            ]
+          },
+          {
+            "sample_id": "scene_0000_mic30cm",
+            "score": 0.002677563462443657,
+            "channels": [
+              -0.01239408732800417,
+              0.017749214252891485
+            ]
+          },
+          {
+            "sample_id": "scene_0001_mic30cm",
+            "score": -0.01789853330833867,
+            "channels": [
+              -0.028275268209461288,
+              -0.007521798407216046
+            ]
+          }
+        ],
+        "higher_is_better": true
+      },
+      "rt60_mae": {
+        "metric_name": "rt60_mae",
+        "score": 0.0960995351851302,
+        "per_sample": [
+          {
+            "sample_id": "scene_0000_mic03cm",
+            "score": 0.19207597636431717,
+            "prediction_rt60": 1.3734910720088978,
+            "reference_rt60": 1.565567048373215
+          },
+          {
+            "sample_id": "scene_0001_mic03cm",
+            "score": 0.008882607298081213,
+            "prediction_rt60": 1.1591124299430198,
+            "reference_rt60": 1.1502298226449386
+          },
+          {
+            "sample_id": "scene_0000_mic06cm",
+            "score": 0.17870916695478067,
+            "prediction_rt60": 1.3929181626634723,
+            "reference_rt60": 1.571627329618253
+          },
+          {
+            "sample_id": "scene_0001_mic06cm",
+            "score": 0.00963534391306875,
+            "prediction_rt60": 1.1567930108224267,
+            "reference_rt60": 1.147157666909358
+          },
+          {
+            "sample_id": "scene_0000_mic09cm",
+            "score": 0.1872095904859259,
+            "prediction_rt60": 1.3866496104969435,
+            "reference_rt60": 1.5738592009828694
+          },
+          {
+            "sample_id": "scene_0001_mic09cm",
+            "score": 0.0052732002138142775,
+            "prediction_rt60": 1.147126938804451,
+            "reference_rt60": 1.1418537385906367
+          },
+          {
+            "sample_id": "scene_0000_mic12cm",
+            "score": 0.18572740680195432,
+            "prediction_rt60": 1.3835276548786166,
+            "reference_rt60": 1.569255061680571
+          },
+          {
+            "sample_id": "scene_0001_mic12cm",
+            "score": 0.0007020964866690793,
+            "prediction_rt60": 1.1529815778632988,
+            "reference_rt60": 1.1522794813766297
+          },
+          {
+            "sample_id": "scene_0000_mic15cm",
+            "score": 0.19869876349592897,
+            "prediction_rt60": 1.3766303103333497,
+            "reference_rt60": 1.5753290738292787
+          },
+          {
+            "sample_id": "scene_0001_mic15cm",
+            "score": 0.01376832086626556,
+            "prediction_rt60": 1.1685910910891524,
+            "reference_rt60": 1.1548227702228868
+          },
+          {
+            "sample_id": "scene_0000_mic18cm",
+            "score": 0.1842706402155887,
+            "prediction_rt60": 1.3800882141146764,
+            "reference_rt60": 1.5643588543302651
+          },
+          {
+            "sample_id": "scene_0001_mic18cm",
+            "score": 0.023309891763185764,
+            "prediction_rt60": 1.1730516520310723,
+            "reference_rt60": 1.1497417602678865
+          },
+          {
+            "sample_id": "scene_0000_mic21cm",
+            "score": 0.17239614713808749,
+            "prediction_rt60": 1.398137619059265,
+            "reference_rt60": 1.5705337661973524
+          },
+          {
+            "sample_id": "scene_0001_mic21cm",
+            "score": 0.02192610069906431,
+            "prediction_rt60": 1.1641845177009613,
+            "reference_rt60": 1.142258417001897
+          },
+          {
+            "sample_id": "scene_0000_mic24cm",
+            "score": 0.1712328148642026,
+            "prediction_rt60": 1.4079838535405678,
+            "reference_rt60": 1.5792166684047704
+          },
+          {
+            "sample_id": "scene_0001_mic24cm",
+            "score": 0.022119623325732807,
+            "prediction_rt60": 1.159856054927019,
+            "reference_rt60": 1.1377364316012861
+          },
+          {
+            "sample_id": "scene_0000_mic27cm",
+            "score": 0.17107759548737533,
+            "prediction_rt60": 1.4128687077064543,
+            "reference_rt60": 1.5839463031938297
+          },
+          {
+            "sample_id": "scene_0001_mic27cm",
+            "score": 0.0008171844092279557,
+            "prediction_rt60": 1.1491066294133288,
+            "reference_rt60": 1.1482894450041008
+          },
+          {
+            "sample_id": "scene_0000_mic30cm",
+            "score": 0.1490923445717156,
+            "prediction_rt60": 1.4376519315383338,
+            "reference_rt60": 1.5867442761100494
+          },
+          {
+            "sample_id": "scene_0001_mic30cm",
+            "score": 0.025065888347617582,
+            "prediction_rt60": 1.1408441469020816,
+            "reference_rt60": 1.1659100352496992
+          }
+        ],
+        "higher_is_better": false,
+        "unit": "seconds"
+      },
+      "rir_iacc_mae": {
+        "metric_name": "rir_iacc_mae",
+        "score": 0.2401844839063465,
+        "per_sample": [
+          {
+            "sample_id": "scene_0000_mic03cm",
+            "score": 0.14141848267402235,
+            "prediction_iacc": 0.7567537480302055,
+            "reference_iacc": 0.6153352653561831,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0001_mic03cm",
+            "score": 0.23508437964139006,
+            "prediction_iacc": 0.7881761158191817,
+            "reference_iacc": 0.5530917361777916,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0000_mic06cm",
+            "score": 0.2686229405629644,
+            "prediction_iacc": 0.7249623120167147,
+            "reference_iacc": 0.4563393714537503,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0001_mic06cm",
+            "score": 0.26800311972408297,
+            "prediction_iacc": 0.7095460901062806,
+            "reference_iacc": 0.4415429703821976,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0000_mic09cm",
+            "score": 0.13651694091621147,
+            "prediction_iacc": 0.7109699892115688,
+            "reference_iacc": 0.5744530482953574,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0001_mic09cm",
+            "score": 0.2740596922671041,
+            "prediction_iacc": 0.6817996465306347,
+            "reference_iacc": 0.40773995426353066,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0000_mic12cm",
+            "score": 0.1946366497149019,
+            "prediction_iacc": 0.7106784590723834,
+            "reference_iacc": 0.5160418093574815,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0001_mic12cm",
+            "score": 0.2635141480720834,
+            "prediction_iacc": 0.6717400298957847,
+            "reference_iacc": 0.40822588182370134,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0000_mic15cm",
+            "score": 0.27500106063871954,
+            "prediction_iacc": 0.6998342389582143,
+            "reference_iacc": 0.42483317831949474,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0001_mic15cm",
+            "score": 0.2800531292306134,
+            "prediction_iacc": 0.6714975927192066,
+            "reference_iacc": 0.39144446348859324,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0000_mic18cm",
+            "score": 0.15681560842852105,
+            "prediction_iacc": 0.7044177072331236,
+            "reference_iacc": 0.5476020988046025,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0001_mic18cm",
+            "score": 0.29419997970621325,
+            "prediction_iacc": 0.6772270547628377,
+            "reference_iacc": 0.3830270750566245,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0000_mic21cm",
+            "score": 0.1895533641607785,
+            "prediction_iacc": 0.6924118986768211,
+            "reference_iacc": 0.5028585345160426,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0001_mic21cm",
+            "score": 0.27620601932512356,
+            "prediction_iacc": 0.6721790055999455,
+            "reference_iacc": 0.3959729862748219,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0000_mic24cm",
+            "score": 0.3173357503522334,
+            "prediction_iacc": 0.6972146658026835,
+            "reference_iacc": 0.37987891545045016,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0001_mic24cm",
+            "score": 0.279337669385162,
+            "prediction_iacc": 0.662560862222849,
+            "reference_iacc": 0.383223192837687,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0000_mic27cm",
+            "score": 0.156997746467341,
+            "prediction_iacc": 0.6976957256095595,
+            "reference_iacc": 0.5406979791422185,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0001_mic27cm",
+            "score": 0.3035047692394382,
+            "prediction_iacc": 0.662968384998585,
+            "reference_iacc": 0.3594636157591468,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0000_mic30cm",
+            "score": 0.1778351426807292,
+            "prediction_iacc": 0.7147432703924422,
+            "reference_iacc": 0.536908127711713,
+            "unit": "coefficient"
+          },
+          {
+            "sample_id": "scene_0001_mic30cm",
+            "score": 0.31499308493929623,
+            "prediction_iacc": 0.6697840682271176,
+            "reference_iacc": 0.3547909832878213,
+            "unit": "coefficient"
+          }
+        ],
+        "higher_is_better": false
+      }
+    },
+    "rows": [
+      {
+        "sample_id": "scene_0000_mic03cm"
+      },
+      {
+        "sample_id": "scene_0001_mic03cm"
+      },
+      {
+        "sample_id": "scene_0000_mic06cm"
+      },
+      {
+        "sample_id": "scene_0001_mic06cm"
+      },
+      {
+        "sample_id": "scene_0000_mic09cm"
+      },
+      {
+        "sample_id": "scene_0001_mic09cm"
+      },
+      {
+        "sample_id": "scene_0000_mic12cm"
+      },
+      {
+        "sample_id": "scene_0001_mic12cm"
+      },
+      {
+        "sample_id": "scene_0000_mic15cm"
+      },
+      {
+        "sample_id": "scene_0001_mic15cm"
+      },
+      {
+        "sample_id": "scene_0000_mic18cm"
+      },
+      {
+        "sample_id": "scene_0001_mic18cm"
+      },
+      {
+        "sample_id": "scene_0000_mic21cm"
+      },
+      {
+        "sample_id": "scene_0001_mic21cm"
+      },
+      {
+        "sample_id": "scene_0000_mic24cm"
+      },
+      {
+        "sample_id": "scene_0001_mic24cm"
+      },
+      {
+        "sample_id": "scene_0000_mic27cm"
+      },
+      {
+        "sample_id": "scene_0001_mic27cm"
+      },
+      {
+        "sample_id": "scene_0000_mic30cm"
+      },
+      {
+        "sample_id": "scene_0001_mic30cm"
+      }
+    ]
+  }
+}

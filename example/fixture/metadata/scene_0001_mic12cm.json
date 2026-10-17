@@ -1,0 +1,80 @@
+{
+  "scene_id": "scene_0001",
+  "scene_seed": 20260922,
+  "room_size": [
+    8.663740897891364,
+    6.179095844129025,
+    2.870004627632149
+  ],
+  "rt60": 0.8242787759389767,
+  "source_position": [
+    3.0689494609832764,
+    3.9757277965545654,
+    1.0325772762298584
+  ],
+  "mic_center": [
+    4.400469779968262,
+    3.1451051235198975,
+    1.6179062128067017
+  ],
+  "array_axis": [
+    0.5526223942131165,
+    0.8334317545031283,
+    0.0
+  ],
+  "beta": [
+    0.930222749710083,
+    0.9177466630935669,
+    0.9082114100456238,
+    0.9106999039649963,
+    0.9163411855697632,
+    0.9258604049682617
+  ],
+  "target_snr_db": 20.345808417512586,
+  "source_utt_id": "000829",
+  "source_dry": "/hpc_stor01/home/yujie.xiong_sx/data/dataset_30mm/test/clean_dry/000829.wav",
+  "source_noise": "/hpc_stor01/home/yujie.xiong_sx/data/dataset_30mm/test_varsnr10_25/noise/000829.wav",
+  "clean_source_path": "/hpc_stor02/home/wen.wen_sx/dataset/LibriSpeech/test-clean/2094/142345/2094-142345-0054.wav",
+  "noise_source_path": "/hpc_stor02/home/wen.wen_sx/dataset/DNS-Challenge/datasets/noise/77BU7DbAbJM.wav",
+  "utt_id": "scene_0001_mic12cm",
+  "sample_id": "scene_0001_mic12cm",
+  "mixture": "/hpc_stor01/home/yujie.xiong_sx/data/variableMspacingTestSet/mixture/scene_0001_mic12cm.wav",
+  "noise": "/hpc_stor01/home/yujie.xiong_sx/data/variableMspacingTestSet/noise/scene_0001_mic12cm.wav",
+  "clean_rev": "/hpc_stor01/home/yujie.xiong_sx/data/variableMspacingTestSet/clean_rev/scene_0001_mic12cm.wav",
+  "clean_early": "/hpc_stor01/home/yujie.xiong_sx/data/variableMspacingTestSet/clean_early/scene_0001_mic12cm.wav",
+  "clean_dp": "/hpc_stor01/home/yujie.xiong_sx/data/variableMspacingTestSet/clean_dp/scene_0001_mic12cm.wav",
+  "rir": "/hpc_stor01/home/yujie.xiong_sx/data/variableMspacingTestSet/rir/scene_0001_mic12cm.npy",
+  "rir_dp": "/hpc_stor01/home/yujie.xiong_sx/data/variableMspacingTestSet/rir_dp/scene_0001_mic12cm.npy",
+  "rir_early": "/hpc_stor01/home/yujie.xiong_sx/data/variableMspacingTestSet/rir_early/scene_0001_mic12cm.npy",
+  "clean_dry": "/hpc_stor01/home/yujie.xiong_sx/data/variableMspacingTestSet/clean_dry/scene_0001.wav",
+  "noise_base": "/hpc_stor01/home/yujie.xiong_sx/data/variableMspacingTestSet/noise_base/scene_0001.wav",
+  "sr": 16000,
+  "num_samples": 48000,
+  "mic_spacing": 0.12,
+  "mic_spacing_cm": 12,
+  "mic_positions": [
+    [
+      4.3673124363154745,
+      3.0950992182497097,
+      1.6179062128067017
+    ],
+    [
+      4.433627123621049,
+      3.1951110287900852,
+      1.6179062128067017
+    ]
+  ],
+  "snr_db": 20.345808417512586,
+  "measured_snr_db": 20.345808990186743,
+  "doa_cos": -0.02600697328374424,
+  "doa_deg": 91.49025783173103,
+  "direct_arrival_samples": [
+    78,
+    78
+  ],
+  "rir_num_samples": 13190,
+  "scene_gain": 1.0,
+  "noise_gain_from_base": 0.0009961418653527687,
+  "rir_scale": "native gpuRIR output",
+  "early_window_ms_after_direct_arrival": 50
+}

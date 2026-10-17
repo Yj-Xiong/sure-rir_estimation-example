@@ -85,13 +85,13 @@ function draw() {
   ctx.fillRect(0, 0, width, height);
 
   const currentEntries = entries();
-  const drawSeries = (values, color, dashed, top, plotHeight) => {
+  const drawSeries = (values, color, dashed, top, plotHeight, scale) => {
     if (!values.length) return;
     if (ctx.setLineDash) ctx.setLineDash(dashed ? [5, 4] : []);
     ctx.beginPath();
     values.forEach((value, index) => {
       const x = plotLeft + (index / Math.max(values.length - 1, 1)) * plotWidth;
-      const y = top + plotHeight * 0.5 - value * plotHeight * 0.42;
+      const y = top + plotHeight * 0.5 - (value / scale) * plotHeight * 0.42;
       index ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
     });
     ctx.strokeStyle = color;
@@ -104,6 +104,11 @@ function draw() {
     const top = channel * (rowHeight + rowGap);
     const reference = currentEntries[0]?.sample.reference_waveforms?.[channel] || [];
     const estimates = currentEntries.map((entry) => entry.sample.estimate_waveforms?.[channel] || entry.sample.waveform || []);
+    const observedPeak = Math.max(
+      ...[reference].concat(estimates).flatMap((values) => values.map((value) => Math.abs(value))),
+      1e-6,
+    );
+    const axisPeak = observedPeak * 1.1;
     ctx.fillStyle = "#193c33";
     ctx.fillRect(0, top, width, rowHeight);
     ctx.strokeStyle = "#315a49";
@@ -118,14 +123,14 @@ function draw() {
     ctx.fillStyle = "#b8c9bd";
     ctx.font = "11px system-ui";
     ctx.textAlign = "right";
-    ctx.fillText("+1.0", plotLeft - 7, top + 12);
+    ctx.fillText("+" + formatAmplitude(axisPeak), plotLeft - 7, top + 12);
     ctx.fillText("0", plotLeft - 7, top + rowHeight / 2 + 4);
-    ctx.fillText("-1.0", plotLeft - 7, top + rowHeight - 4);
+    ctx.fillText("-" + formatAmplitude(axisPeak), plotLeft - 7, top + rowHeight - 4);
     ctx.textAlign = "left";
     ctx.font = "10px var(--mono), monospace";
     ctx.fillText(channel === 0 ? "L / channel 0" : "R / channel 1", plotLeft + 8, top + 14);
-    drawSeries(reference, "#f1f3e8", true, top, rowHeight);
-    estimates.forEach((values, index) => drawSeries(values, group().colors[index], false, top, rowHeight));
+    drawSeries(reference, "#f1f3e8", true, top, rowHeight, axisPeak);
+    estimates.forEach((values, index) => drawSeries(values, group().colors[index], false, top, rowHeight, axisPeak));
   }
 }
 

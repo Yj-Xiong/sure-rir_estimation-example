@@ -17,7 +17,7 @@ three repositories must keep their own PRs and pipeline identities separate.
 
 ## Open-Bench contribution mapping
 
-The engine change is classified as **New Metric** on the existing RIR task:
+The engine change adds the **RIR estimation** task and its metrics:
 
 - `rir.any.rir_iacc_mae.rir_iacc_mae_v1`;
 - `rir.any.rir_itd_mae.rir_itd_mae_v1`;

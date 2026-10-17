@@ -1013,13 +1013,13 @@
     },
     {
       "path": "index.html",
-      "sha256": "aa859344042054b27138c7eccb944effe679341328c8f0aa6f442826a26382b6",
-      "bytes": 5413
+      "sha256": "d7c2c07205228a500403a16aed364c24d41df5f7cc733a020054903a46a03fc3",
+      "bytes": 6768
     },
     {
       "path": "styles.css",
-      "sha256": "6b8dfd9a6289a5e637873d8a50a72639423f4bf37ed6726388bc382362f56869",
-      "bytes": 10055
+      "sha256": "762f67addd2f0bc267fd5420371b24e1cfd7b2c2a5d588f9db8884c14c43713a",
+      "bytes": 10985
     }
   ]
 }

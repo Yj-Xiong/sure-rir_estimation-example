@@ -1,6 +1,6 @@
 # SURE RIR Estimation Example
 
-**[Open the GitHub Pages demo](https://wenanzhi.github.io/sure-rir_estimation-example/)** · [Reproduction notes](example/README.md)
+**[Open the GitHub Pages demo](https://yj-xiong.github.io/sure-rir_estimation-example/)** · [Reproduction notes](example/README.md)
 
 This example follows the public structure of `sure-se-example`, and covers
 SURE's channel-aware RIR evaluation contract:

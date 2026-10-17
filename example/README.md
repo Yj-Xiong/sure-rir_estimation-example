@@ -1,6 +1,6 @@
 # 运行这个 RIR 样例
 
-这个示例的公开页面是静态预览，真实评分由 SURE Harness 调用已合并的
+这个示例的公开页面使用真实的 Rec-RIR SURE report；真实评分由 SURE Harness 调用已合并的
 `sure-evaluation` RIR pipeline 执行。模型输出只能提供 `prediction_rir`，
 参考 RIR 只进入评分链路。
 

@@ -34,10 +34,10 @@ match; mono reports must not be mixed with binaural spatial reports. The small
 sample evidence is the 20-row, ten-spacing VariableMSpacingTest selection
 described under `example/fixture/`.
 
-The page is a static GitHub Pages artifact. Its waveforms and scores are
-browser-generated previews; model weights, private paths, and generated WAVs
-stay outside the repository. The real 20-row selection is materialized with
-the SURE Harness fixture helper after cloning the Harness repository.
+The page is a static GitHub Pages artifact. The displayed Rec-RIR values come
+from a real 20-row SURE report; NeuBIRE and the separate L/R branch remain
+explicitly marked as not run until their own reports exist. Model weights,
+private paths, and generated WAVs stay outside the repository.
 
 Repository layout follows the SURE example convention:
 

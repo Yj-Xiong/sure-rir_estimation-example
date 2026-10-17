@@ -8,8 +8,8 @@
     },
     {
       "path": "case_manifest.json",
-      "sha256": "47b17c1bf6c69d4f8ecb938e5b8942430db154b5c5f883cf629cc58f7011fde9",
-      "bytes": 1182
+      "sha256": "cec85430ccabc65c21cb73d630e5f49dab1a1bfae3630684d26e5f4308b03dc3",
+      "bytes": 1504
     },
     {
       "path": "cases/neubire-v1-native/predictions/scene_0000_mic03cm.wav",
@@ -638,8 +638,8 @@
     },
     {
       "path": "model_examples.yaml",
-      "sha256": "a7d84e822137350610482fa26a449af6bbc5100b021105473034c86afaae30c1",
-      "bytes": 1143
+      "sha256": "4cc176f9054743e3088ced628b4d6878963d31cc50644109ac2ab4e53db1eb23",
+      "bytes": 1139
     },
     {
       "path": "original_mixture/scene_0000_mic03cm.wav",

@@ -23,28 +23,28 @@
     },
     {
       "path": "README.md",
-      "sha256": "3ff866c4f195b5aa7d186d59ce4a81f6cb274228f05d88947a006d9bf8943ed6",
-      "bytes": 2705
+      "sha256": "157c1a741fa4f7c859ec39598eee02a6796f6420f71fa147dc874d519305554a",
+      "bytes": 2769
     },
     {
       "path": "app.js",
-      "sha256": "5c504aa7fceeb384b6c2a5ea693509e174dde80494b05e6bac1684661cb13449",
-      "bytes": 4870
+      "sha256": "b0964a3f1f9b4ac85ddbc872b1af6b85dde141adb7971b4a928dd664935c35b1",
+      "bytes": 7508
     },
     {
       "path": "data/results.json",
-      "sha256": "ddc6e9ddc3eedcaa78dce9084a83d5eec1c63680c34f622a8e5cefef6661c72f",
-      "bytes": 316087
+      "sha256": "37b0f54145f5e6dbc1d621778f18ba5066ef463e3b14b62817f21d18df68254c",
+      "bytes": 317826
     },
     {
       "path": "example/README.md",
-      "sha256": "2e38e54ddac921f3cbb96715315eb7dff384e30fc42898a28035a40aa15eab5f",
-      "bytes": 1263
+      "sha256": "7af31285d08a5e0376deb5598cb701b4b0df24bf5870d3ba3beaf818694e7930",
+      "bytes": 1294
     },
     {
       "path": "example/expected.json",
-      "sha256": "fef9ead13d65f6397635ca4b2f1bb2d176c8982d9f3b60a87d34e4cbcda7d195",
-      "bytes": 506
+      "sha256": "19877d97f217ad9bfdbea93fa2a7db5d4fc3ec5e42c387adfd83cb0473fd869e",
+      "bytes": 480
     },
     {
       "path": "example/fixture/README.md",
@@ -53,8 +53,8 @@
     },
     {
       "path": "example/fixture/case_manifest.json",
-      "sha256": "47b17c1bf6c69d4f8ecb938e5b8942430db154b5c5f883cf629cc58f7011fde9",
-      "bytes": 1182
+      "sha256": "cec85430ccabc65c21cb73d630e5f49dab1a1bfae3630684d26e5f4308b03dc3",
+      "bytes": 1504
     },
     {
       "path": "example/fixture/cases/neubire-v1-native/predictions/scene_0000_mic03cm.wav",
@@ -683,8 +683,8 @@
     },
     {
       "path": "example/fixture/model_examples.yaml",
-      "sha256": "a7d84e822137350610482fa26a449af6bbc5100b021105473034c86afaae30c1",
-      "bytes": 1143
+      "sha256": "4cc176f9054743e3088ced628b4d6878963d31cc50644109ac2ab4e53db1eb23",
+      "bytes": 1139
     },
     {
       "path": "example/fixture/original_mixture/scene_0000_mic03cm.wav",
@@ -1013,8 +1013,8 @@
     },
     {
       "path": "index.html",
-      "sha256": "548feeaa59d6be4de78129f893bda0f6811ab1b16e946d9aaccf6d5b13af063c",
-      "bytes": 5270
+      "sha256": "56c562ee51544a040c76489c4c71917ae132db9f96877f926d7919a4c8cc6a20",
+      "bytes": 5294
     },
     {
       "path": "styles.css",

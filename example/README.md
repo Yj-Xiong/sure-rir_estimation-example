@@ -19,5 +19,6 @@ sure-eval metric describe rir --metric rir_iacc_mae --output /tmp/rir_pipeline.j
 sure-eval metric run --pipeline /tmp/rir_pipeline.json --samples-jsonl /tmp/rir_samples.jsonl --output-dir /tmp/rir_eval --validate-env --json
 ```
 
-双耳链路要求恰好两个通道；单通道链路使用 RIR-NMSE、Correlation、RT60、
-DRR、C50、C80。报告会同时保存 `report.json` 和 `pipeline_description.json`。
+双耳链路要求恰好两个通道；单通道和多通道基础链路都使用 NPM、RT60，
+空间链路再附加 IACC、ITD、ILD、IPD。报告会同时保存 `report.json` 和
+`pipeline_description.json`。

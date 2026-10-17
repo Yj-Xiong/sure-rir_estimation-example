@@ -6,26 +6,26 @@ models:
     input_transform: channel_0
     output_channels: 1
     score_channel: 0
-    pipeline_metrics: [rir_nmse, rir_corr, rt60_mae, rir_drr_mae, rir_c50_mae, rir_c80_mae]
+    pipeline_metrics: [rir_npm, rt60_mae, rir_drr_mae, rir_c50_mae, rir_c80_mae]
   - id: rec-rir-separate
     display_name: Rec-RIR separate L/R
     branch: multi_channel
     input_transform: independent_channel_0_and_channel_1
     output_channels: 2
     merge_order: [left, right]
-    pipeline_metrics: [rir_nmse, rir_iacc_mae, rir_itd_mae, rir_ild_mae, rir_ipd_mae]
+    pipeline_metrics: [rir_npm, rt60_mae, rir_iacc_mae, rir_itd_mae, rir_ild_mae, rir_ipd_mae]
   - id: neubire-single
     display_name: NeuBIRE single
     branch: single_channel
     input_transform: duplicate_channel_0_to_two_inputs
     output_channels: 1
     score_channel: 0
-    pipeline_metrics: [rir_nmse, rir_corr, rt60_mae, rir_drr_mae, rir_c50_mae, rir_c80_mae]
+    pipeline_metrics: [rir_npm, rt60_mae, rir_drr_mae, rir_c50_mae, rir_c80_mae]
   - id: neubire-mint
     display_name: NeuBIRE v1 MINT
     branch: multi_channel
     input_transform: native_two_channel
     output_channels: 2
     merge_order: [left, right]
-    pipeline_metrics: [rir_nmse, rir_iacc_mae, rir_itd_mae, rir_ild_mae, rir_ipd_mae]
+    pipeline_metrics: [rir_npm, rt60_mae, rir_iacc_mae, rir_itd_mae, rir_ild_mae, rir_ipd_mae]
     checkpoint: "NeuBIRE v1 / best_npm_1"

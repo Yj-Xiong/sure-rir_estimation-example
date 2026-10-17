@@ -22,13 +22,14 @@ The engine change is classified as **New Metric** on the existing RIR task:
 - `rir.any.rir_iacc_mae.rir_iacc_mae_v1`;
 - `rir.any.rir_itd_mae.rir_itd_mae_v1`;
 - the existing binaural ILD/IPD nodes remain independently selectable;
-- the spatial multi-metric bundle keeps `rir_nmse` as its report top-level score.
+- the spatial multi-metric bundle keeps `rir_npm` and `rt60_mae` as the
+  base scores before the spatial metrics.
 
 The engine PR contains only versioned nodes, task contracts, routes, tests,
 task documentation, and regenerated catalog assets. This repository contains
 no node implementation and no replacement for an existing `pipeline_id`.
 
-The default RIR bundle remains unchanged. Scores are comparable only when the
+The default RIR bundle uses NPM and RT60 before optional spatial metrics. Scores are comparable only when the
 canonical metric, channel branch, sample-rate/window policy, and pipeline ID
 match; mono reports must not be mixed with binaural spatial reports. The small
 sample evidence is the 20-row, ten-spacing VariableMSpacingTest selection

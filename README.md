@@ -33,7 +33,7 @@ The default RIR bundle uses NPM and RT60 before optional spatial metrics. Scores
 canonical metric, channel branch, sample-rate/window policy, and pipeline ID
 match; mono reports must not be mixed with binaural spatial reports. The small
 browser preview uses 60 direct RIR rows from the fixed-SNR set: 10/20/30 dB,
-scenes `scene_0000` and `scene_0099`, and ten microphone spacings.
+scenes `scene_0000` and `scene_0025`, and ten microphone spacings.
 
 The page is a static GitHub Pages artifact. It loads four real 60-row direct-RIR
 result cases. Model checkpoints and private paths stay outside the repository;

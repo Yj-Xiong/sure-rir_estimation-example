@@ -38,6 +38,8 @@ scenes `scene_0000` and `scene_0096`, and ten microphone spacings.
 The page is a static GitHub Pages artifact. It loads four real 60-row direct-RIR
 result cases. Model checkpoints and private paths stay outside the repository;
 the browser data contains only bounded waveform samples and scores.
+The exact source dataset, sample selection, checkpoints, preprocessing, and
+scoring protocol are recorded in [`data/provenance.json`](data/provenance.json).
 
 Repository layout follows the SURE example convention:
 

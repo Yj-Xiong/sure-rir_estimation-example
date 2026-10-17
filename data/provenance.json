@@ -1,0 +1,49 @@
+{
+  "schema": "sure.rir.demo_data_provenance.v1",
+  "purpose": "Provenance for data/results.json browser preview",
+  "dataset": {
+    "name": "VariableMSpacingFixedSNR_30scenes_260928",
+    "manifest": "data/variableMspacingFixedSNR_30scenes_260928/test_manifest.jsonl",
+    "source_dataset": "VariableMSpacingTestSet",
+    "generator": "Rec-BIR/scripts/generate_variable_mspacing_fixed_snr_subset.py",
+    "generator_selection_seed": 20260928,
+    "sample_rate_hz": 16000,
+    "available_snrs_db": [10, 20, 30, 40],
+    "available_scenes": 30,
+    "available_spacings_cm": [3, 6, 9, 12, 15, 18, 21, 24, 27, 30]
+  },
+  "browser_selection": {
+    "snrs_db": [10, 20, 30],
+    "scenes": ["scene_0000", "scene_0096"],
+    "spacings_cm": [3, 6, 9, 12, 15, 18, 21, 24, 27, 30],
+    "rows_per_snr": 20,
+    "total_rows": 60,
+    "reference_role": "rir from the fixed-SNR manifest; SNR changes the mixture, not the reference RIR"
+  },
+  "inference": {
+    "source_module": "Rec-BIR/scripts/evaluate_air_itd_gccphat_260817.py",
+    "path": "direct RIR estimator -> saved RIR; no MINT inverse, speech reconstruction, or acoustic speech scoring",
+    "rec_rir": {
+      "config": "fins-main/configs/recrir/first_channel/original_recrir_1ch_2chrender_ch0_dataset30mm_noise92_full50_bs2x2.toml",
+      "checkpoint": "Rec-BIR/eval_results/unified_10testsets_recrir_1ch_baselines_with_iacc_260805/checkpoint_snapshots/official_recrir_epoch35.tar",
+      "outputs": ["channel 0 single", "native two-channel separate L/R"]
+    },
+    "neubire_v1": {
+      "config": "Rec-BIR/exp/3cmstep10w_shareddp_nocbam_rimagdelta01_8gpu4090_bs2x8_stepvalid2500_260922/2026-09-22-22-46-02.toml",
+      "checkpoint": "Rec-BIR/exp/3cmstep10w_shareddp_nocbam_rimagdelta01_8gpu4090_bs2x8_stepvalid2500_260922/ckpt/best_npm_1.tar",
+      "outputs": ["channel 0 single", "native two-channel"]
+    }
+  },
+  "scoring": {
+    "npm": "Rec-BIR/scripts/evaluate_variable_mspacing_bci.py:npm_db, first 16000 samples, shared +/-256 sample lag, global scale-invariant projection error",
+    "acoustic": "Rec-BIR/scripts/compute_variable_mspacing_acoustic_errors.py, 1 s window, per-channel RT60/DRR/C50/EDC and optional IACC/spatial delay",
+    "waveform_display": "Rec-BIR/scripts/waveform_alignment.py:shared_ch0_peak_crop, 2.5 ms pre-roll, then independent peak normalization per trace",
+    "waveform_mae": "mean absolute error after the same crop and peak normalization",
+    "temporal_alignment": "display crop only; NPM and saved RIR scores do not apply an extra time shift"
+  },
+  "published_artifact": {
+    "path": "data/results.json",
+    "contains": "60 samples per each of four comparison cases, downsampled normalized traces, scores, and provenance",
+    "raw_model_outputs": "not committed; kept in the local analysis output root"
+  }
+}

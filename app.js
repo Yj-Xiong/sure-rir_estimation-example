@@ -167,7 +167,7 @@ function render() {
 async function boot() {
   try {
     actualData = await (await fetch(dataUrl)).json();
-    document.querySelector(".preview-badge").textContent = "REC-BIR DIRECT RIR / 60 SAMPLES";
+    document.querySelector(".preview-badge").textContent = "gpuRIR / 60 SAMPLES";
     document.querySelector("#inspect .section-line>p").textContent = "Shared references with multiple direct RIR estimate branches.";
     document.querySelector(".sample-note").textContent = "Dashed line is the reference; solid lines are estimates. Both channels share the same sample and scoreboard values use the same report row.";
     updateSnrOptions();

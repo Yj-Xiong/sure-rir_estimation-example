@@ -35,6 +35,16 @@ match; mono reports must not be mixed with binaural spatial reports. The small
 browser preview uses 60 direct RIR rows from the fixed-SNR set: 10/20/30 dB,
 scenes `scene_0000` and `scene_0025`, and ten microphone spacings.
 
+The executable Harness backend reproduction in [`example/README.md`](example/README.md)
+pins SURE and Rec-RIR, calls a real `estimate_rir` MCP adapter on the 20-row
+fixture, then uses the Harness RIR bridge, `evaluate_predictions.py`, and locked
+Evaluation Runtime to generate fresh reports. It covers the Rec-RIR channel-0 branch; the other
+three branches remain saved evidence rather than fresh inference in that script.
+The pinned backend uses `rir_nmse`/`rir_corr`/`rt60_mae`, while the newer
+browser/NPM artifacts use a different metric definition and dataset.
+The completed 20-row run and its public report are in
+[`example/harness-run/`](example/harness-run/README.md).
+
 The page is a static GitHub Pages artifact. It loads four real 60-row direct-RIR
 result cases. Model checkpoints and private paths stay outside the repository;
 the browser data contains only bounded waveform samples and scores.

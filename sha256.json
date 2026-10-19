@@ -23,13 +23,18 @@
     },
     {
       "path": "README.md",
-      "sha256": "9b61aa78756f1c10650033f52a48af2207ae4858e7cbf1352b2020847519016a",
-      "bytes": 2925
+      "sha256": "4841728073cfb45f0485256e0cdb7cbe59e0f27a7035962a7a8dd0137e1674e6",
+      "bytes": 3603
     },
     {
       "path": "app.js",
       "sha256": "4907a2c3ba7a6a58a1da9756cce044a239063cb9bf02a75370f37da412020523",
       "bytes": 12243
+    },
+    {
+      "path": "data/provenance.json",
+      "sha256": "e580356385c82aafcabe26c72e45a7b0e3250dd414659aa50aef274aa909af21",
+      "bytes": 2996
     },
     {
       "path": "data/results.json",
@@ -38,8 +43,28 @@
     },
     {
       "path": "example/README.md",
-      "sha256": "c2549c68e7735a04149b29330cb9ada045042dc622bf4e8502ab41978070d6dc",
-      "bytes": 1361
+      "sha256": "d7ec64b2ba96345542ae3d88b71d26a2d91085c5032bef0d104d2a16ebcd350d",
+      "bytes": 8486
+    },
+    {
+      "path": "example/adapter/config.toml",
+      "sha256": "fbec9639b5b1b34b74af43e0505ce9054bfea24816a8df503d70e24572f30db2",
+      "bytes": 594
+    },
+    {
+      "path": "example/adapter/config.yaml",
+      "sha256": "9afe2c1947b45199ff010383167b6c070d2fc4f6efb6541e88e185ad6a5187f1",
+      "bytes": 223
+    },
+    {
+      "path": "example/adapter/model.py",
+      "sha256": "bfd7ee56d3603da806f25df5ff150d57ed60c65ea7e6e10bf9744cc1387e900e",
+      "bytes": 3195
+    },
+    {
+      "path": "example/adapter/server.py",
+      "sha256": "aeaac25257cc53b1aa577d84a95f6e13e5cfc69d076d1cf22e8ec98c1f4ed410",
+      "bytes": 2183
     },
     {
       "path": "example/expected.json",
@@ -997,6 +1022,31 @@
       "bytes": 315
     },
     {
+      "path": "example/harness-run/README.md",
+      "sha256": "2631e0391cabfabdbde8075eb8e07354004a057fa25c285bbb1991ee7ebd1c6d",
+      "bytes": 1886
+    },
+    {
+      "path": "example/harness-run/model_environment.json",
+      "sha256": "115ca5441ca4ade99576763b9b1a48f0cfb68c5a83307e48e0ab396459b4a374",
+      "bytes": 358
+    },
+    {
+      "path": "example/harness-run/pipeline_description.json",
+      "sha256": "bfb9d8b4a5680520837a3aaec6f53b055c7208e978f33847942f9c00ffdd485d",
+      "bytes": 3093
+    },
+    {
+      "path": "example/harness-run/report.json",
+      "sha256": "23e1f676ffab7c203494a3afac00c6a48ef42f1cc300f19908708634f8f6f7a4",
+      "bytes": 25144
+    },
+    {
+      "path": "example/harness-run/summary.json",
+      "sha256": "cb46537ff3e5959ccc4b8f657100a1652dcf5c1c2faec820904b5c1fa728eba3",
+      "bytes": 927
+    },
+    {
       "path": "example/reference-run/pipeline_description.json",
       "sha256": "bfb9d8b4a5680520837a3aaec6f53b055c7208e978f33847942f9c00ffdd485d",
       "bytes": 3093
@@ -1010,6 +1060,16 @@
       "path": "example/reference-run/summary.json",
       "sha256": "97342cbdd43d32b80d1f13a94f1c7f0454dd3103900d1d010699ec975bc7088c",
       "bytes": 467
+    },
+    {
+      "path": "example/run_example.py",
+      "sha256": "60e1dfd54b326ad19c77efd71c0de589b5785d9ba8fc6afa294109e2fd4536c4",
+      "bytes": 17092
+    },
+    {
+      "path": "example/test_example.py",
+      "sha256": "7cf6e8429751eef1e3a1b4fd64cd248062e8f72f14a5ab90c364814cb55be6bb",
+      "bytes": 5655
     },
     {
       "path": "index.html",

@@ -1,0 +1,10 @@
+name: rec_rir_pim_channel0
+task: RIR
+model:
+  id: audio-westlakeu/rec-rir-epoch35
+  task: RIR
+server:
+  command: [python, server.py]
+tools:
+  - name: estimate_rir
+    description: Estimate a channel-0 room impulse response

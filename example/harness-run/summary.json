@@ -1,0 +1,21 @@
+{
+  "status": "completed",
+  "scope": "Rec-RIR channel-0 Harness backend reproduction",
+  "sure_commit": "73975931da1353c3b97a422e796612d8b363fe3b",
+  "engine_commit": "8041b1249c5d0ce39a96c72cab01e49b09cc87e9",
+  "model_commit": "6914eea792f0117e39f87510ffbda7cd04dffbbb",
+  "checkpoint_sha256": "afe36e477f6fb3656d162d906a47da2d40a789634b476564266fc1ba36037478",
+  "harness_runtime_id": "sure-harness-v1-m3-py311-03393a2780e1",
+  "evaluation_runtime_id": "sure-evaluation-root-v1-m5-8041b1249c5d-py311-fb2f0b85b36f",
+  "model_environment": "model_environment.json",
+  "sample_count": 20,
+  "resumed_scoring": true,
+  "pipeline_id": "rir.any.multi.rir_nmse.rir_nmse_v1__rir_corr.rir_corr_v1__rt60_mae.rt60_mae_v1",
+  "metrics": {
+    "rir_nmse": 225.1464392939488,
+    "rir_corr": -0.01816639841539773,
+    "rt60_mae": 0.6230814872020897
+  },
+  "report": "report.json",
+  "pipeline_description": "pipeline_description.json"
+}

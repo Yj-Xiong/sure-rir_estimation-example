@@ -1,0 +1,17 @@
+{
+  "python": "3.10.0",
+  "torch_build": "2.2.0+cu121",
+  "torch_cuda": "12.1",
+  "packages": {
+    "torch": "2.2.0",
+    "torchaudio": "2.2.0",
+    "mamba-ssm": "2.1.0",
+    "causal-conv1d": "1.4.0",
+    "numpy": "1.26.4",
+    "soundfile": "0.13.1",
+    "toml": "0.10.2",
+    "tqdm": "4.68.2",
+    "jsonargparse": "4.48.0",
+    "matplotlib": "3.10.8"
+  }
+}

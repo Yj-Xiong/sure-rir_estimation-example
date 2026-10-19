@@ -1,6 +1,6 @@
 const GROUPS = {
   single: {
-    label: "Single-channel",
+    label: "Monaural",
     note: "Rec-RIR and NeuBIRE estimates against one reference",
     cases: ["rec_rir_single", "neubire_v1_single"],
     colors: ["#d8894d", "#6b8fd6"],

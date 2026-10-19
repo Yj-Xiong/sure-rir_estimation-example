@@ -5,7 +5,7 @@
 This example follows the public structure of `sure-se-example`, and covers
 SURE's channel-aware RIR evaluation contract:
 
-- Rec-RIR -> single-channel inference, scoring channel 0;
+- Rec-RIR -> monaural inference, scoring channel 0;
 - Rec-RIR -> two independent mono inferences, merged as L/R;
 - NeuBIRE -> channel 0 duplicated to both model inputs, scoring output channel 0;
 - NeuBIRE -> multichannel inference with IACC and ITD.

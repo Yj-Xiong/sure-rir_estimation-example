@@ -64,6 +64,33 @@ function displayMetric(name, value) {
   return (value * (meta.scale || 1)).toFixed(meta.precision) + " " + meta.unit;
 }
 
+function referenceBasis(name, sample) {
+  const ref = sample.reference_metrics || {};
+  const pred = sample.prediction_metrics || {};
+  const scalarMap = {
+    rt60_1s_mae: ["rt60_1s", "s", 1000],
+    drr_1s_mae: ["drr_1s", "dB", 1],
+    c50_1s_mae: ["c50_1s", "dB", 1],
+    iacc_full_1s_mae: ["iacc_full_1s", "", 1],
+    iacc_early_1s_mae: ["iacc_early_1s", "", 1],
+    iacc_late_1s_mae: ["iacc_late_1s", "", 1],
+    itd_1s_mae: ["itd_1s_ms", "ms", 1],
+    ild_1s_mae: ["ild_1s_db", "dB", 1],
+    ipd_1s_mae: ["ipd_1s_rad", "rad", 1],
+  };
+  const mapping = scalarMap[name];
+  if (!mapping || !Number.isFinite(ref[mapping[0]]) || !Number.isFinite(pred[mapping[0]])) {
+    if (name === "rir_npm") return "lag-invariant pair";
+    if (name === "rir_l1_mae") return "normalized traces";
+    if (name === "edc_1s_mae") return "decay curves";
+    return "reference / estimate recorded";
+  }
+  const [, unit, scale] = mapping;
+  const precision = unit === "ms" ? 3 : unit === "dB" ? 2 : 3;
+  return "ref " + (ref[mapping[0]] * scale).toFixed(precision) + (unit ? " " + unit : "") +
+    " / pred " + (pred[mapping[0]] * scale).toFixed(precision) + (unit ? " " + unit : "");
+}
+
 function formatAmplitude(value) {
   if (value === 0) return "0";
   return Math.abs(value) >= 0.001 ? value.toFixed(4) : value.toExponential(2);
@@ -158,7 +185,7 @@ function render() {
         metrics.map((name) => {
           const value = entry.sample.scores[name];
           const best = Number.isFinite(value) && value === bestValues[name];
-          return '<span class="' + (best ? 'best' : '') + '"><b>' + metricMeta(name).label + '</b><em>' + displayMetric(name, value) + '</em></span>';
+          return '<span class="' + (best ? 'best' : '') + '"><b>' + metricMeta(name).label + '</b><em>' + displayMetric(name, value) + '</em><small>' + referenceBasis(name, entry.sample) + '</small></span>';
         }).join("") +
         "</div></div>";
     })

@@ -2,22 +2,15 @@
 
 **[Open the GitHub Pages demo](https://yj-xiong.github.io/sure-rir_estimation-example/)** · [Reproduction notes](example/README.md)
 
-This example follows the public structure of `sure-se-example`, and covers
-SURE's channel-aware RIR evaluation contract:
+This example covers SURE's channel-aware RIR evaluation contract:
 
 - Rec-RIR -> monaural inference, scoring channel 0;
 - Rec-RIR -> two independent mono inferences, merged as L/R;
 - NeuBIRE -> channel 0 duplicated to both model inputs, scoring output channel 0;
 - NeuBIRE -> multichannel inference with IACC and ITD.
 
-This repository is the Example contribution only. The evaluation Pipeline
-contribution belongs in `PigeonDan1/sure-evaluation`; the later Harness
-integration belongs in `PigeonDan1/sure` after the engine PR is merged. The
-three repositories must keep their own PRs and pipeline identities separate.
-
-## Open-Bench contribution mapping
-
-The engine change adds the **RIR estimation** task and its metrics:
+The **RIR estimation** task and its metrics are implemented in
+[`sure-evaluation`](https://github.com/PigeonDan1/sure-evaluation):
 
 - `rir.any.rir_iacc_mae.rir_iacc_mae_v1`;
 - `rir.any.rir_itd_mae.rir_itd_mae_v1`;
@@ -25,24 +18,18 @@ The engine change adds the **RIR estimation** task and its metrics:
 - the spatial multi-metric bundle keeps `rir_npm` and `rt60_mae` as the
   base scores before the spatial metrics.
 
-The engine PR contains only versioned nodes, task contracts, routes, tests,
-task documentation, and regenerated catalog assets. This repository contains
-no node implementation and no replacement for an existing `pipeline_id`.
-
 The default RIR bundle uses NPM and RT60 before optional spatial metrics. Scores are comparable only when the
 canonical metric, channel branch, sample-rate/window policy, and pipeline ID
 match; mono reports must not be mixed with binaural spatial reports. The small
 browser preview uses 60 direct RIR rows from the fixed-SNR set: 10/20/30 dB,
 scenes `scene_0000` and `scene_0025`, and ten microphone spacings.
 
-The executable Harness backend reproduction in [`example/README.md`](example/README.md)
-pins SURE and Rec-RIR, calls a real `estimate_rir` MCP adapter on the 20-row
-fixture, then uses the Harness RIR bridge, `evaluate_predictions.py`, and locked
-Evaluation Runtime to generate fresh reports. It covers the Rec-RIR channel-0 branch; the other
-three branches remain saved evidence rather than fresh inference in that script.
-The pinned backend uses `rir_nmse`/`rir_corr`/`rt60_mae`, while the newer
-browser/NPM artifacts use a different metric definition and dataset.
-The completed 20-row run and its public report are in
+The Harness reproduction in [`example/README.md`](example/README.md) pins SURE
+and Rec-RIR, calls an `estimate_rir` MCP adapter on the 20-row fixture, then
+uses the Harness RIR bridge, `evaluate_predictions.py`, and the locked
+Evaluation Runtime to produce reports. The script evaluates the Rec-RIR
+channel-0 branch. It uses `rir_nmse`/`rir_corr`/`rt60_mae`; the browser data
+uses NPM and a different dataset. The 20-row report is in
 [`example/harness-run/`](example/harness-run/README.md).
 
 The page is a static GitHub Pages artifact. It loads four real 60-row direct-RIR

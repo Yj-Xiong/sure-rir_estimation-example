@@ -16,18 +16,17 @@
 ## 1. 获取固定源码和 Harness Runtime
 
 需要 Git、`uv`、能下载 Python 依赖的网络，以及 Bash。本次实测使用 CUDA；CPU
-推理路径未验证。以下命令在同一个工作目录执行。当前固定的 SURE 与评测引擎提交存在于
-本地工作区；本地远端跟踪分支尚未显示这两个提交。先用包含提交对象的本地源码
-克隆，待相应提交公开后可把源码变量换成 GitHub URL。
+推理路径未验证。以下命令在同一个工作目录执行。固定的 SURE 提交目前需要包含该对象的
+本地源码；评测引擎提交已在个人 fork 的公开分支中。待 SURE 提交公开后，可把其源码变量
+换成对应的 GitHub URL。
 
 ```bash
 RIR_EXAMPLE="/absolute/path/to/sure-rir_estimation-example/example"
 SURE_SOURCE="/absolute/path/to/sure-harness"
-ENGINE_SOURCE="$SURE_SOURCE/sure/external/sure-evaluation"
 git clone --no-checkout "$SURE_SOURCE" sure-rir-repro
 git -C sure-rir-repro checkout 73975931da1353c3b97a422e796612d8b363fe3b
-git -C sure-rir-repro config submodule.sure/external/sure-evaluation.url "$ENGINE_SOURCE"
-git -C sure-rir-repro -c protocol.file.allow=always submodule update --init sure/external/sure-evaluation
+git -C sure-rir-repro config submodule.sure/external/sure-evaluation.url https://github.com/Yj-Xiong/sure-evaluation.git
+git -C sure-rir-repro submodule update --init sure/external/sure-evaluation
 git -C sure-rir-repro/sure/external/sure-evaluation rev-parse HEAD
 
 SURE_REPO="$PWD/sure-rir-repro"
@@ -38,8 +37,7 @@ HARNESS_PYTHON_BIN=$(python3 "$SURE_REPO/sure/runtime/harness/bootstrap.py")
 子模块必须是 `8041b1249c5d0ce39a96c72cab01e49b09cc87e9`。`bootstrap.py`
 通过锁文件准备并核验 Harness Runtime；系统的 `python3` 只负责启动 bootstrap，
 后续脚本必须使用 `$HARNESS_PYTHON_BIN`。首次安装可能下载 Python 3.11 与依赖。
-在本工作区，`SURE_SOURCE` 可指向 `AutoResearch/sure-harness`，`ENGINE_SOURCE`
-可指向其 `sure/external/sure-evaluation`。若已有 Python 3.11 但 uv 的解释器下载
+在本工作区，`SURE_SOURCE` 可指向 `AutoResearch/sure-harness`。若已有 Python 3.11 但 uv 的解释器下载
 不可用，将该解释器目录放到 `PATH` 前面，并设置 `UV_PYTHON_DOWNLOADS=never`；
 依赖镜像可以通过 `UV_INDEX_URL` 指定，锁文件的哈希验证仍会执行。
 

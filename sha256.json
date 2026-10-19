@@ -43,8 +43,8 @@
     },
     {
       "path": "example/README.md",
-      "sha256": "d7ec64b2ba96345542ae3d88b71d26a2d91085c5032bef0d104d2a16ebcd350d",
-      "bytes": 8486
+      "sha256": "85d6b277bff28fd5ce92ea4947318db7ea9c5f692d5ce6c6a837da10e404fbb0",
+      "bytes": 8332
     },
     {
       "path": "example/adapter/config.toml",
@@ -1073,8 +1073,8 @@
     },
     {
       "path": "index.html",
-      "sha256": "4f470140bedd943faaf6cf9399e28372a13d525e324d78b33bcb1fb2af462c09",
-      "bytes": 10371
+      "sha256": "862a316194df5d0d946368712bff53a92f878bf1024ade7a0a7600b22d95978a",
+      "bytes": 10304
     },
     {
       "path": "styles.css",

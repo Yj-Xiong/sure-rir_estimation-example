@@ -18,15 +18,14 @@
       <div class="section-line"><div><span class="section-number">04</span><h2>Reproduce the Harness run</h2></div><p>Rec-RIR monaural · 20 fixture rows · pinned SURE and evaluation engine</p></div>
       <div class="repro-intro"><p>This runnable backend example scores <code>rir_nmse</code>, <code>rir_corr</code> and <code>rt60_mae</code>. The 60 fixed-SNR rows shown above use a newer NPM protocol and are a separate result set. Run the commands in one working directory and carry the variables into the allocated cluster shell.</p><div class="repro-links"><a href="example/README.md">Full reproduction notes</a><a href="example/fixture/provenance.json">Fixture provenance</a><a href="example/harness-run/report.json">Saved report</a></div></div>
       <ol class="repro-steps">
-        <li><div class="repro-step-head"><h3>Get the pinned sources</h3><span>Git · local source access</span></div><p>The pinned SURE and engine commits are currently available from local source checkouts. Set those paths before cloning; the engine gitlink must resolve to <code>8041b1249c5d</code>.</p><pre>git clone https://github.com/Yj-Xiong/sure-rir_estimation-example.git
+        <li><div class="repro-step-head"><h3>Get the pinned sources</h3><span>Git · pinned source access</span></div><p>The SURE commit currently requires a local checkout containing it. The evaluation engine comes from the public fork; its gitlink must resolve to <code>8041b1249c5d</code>.</p><pre>git clone https://github.com/Yj-Xiong/sure-rir_estimation-example.git
 RIR_EXAMPLE="$PWD/sure-rir_estimation-example/example"
 SURE_SOURCE="/absolute/path/to/sure-harness"
-ENGINE_SOURCE="$SURE_SOURCE/sure/external/sure-evaluation"
 MODEL_SOURCE="/absolute/path/to/Rec-RIR"
 git clone --no-checkout "$SURE_SOURCE" sure-rir-repro
 git -C sure-rir-repro checkout 73975931da1353c3b97a422e796612d8b363fe3b
-git -C sure-rir-repro config submodule.sure/external/sure-evaluation.url "$ENGINE_SOURCE"
-git -C sure-rir-repro -c protocol.file.allow=always submodule update --init sure/external/sure-evaluation
+git -C sure-rir-repro config submodule.sure/external/sure-evaluation.url https://github.com/Yj-Xiong/sure-evaluation.git
+git -C sure-rir-repro submodule update --init sure/external/sure-evaluation
 git clone --no-checkout "$MODEL_SOURCE" rec-rir-source
 git -C rec-rir-source checkout 6914eea792f0117e39f87510ffbda7cd04dffbbb</pre></li>
         <li><div class="repro-step-head"><h3>Prepare the locked runtimes</h3><span>Run model environment setup on the cluster</span></div><p>The checkpoint is part of the pinned Rec-RIR source. Its SHA-256 must be <code>afe36e477f6fb3656d162d906a47da2d40a789634b476564266fc1ba36037478</code>. A fresh Mamba install may compile CUDA extensions.</p><pre>SURE_REPO="$PWD/sure-rir-repro"

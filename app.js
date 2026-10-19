@@ -7,7 +7,7 @@ const GROUPS = {
   },
   binaural: {
     label: "Binaural",
-    note: "Rec-RIR separate and NeuBIRE multichannel estimates against L/R reference",
+    note: "Rec-RIR separate and NeuBIRE estimates against L/R reference",
     cases: ["rec_rir_separate", "neubire_v1_native"],
     colors: ["#d8894d", "#6b8fd6"],
   },
@@ -17,7 +17,7 @@ const MODELS = {
   rec_rir_single: "Rec-RIR",
   neubire_v1_single: "NeuBIRE",
   rec_rir_separate: "Rec-RIR separate",
-  neubire_v1_native: "NeuBIRE multichannel",
+  neubire_v1_native: "NeuBIRE",
 };
 
 const METRIC_META = {

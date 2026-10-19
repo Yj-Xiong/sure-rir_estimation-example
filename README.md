@@ -7,8 +7,8 @@ SURE's channel-aware RIR evaluation contract:
 
 - Rec-RIR -> single-channel inference, scoring channel 0;
 - Rec-RIR -> two independent mono inferences, merged as L/R;
-- NeuBIRE v1 -> channel 0 duplicated to both model inputs, scoring output channel 0;
-- NeuBIRE v1 -> native two-channel inference with IACC and ITD.
+- NeuBIRE -> channel 0 duplicated to both model inputs, scoring output channel 0;
+- NeuBIRE -> multichannel inference with IACC and ITD.
 
 This repository is the Example contribution only. The evaluation Pipeline
 contribution belongs in `PigeonDan1/sure-evaluation`; the later Harness

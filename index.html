@@ -14,7 +14,45 @@
       <div class="sample-bar"><span id="sample-id">scene_0000_mic03cm</span><span id="group-note">monaural estimates</span><label>SNR <select id="snr"></select></label><label>spacing <select id="spacing"></select></label><label id="sample-control">sample <select id="sample"></select></label><button id="play" type="button">Play reference</button></div>
       <div class="workbench-grid"><div class="wave-card"><div class="card-top"><div><span class="mini-label">ESTIMATE / REFERENCE OVERLAY</span><h3 id="model-title">Monaural comparison</h3><p id="model-note">reference plus two estimates</p></div><span class="status"><i></i> actual reports</span></div><div id="wave-legend" class="wave-legend"></div><canvas id="wave" width="1200" height="330" aria-label="Estimated and reference RIR waveforms"></canvas><div class="axis"><span>0 ms</span><span>250</span><span>500</span><span>750</span><span>1000 ms</span></div></div><aside class="score-card"><div class="card-top"><div><span class="mini-label">SCOREBOARD</span><h3 id="score-title">Base metrics</h3></div><span class="score-direction">lower is better</span></div><div id="scoreboard" class="scoreboard"></div></aside></div><p class="sample-note">Reference is drawn as a dashed line; each colored line is an estimate from the selected result branch.</p></section>
     <section class="rules" id="rules"><div class="section-line"><div><span class="section-number">03</span><h2>Rules that stay visible</h2></div><p>Same JSONL contract, different channel guarantees.</p></div><div class="rule-grid"><article><span class="rule-index">A</span><h3>Base RIR quality</h3><p>Score every channel branch with NPM and RT60 before adding spatial metrics.</p></article><article><span class="rule-index">B</span><h3>Binaural</h3><p>Require exactly two channels before IACC; ITD, ILD and IPD support additional channels against channel 0.</p></article><article><span class="rule-index">C</span><h3>Provenance</h3><p>Reference RIRs stay outside model inputs. Reports preserve pipeline identity and node IDs.</p></article></div></section>
-    <section class="reproduce" id="reproduce"><div class="section-line"><div><span class="section-number">04</span><h2>Run the real chain</h2></div><p>Use the Harness fixture helper, then the pinned SURE evaluator.</p></div><div class="command-grid"><div class="command-copy"><p class="kicker">JSONL → PIPELINE → REPORT</p><h3>Keep the three artifacts together.</h3><p>Materialize the fixed-SNR selection, describe one exact pipeline, then run it. The generated report and pipeline description are the review evidence.</p></div><div class="commands"><details open><summary>Materialize samples</summary><pre id="command">python3 fixtures/tasks/rir/rir_smoke/prepare_variable_mspacing.py --manifest /path/to/variableMspacingFixedSNR_30scenes_260928/test_manifest.jsonl --prediction-root /path/to/predictions --output /tmp/rir_samples.jsonl --allow-missing-predictions</pre></details><details><summary>Describe and run</summary><pre id="route">sure-eval metric describe rir --metric rir_npm --output rir_pipeline.json --json; sure-eval metric run --pipeline rir_pipeline.json --samples-jsonl /tmp/rir_samples.jsonl --output-dir /tmp/rir_eval --validate-env --json</pre></details></div></div></section>
+    <section class="reproduce" id="reproduce">
+      <div class="section-line"><div><span class="section-number">04</span><h2>Reproduce the Harness run</h2></div><p>Rec-RIR monaural · 20 fixture rows · pinned SURE and evaluation engine</p></div>
+      <div class="repro-intro"><p>This runnable backend example scores <code>rir_nmse</code>, <code>rir_corr</code> and <code>rt60_mae</code>. The 60 fixed-SNR rows shown above use a newer NPM protocol and are a separate result set. Run the commands in one working directory and carry the variables into the allocated cluster shell.</p><div class="repro-links"><a href="example/README.md">Full reproduction notes</a><a href="example/fixture/provenance.json">Fixture provenance</a><a href="example/harness-run/report.json">Saved report</a></div></div>
+      <ol class="repro-steps">
+        <li><div class="repro-step-head"><h3>Get the pinned sources</h3><span>Git · local source access</span></div><p>The pinned SURE and engine commits are currently available from local source checkouts. Set those paths before cloning; the engine gitlink must resolve to <code>8041b1249c5d</code>.</p><pre>git clone https://github.com/Yj-Xiong/sure-rir_estimation-example.git
+RIR_EXAMPLE="$PWD/sure-rir_estimation-example/example"
+SURE_SOURCE="/absolute/path/to/sure-harness"
+ENGINE_SOURCE="$SURE_SOURCE/sure/external/sure-evaluation"
+MODEL_SOURCE="/absolute/path/to/Rec-RIR"
+git clone --no-checkout "$SURE_SOURCE" sure-rir-repro
+git -C sure-rir-repro checkout 73975931da1353c3b97a422e796612d8b363fe3b
+git -C sure-rir-repro config submodule.sure/external/sure-evaluation.url "$ENGINE_SOURCE"
+git -C sure-rir-repro -c protocol.file.allow=always submodule update --init sure/external/sure-evaluation
+git clone --no-checkout "$MODEL_SOURCE" rec-rir-source
+git -C rec-rir-source checkout 6914eea792f0117e39f87510ffbda7cd04dffbbb</pre></li>
+        <li><div class="repro-step-head"><h3>Prepare the locked runtimes</h3><span>Run model environment setup on the cluster</span></div><p>The checkpoint is part of the pinned Rec-RIR source. Its SHA-256 must be <code>afe36e477f6fb3656d162d906a47da2d40a789634b476564266fc1ba36037478</code>. A fresh Mamba install may compile CUDA extensions.</p><pre>SURE_REPO="$PWD/sure-rir-repro"
+MODEL_REPO="$PWD/rec-rir-source"
+MODEL_CHECKPOINT="$MODEL_REPO/ckpt/epoch35.tar"
+HARNESS_PYTHON_BIN=$(python3 "$SURE_REPO/sure/runtime/harness/bootstrap.py")
+sha256sum "$MODEL_CHECKPOINT"
+uv venv --python 3.10 .venv-rir-model
+MODEL_PYTHON="$PWD/.venv-rir-model/bin/python"
+uv pip install --python "$MODEL_PYTHON" \
+  'torch==2.2.0' 'torchaudio==2.2.0' 'mamba-ssm==2.1.0' \
+  'causal-conv1d==1.4.0' 'numpy==1.26.4' 'soundfile==0.13.1' \
+  'toml==0.10.2' 'tqdm==4.68.2' 'jsonargparse==4.48.0' 'matplotlib==3.10.8'</pre></li>
+        <li><div class="repro-step-head"><h3>Check the adapter and fixture</h3><span>Short check · no model inference</span></div><p>This checks all 20 fixture rows, the published report identity and the MCP <code>initialize</code>/<code>tools/list</code>/<code>shutdown</code> replies. Expected result: four tests pass.</p><pre>"$MODEL_PYTHON" "$RIR_EXAMPLE/test_example.py"</pre></li>
+        <li><div class="repro-step-head"><h3>Run inference and evaluation</h3><span>Cluster job · GPU</span></div><p>Run inside a cluster allocation with a new output directory. The model only sees channel-0 audio; reference RIRs enter the Harness scoring bridge. This step generates 20 new RIR WAVs and three external metric reports.</p><pre>"$HARNESS_PYTHON_BIN" "$RIR_EXAMPLE/run_example.py" \
+  --repo "$SURE_REPO" \
+  --model-repo "$MODEL_REPO" \
+  --checkpoint "$MODEL_CHECKPOINT" \
+  --model-python "$MODEL_PYTHON" \
+  --device cuda:0 \
+  --output-dir "$PWD/rir-run-001"</pre></li>
+        <li><div class="repro-step-head"><h3>Verify the new report</h3><span>20 samples · matching pipeline identity</span></div><p>The runner checks that Harness and the pinned engine agree on all three scores, every metric has 20 rows, and describe/run/report preserve pipeline and node identities. Inspect the generated summary and report:</p><pre>"$HARNESS_PYTHON_BIN" -m json.tool "$PWD/rir-run-001/summary.json"
+"$HARNESS_PYTHON_BIN" -m json.tool "$PWD/rir-run-001/evaluation/report.json"</pre></li>
+        <li><div class="repro-step-head"><h3>Compare the saved evidence</h3><span>Previously completed · 20 real predictions</span></div><p>The completed run records Rec-RIR checkpoint, Runtime IDs, model environment, metric results and pipeline description. Raw prediction WAVs remain outside this public repository. Compare against the <a href="example/harness-run/summary.json">saved summary</a> and <a href="example/harness-run/pipeline_description.json">pipeline description</a>; numerical results can differ after changing hardware or dependencies.</p></li>
+      </ol>
+    </section>
   </main><footer><span>SURE / RIR evaluation example</span><a href="example/README.md">reproduction notes</a><a href="https://github.com/PigeonDan1/sure">engine repository ↗</a></footer>
 </body>
 </html>

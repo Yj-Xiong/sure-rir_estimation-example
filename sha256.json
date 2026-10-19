@@ -1073,13 +1073,13 @@
     },
     {
       "path": "index.html",
-      "sha256": "3d4939ab9ec0a1bb6da8708f20a7c555e3a25274737ec56e38f2f2a9e8a67227",
-      "bytes": 6720
+      "sha256": "4f470140bedd943faaf6cf9399e28372a13d525e324d78b33bcb1fb2af462c09",
+      "bytes": 10371
     },
     {
       "path": "styles.css",
-      "sha256": "5933bace002bd8fb18e831e8b99b5747aff08e4d5211e47ebb02adf2895b802a",
-      "bytes": 11106
+      "sha256": "2fe11ad4336c660edaf8f22c9347adfc4ef280672baab18b6849f1572d97c3ee",
+      "bytes": 12747
     }
   ]
 }

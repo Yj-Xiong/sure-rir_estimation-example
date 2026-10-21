@@ -23,18 +23,28 @@
     },
     {
       "path": "README.md",
-      "sha256": "875e31ee1b4e4c1ec871b8f5c73d05b981229231004f965e29d83b156a9c5f22",
-      "bytes": 2862
+      "sha256": "a7ed36b457b5790e92c51d2615fd2394b66c698f9ccf73b5f886cdcc59a67380",
+      "bytes": 3422
     },
     {
       "path": "app.js",
-      "sha256": "4907a2c3ba7a6a58a1da9756cce044a239063cb9bf02a75370f37da412020523",
-      "bytes": 12243
+      "sha256": "43ae93fb53eeb3d444760152b66a37aa432cb870e4bfc4a7deac17fb2be93d56",
+      "bytes": 13892
     },
     {
       "path": "data/provenance.json",
-      "sha256": "e580356385c82aafcabe26c72e45a7b0e3250dd414659aa50aef274aa909af21",
-      "bytes": 2996
+      "sha256": "a85645b1b385ca4877eeb08acc95187264401925c2c0288dad340c3fa82041b2",
+      "bytes": 3802
+    },
+    {
+      "path": "data/four_mic_demo_selection.json",
+      "sha256": "da029172f7547a1c8772f03a2171a7ddd7ff0e75f9e4f04233bf1c70f3427e1d",
+      "bytes": 16849
+    },
+    {
+      "path": "data/frequency_error.json",
+      "sha256": "b65a8d4c72cfb115bafd40147cd113b12e4c5da8939dfdff9aed9375e0eb93d1",
+      "bytes": 6262
     },
     {
       "path": "data/results.json",
@@ -43,8 +53,18 @@
     },
     {
       "path": "example/README.md",
-      "sha256": "59797977f72c3798602389e28f464dc78c4769caacd2268f28fe9eeedeeec6ea",
-      "bytes": 4580
+      "sha256": "c4f2aabaafe4ac517361170d9e205b9da943df89cd165a698ac178eda6624166",
+      "bytes": 4886
+    },
+    {
+      "path": "example/minimal/README.md",
+      "sha256": "a24f41a93f675920289f3173e29c65cf823bd8f820dd669fd2b12f52c37d5f80",
+      "bytes": 883
+    },
+    {
+      "path": "example/minimal/pipeline_coverage.json",
+      "sha256": "430eb0d4bd108a40d5ff290c4541e8b7fb3dd0d8a8e1a6b740aeffbd8dfcc041",
+      "bytes": 882
     },
     {
       "path": "example/adapter/config.toml",
@@ -1072,14 +1092,24 @@
       "bytes": 5655
     },
     {
+      "path": "scripts/compute_frequency_error.py",
+      "sha256": "146efd269f23d8bb5cf775183ace64eb725a2214c618f4b5aa118a148afb37f7",
+      "bytes": 3345
+    },
+    {
+      "path": "scripts/select_four_mic_demo.py",
+      "sha256": "80d081d489b9f112f943ed67611dc2934bbaaa0580556b5926f54be71dfa2d4b",
+      "bytes": 2955
+    },
+    {
       "path": "index.html",
-      "sha256": "9da71fa1510d8cebc81fed0a2f869f8a65d323cb381a74be5b614192fd01af53",
-      "bytes": 10072
+      "sha256": "c400489f44dd6122de3398be42ec749280349426add9e1928bec63eb0cad490a",
+      "bytes": 10700
     },
     {
       "path": "styles.css",
-      "sha256": "2fe11ad4336c660edaf8f22c9347adfc4ef280672baab18b6849f1572d97c3ee",
-      "bytes": 12747
+      "sha256": "6ba589c1978bc088aa68f413d7c772c74f16559a019d650cddd3921e71100860",
+      "bytes": 14169
     }
   ]
 }

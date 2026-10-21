@@ -1,0 +1,506 @@
+{
+  "schema": "sure.rir.four_mic_demo_selection.v1",
+  "source_manifest": "Rec-BIR/NeuSIRI/data/four_mic_fixed_v2/test/test_manifest.jsonl",
+  "sample_rate_hz": 16000,
+  "snr_db": [
+    10,
+    20,
+    30
+  ],
+  "rows_per_snr_spacing": 2,
+  "spacing_m": [
+    0.02,
+    0.04,
+    0.06,
+    0.08,
+    0.1,
+    0.12,
+    0.14,
+    0.16,
+    0.18,
+    0.2
+  ],
+  "sample_count": 60,
+  "rows": [
+    {
+      "sample_id": "test_000000",
+      "snr_db": 10,
+      "adjacent_spacing_m": 0.02,
+      "array_aperture_m": 0.06,
+      "rir": "NeuSIRI/data/four_mic/rir/test/000000.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_000000.wav"
+    },
+    {
+      "sample_id": "test_000010",
+      "snr_db": 10,
+      "adjacent_spacing_m": 0.02,
+      "array_aperture_m": 0.06,
+      "rir": "NeuSIRI/data/four_mic/rir/test/000010.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_000010.wav"
+    },
+    {
+      "sample_id": "test_000001",
+      "snr_db": 10,
+      "adjacent_spacing_m": 0.04,
+      "array_aperture_m": 0.12,
+      "rir": "NeuSIRI/data/four_mic/rir/test/000001.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_000001.wav"
+    },
+    {
+      "sample_id": "test_000011",
+      "snr_db": 10,
+      "adjacent_spacing_m": 0.04,
+      "array_aperture_m": 0.12,
+      "rir": "NeuSIRI/data/four_mic/rir/test/000011.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_000011.wav"
+    },
+    {
+      "sample_id": "test_000002",
+      "snr_db": 10,
+      "adjacent_spacing_m": 0.06,
+      "array_aperture_m": 0.18,
+      "rir": "NeuSIRI/data/four_mic/rir/test/000002.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_000002.wav"
+    },
+    {
+      "sample_id": "test_000012",
+      "snr_db": 10,
+      "adjacent_spacing_m": 0.06,
+      "array_aperture_m": 0.18,
+      "rir": "NeuSIRI/data/four_mic/rir/test/000012.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_000012.wav"
+    },
+    {
+      "sample_id": "test_000003",
+      "snr_db": 10,
+      "adjacent_spacing_m": 0.08,
+      "array_aperture_m": 0.24,
+      "rir": "NeuSIRI/data/four_mic/rir/test/000003.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_000003.wav"
+    },
+    {
+      "sample_id": "test_000013",
+      "snr_db": 10,
+      "adjacent_spacing_m": 0.08,
+      "array_aperture_m": 0.24,
+      "rir": "NeuSIRI/data/four_mic/rir/test/000013.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_000013.wav"
+    },
+    {
+      "sample_id": "test_000004",
+      "snr_db": 10,
+      "adjacent_spacing_m": 0.1,
+      "array_aperture_m": 0.30000000000000004,
+      "rir": "NeuSIRI/data/four_mic/rir/test/000004.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_000004.wav"
+    },
+    {
+      "sample_id": "test_000014",
+      "snr_db": 10,
+      "adjacent_spacing_m": 0.1,
+      "array_aperture_m": 0.30000000000000004,
+      "rir": "NeuSIRI/data/four_mic/rir/test/000014.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_000014.wav"
+    },
+    {
+      "sample_id": "test_000005",
+      "snr_db": 10,
+      "adjacent_spacing_m": 0.12,
+      "array_aperture_m": 0.36,
+      "rir": "NeuSIRI/data/four_mic/rir/test/000005.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_000005.wav"
+    },
+    {
+      "sample_id": "test_000015",
+      "snr_db": 10,
+      "adjacent_spacing_m": 0.12,
+      "array_aperture_m": 0.36,
+      "rir": "NeuSIRI/data/four_mic/rir/test/000015.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_000015.wav"
+    },
+    {
+      "sample_id": "test_000006",
+      "snr_db": 10,
+      "adjacent_spacing_m": 0.14,
+      "array_aperture_m": 0.42000000000000004,
+      "rir": "NeuSIRI/data/four_mic/rir/test/000006.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_000006.wav"
+    },
+    {
+      "sample_id": "test_000016",
+      "snr_db": 10,
+      "adjacent_spacing_m": 0.14,
+      "array_aperture_m": 0.42000000000000004,
+      "rir": "NeuSIRI/data/four_mic/rir/test/000016.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_000016.wav"
+    },
+    {
+      "sample_id": "test_000007",
+      "snr_db": 10,
+      "adjacent_spacing_m": 0.16,
+      "array_aperture_m": 0.48,
+      "rir": "NeuSIRI/data/four_mic/rir/test/000007.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_000007.wav"
+    },
+    {
+      "sample_id": "test_000017",
+      "snr_db": 10,
+      "adjacent_spacing_m": 0.16,
+      "array_aperture_m": 0.48,
+      "rir": "NeuSIRI/data/four_mic/rir/test/000017.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_000017.wav"
+    },
+    {
+      "sample_id": "test_000008",
+      "snr_db": 10,
+      "adjacent_spacing_m": 0.18,
+      "array_aperture_m": 0.54,
+      "rir": "NeuSIRI/data/four_mic/rir/test/000008.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_000008.wav"
+    },
+    {
+      "sample_id": "test_000018",
+      "snr_db": 10,
+      "adjacent_spacing_m": 0.18,
+      "array_aperture_m": 0.54,
+      "rir": "NeuSIRI/data/four_mic/rir/test/000018.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_000018.wav"
+    },
+    {
+      "sample_id": "test_000009",
+      "snr_db": 10,
+      "adjacent_spacing_m": 0.2,
+      "array_aperture_m": 0.6000000000000001,
+      "rir": "NeuSIRI/data/four_mic/rir/test/000009.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_000009.wav"
+    },
+    {
+      "sample_id": "test_000019",
+      "snr_db": 10,
+      "adjacent_spacing_m": 0.2,
+      "array_aperture_m": 0.6000000000000001,
+      "rir": "NeuSIRI/data/four_mic/rir/test/000019.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_000019.wav"
+    },
+    {
+      "sample_id": "test_001000",
+      "snr_db": 20,
+      "adjacent_spacing_m": 0.02,
+      "array_aperture_m": 0.06,
+      "rir": "NeuSIRI/data/four_mic/rir/test/001000.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_001000.wav"
+    },
+    {
+      "sample_id": "test_001010",
+      "snr_db": 20,
+      "adjacent_spacing_m": 0.02,
+      "array_aperture_m": 0.06,
+      "rir": "NeuSIRI/data/four_mic/rir/test/001010.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_001010.wav"
+    },
+    {
+      "sample_id": "test_001001",
+      "snr_db": 20,
+      "adjacent_spacing_m": 0.04,
+      "array_aperture_m": 0.12,
+      "rir": "NeuSIRI/data/four_mic/rir/test/001001.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_001001.wav"
+    },
+    {
+      "sample_id": "test_001011",
+      "snr_db": 20,
+      "adjacent_spacing_m": 0.04,
+      "array_aperture_m": 0.12,
+      "rir": "NeuSIRI/data/four_mic/rir/test/001011.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_001011.wav"
+    },
+    {
+      "sample_id": "test_001002",
+      "snr_db": 20,
+      "adjacent_spacing_m": 0.06,
+      "array_aperture_m": 0.18,
+      "rir": "NeuSIRI/data/four_mic/rir/test/001002.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_001002.wav"
+    },
+    {
+      "sample_id": "test_001012",
+      "snr_db": 20,
+      "adjacent_spacing_m": 0.06,
+      "array_aperture_m": 0.18,
+      "rir": "NeuSIRI/data/four_mic/rir/test/001012.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_001012.wav"
+    },
+    {
+      "sample_id": "test_001003",
+      "snr_db": 20,
+      "adjacent_spacing_m": 0.08,
+      "array_aperture_m": 0.24,
+      "rir": "NeuSIRI/data/four_mic/rir/test/001003.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_001003.wav"
+    },
+    {
+      "sample_id": "test_001013",
+      "snr_db": 20,
+      "adjacent_spacing_m": 0.08,
+      "array_aperture_m": 0.24,
+      "rir": "NeuSIRI/data/four_mic/rir/test/001013.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_001013.wav"
+    },
+    {
+      "sample_id": "test_001004",
+      "snr_db": 20,
+      "adjacent_spacing_m": 0.1,
+      "array_aperture_m": 0.30000000000000004,
+      "rir": "NeuSIRI/data/four_mic/rir/test/001004.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_001004.wav"
+    },
+    {
+      "sample_id": "test_001014",
+      "snr_db": 20,
+      "adjacent_spacing_m": 0.1,
+      "array_aperture_m": 0.30000000000000004,
+      "rir": "NeuSIRI/data/four_mic/rir/test/001014.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_001014.wav"
+    },
+    {
+      "sample_id": "test_001005",
+      "snr_db": 20,
+      "adjacent_spacing_m": 0.12,
+      "array_aperture_m": 0.36,
+      "rir": "NeuSIRI/data/four_mic/rir/test/001005.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_001005.wav"
+    },
+    {
+      "sample_id": "test_001015",
+      "snr_db": 20,
+      "adjacent_spacing_m": 0.12,
+      "array_aperture_m": 0.36,
+      "rir": "NeuSIRI/data/four_mic/rir/test/001015.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_001015.wav"
+    },
+    {
+      "sample_id": "test_001006",
+      "snr_db": 20,
+      "adjacent_spacing_m": 0.14,
+      "array_aperture_m": 0.42000000000000004,
+      "rir": "NeuSIRI/data/four_mic/rir/test/001006.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_001006.wav"
+    },
+    {
+      "sample_id": "test_001016",
+      "snr_db": 20,
+      "adjacent_spacing_m": 0.14,
+      "array_aperture_m": 0.42000000000000004,
+      "rir": "NeuSIRI/data/four_mic/rir/test/001016.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_001016.wav"
+    },
+    {
+      "sample_id": "test_001007",
+      "snr_db": 20,
+      "adjacent_spacing_m": 0.16,
+      "array_aperture_m": 0.48,
+      "rir": "NeuSIRI/data/four_mic/rir/test/001007.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_001007.wav"
+    },
+    {
+      "sample_id": "test_001017",
+      "snr_db": 20,
+      "adjacent_spacing_m": 0.16,
+      "array_aperture_m": 0.48,
+      "rir": "NeuSIRI/data/four_mic/rir/test/001017.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_001017.wav"
+    },
+    {
+      "sample_id": "test_001008",
+      "snr_db": 20,
+      "adjacent_spacing_m": 0.18,
+      "array_aperture_m": 0.54,
+      "rir": "NeuSIRI/data/four_mic/rir/test/001008.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_001008.wav"
+    },
+    {
+      "sample_id": "test_001018",
+      "snr_db": 20,
+      "adjacent_spacing_m": 0.18,
+      "array_aperture_m": 0.54,
+      "rir": "NeuSIRI/data/four_mic/rir/test/001018.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_001018.wav"
+    },
+    {
+      "sample_id": "test_001009",
+      "snr_db": 20,
+      "adjacent_spacing_m": 0.2,
+      "array_aperture_m": 0.6000000000000001,
+      "rir": "NeuSIRI/data/four_mic/rir/test/001009.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_001009.wav"
+    },
+    {
+      "sample_id": "test_001019",
+      "snr_db": 20,
+      "adjacent_spacing_m": 0.2,
+      "array_aperture_m": 0.6000000000000001,
+      "rir": "NeuSIRI/data/four_mic/rir/test/001019.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_001019.wav"
+    },
+    {
+      "sample_id": "test_002000",
+      "snr_db": 30,
+      "adjacent_spacing_m": 0.02,
+      "array_aperture_m": 0.06,
+      "rir": "NeuSIRI/data/four_mic/rir/test/002000.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_002000.wav"
+    },
+    {
+      "sample_id": "test_002010",
+      "snr_db": 30,
+      "adjacent_spacing_m": 0.02,
+      "array_aperture_m": 0.06,
+      "rir": "NeuSIRI/data/four_mic/rir/test/002010.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_002010.wav"
+    },
+    {
+      "sample_id": "test_002001",
+      "snr_db": 30,
+      "adjacent_spacing_m": 0.04,
+      "array_aperture_m": 0.12,
+      "rir": "NeuSIRI/data/four_mic/rir/test/002001.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_002001.wav"
+    },
+    {
+      "sample_id": "test_002011",
+      "snr_db": 30,
+      "adjacent_spacing_m": 0.04,
+      "array_aperture_m": 0.12,
+      "rir": "NeuSIRI/data/four_mic/rir/test/002011.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_002011.wav"
+    },
+    {
+      "sample_id": "test_002002",
+      "snr_db": 30,
+      "adjacent_spacing_m": 0.06,
+      "array_aperture_m": 0.18,
+      "rir": "NeuSIRI/data/four_mic/rir/test/002002.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_002002.wav"
+    },
+    {
+      "sample_id": "test_002012",
+      "snr_db": 30,
+      "adjacent_spacing_m": 0.06,
+      "array_aperture_m": 0.18,
+      "rir": "NeuSIRI/data/four_mic/rir/test/002012.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_002012.wav"
+    },
+    {
+      "sample_id": "test_002003",
+      "snr_db": 30,
+      "adjacent_spacing_m": 0.08,
+      "array_aperture_m": 0.24,
+      "rir": "NeuSIRI/data/four_mic/rir/test/002003.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_002003.wav"
+    },
+    {
+      "sample_id": "test_002013",
+      "snr_db": 30,
+      "adjacent_spacing_m": 0.08,
+      "array_aperture_m": 0.24,
+      "rir": "NeuSIRI/data/four_mic/rir/test/002013.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_002013.wav"
+    },
+    {
+      "sample_id": "test_002004",
+      "snr_db": 30,
+      "adjacent_spacing_m": 0.1,
+      "array_aperture_m": 0.30000000000000004,
+      "rir": "NeuSIRI/data/four_mic/rir/test/002004.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_002004.wav"
+    },
+    {
+      "sample_id": "test_002014",
+      "snr_db": 30,
+      "adjacent_spacing_m": 0.1,
+      "array_aperture_m": 0.30000000000000004,
+      "rir": "NeuSIRI/data/four_mic/rir/test/002014.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_002014.wav"
+    },
+    {
+      "sample_id": "test_002005",
+      "snr_db": 30,
+      "adjacent_spacing_m": 0.12,
+      "array_aperture_m": 0.36,
+      "rir": "NeuSIRI/data/four_mic/rir/test/002005.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_002005.wav"
+    },
+    {
+      "sample_id": "test_002015",
+      "snr_db": 30,
+      "adjacent_spacing_m": 0.12,
+      "array_aperture_m": 0.36,
+      "rir": "NeuSIRI/data/four_mic/rir/test/002015.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_002015.wav"
+    },
+    {
+      "sample_id": "test_002006",
+      "snr_db": 30,
+      "adjacent_spacing_m": 0.14,
+      "array_aperture_m": 0.42000000000000004,
+      "rir": "NeuSIRI/data/four_mic/rir/test/002006.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_002006.wav"
+    },
+    {
+      "sample_id": "test_002016",
+      "snr_db": 30,
+      "adjacent_spacing_m": 0.14,
+      "array_aperture_m": 0.42000000000000004,
+      "rir": "NeuSIRI/data/four_mic/rir/test/002016.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_002016.wav"
+    },
+    {
+      "sample_id": "test_002007",
+      "snr_db": 30,
+      "adjacent_spacing_m": 0.16,
+      "array_aperture_m": 0.48,
+      "rir": "NeuSIRI/data/four_mic/rir/test/002007.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_002007.wav"
+    },
+    {
+      "sample_id": "test_002017",
+      "snr_db": 30,
+      "adjacent_spacing_m": 0.16,
+      "array_aperture_m": 0.48,
+      "rir": "NeuSIRI/data/four_mic/rir/test/002017.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_002017.wav"
+    },
+    {
+      "sample_id": "test_002008",
+      "snr_db": 30,
+      "adjacent_spacing_m": 0.18,
+      "array_aperture_m": 0.54,
+      "rir": "NeuSIRI/data/four_mic/rir/test/002008.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_002008.wav"
+    },
+    {
+      "sample_id": "test_002018",
+      "snr_db": 30,
+      "adjacent_spacing_m": 0.18,
+      "array_aperture_m": 0.54,
+      "rir": "NeuSIRI/data/four_mic/rir/test/002018.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_002018.wav"
+    },
+    {
+      "sample_id": "test_002009",
+      "snr_db": 30,
+      "adjacent_spacing_m": 0.2,
+      "array_aperture_m": 0.6000000000000001,
+      "rir": "NeuSIRI/data/four_mic/rir/test/002009.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_002009.wav"
+    },
+    {
+      "sample_id": "test_002019",
+      "snr_db": 30,
+      "adjacent_spacing_m": 0.2,
+      "array_aperture_m": 0.6000000000000001,
+      "rir": "NeuSIRI/data/four_mic/rir/test/002019.npz",
+      "mixture": "NeuSIRI/data/four_mic_fixed_v2/test/mixture/test_002019.wav"
+    }
+  ]
+}

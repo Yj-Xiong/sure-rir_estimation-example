@@ -1,0 +1,18 @@
+{
+  "schema": "sure.rir.minimal_pipeline_coverage.v1",
+  "samples": {
+    "monaural": {
+      "channel_count": 1,
+      "metrics": ["rir_npm", "rt30_mae", "rt60_mae", "rir_drr_mae", "rir_c50_mae", "rir_c80_mae", "rir_edc_mae"]
+    },
+    "binaural": {
+      "channel_count": 2,
+      "metrics": ["rir_npm", "rt30_mae", "rt60_mae", "rir_drr_mae", "rir_c50_mae", "rir_c80_mae", "rir_edc_mae", "rir_iacc_mae", "rir_itd_mae", "rir_ild_mae", "rir_ipd_mae"]
+    },
+    "four_channel": {
+      "channel_count": 4,
+      "metrics": ["rir_npm", "rt30_mae", "rt60_mae", "rir_drr_mae", "rir_c50_mae", "rir_c80_mae", "rir_edc_mae", "rir_itd_mae", "rir_ild_mae", "rir_ipd_mae", "rir_doa_mae"]
+    }
+  },
+  "all_metrics": ["rir_npm", "rt30_mae", "rt60_mae", "rir_drr_mae", "rir_c50_mae", "rir_c80_mae", "rir_edc_mae", "rir_iacc_mae", "rir_itd_mae", "rir_ild_mae", "rir_ipd_mae", "rir_doa_mae"]
+}

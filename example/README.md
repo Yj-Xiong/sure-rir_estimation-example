@@ -117,4 +117,10 @@ rir.any.multi.rir_nmse.rir_nmse_v1__rir_corr.rir_corr_v1__rt60_mae.rt60_mae_v1
 `fixture/cases/` 保存四种通道分支的输入、输出和部分报告。
 `harness-run/` 保存 20 条运行的报告、pipeline 身份和环境信息。
 
+四麦 demo 的 60 条选择见仓库根目录的
+`data/four_mic_demo_selection.json`，来源为
+`Rec-BIR/NeuSIRI/data/four_mic_fixed_v2/test/test_manifest.jsonl`。
+选择规则为 10/20/30 dB、每个相邻间距 2 条，共 60 条；四通道模型输出可由
+双通道模型两次推理后合并。
+
 网页数据和本目录使用不同的数据集、引擎版本和指标定义，分数分别解释。

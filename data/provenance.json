@@ -20,6 +20,16 @@
     "total_rows": 60,
     "reference_role": "rir from the fixed-SNR manifest; SNR changes the mixture, not the reference RIR"
   },
+  "four_mic_demo_selection": {
+    "manifest": "Rec-BIR/NeuSIRI/data/four_mic_fixed_v2/test/test_manifest.jsonl",
+    "selection_file": "data/four_mic_demo_selection.json",
+    "snrs_db": [10, 20, 30],
+    "adjacent_spacings_m": [0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2],
+    "rows_per_snr_spacing": 2,
+    "total_rows": 60,
+    "output_channels": 4,
+    "inference_note": "Use two passes for a two-channel model, then merge the four output paths."
+  },
   "inference": {
     "source_module": "Rec-BIR/scripts/evaluate_air_itd_gccphat_260817.py",
     "path": "direct RIR estimator -> saved RIR; no MINT inverse, speech reconstruction, or acoustic speech scoring",
@@ -41,6 +51,12 @@
     "waveform_display": "Rec-BIR/scripts/waveform_alignment.py:shared_ch0_peak_crop, 2.5 ms pre-roll, then independent peak normalization per trace",
     "waveform_mae": "mean absolute error after the same crop and peak normalization",
     "temporal_alignment": "display crop only; NPM and saved RIR scores do not apply an extra time shift"
+  },
+  "frequency_analysis": {
+    "path": "data/frequency_error.json",
+    "source": "normalized waveform traces in data/results.json",
+    "bands_hz": [[125, 250], [250, 500], [500, 1000], [1000, 2000], [2000, 4000], [4000, 8000]],
+    "error": "mean absolute magnitude-spectrum error in dB; distribution reports median and p25/p75"
   },
   "published_artifact": {
     "path": "data/results.json",

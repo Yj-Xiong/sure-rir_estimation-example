@@ -32,11 +32,20 @@ channel-0 branch. It uses `rir_nmse`/`rir_corr`/`rt60_mae`; the browser data
 uses NPM and a different dataset. The 20-row report is in
 [`example/harness-run/`](example/harness-run/README.md).
 
+The merge-check fixture is documented in
+[`example/minimal/README.md`](example/minimal/README.md). It covers acoustic,
+binaural, and four-channel spatial metrics with three small synthetic cases.
+
 The page is a static GitHub Pages artifact. It loads four real 60-row direct-RIR
 result cases. Model checkpoints and private paths stay outside the repository;
 the browser data contains only bounded waveform samples and scores.
 The exact source dataset, sample selection, checkpoints, preprocessing, and
 scoring protocol are recorded in [`data/provenance.json`](data/provenance.json).
+The four-microphone 60-row selection is recorded in
+[`data/four_mic_demo_selection.json`](data/four_mic_demo_selection.json); it is
+organized as 10/20/30 dB × 10 adjacent spacings × 2 rows. The page also shows
+normalized waveform magnitude-spectrum error distributions for six frequency
+bands; regenerate them with `python3 scripts/compute_frequency_error.py`.
 
 Repository layout follows the SURE example convention:
 

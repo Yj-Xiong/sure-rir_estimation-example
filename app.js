@@ -40,10 +40,12 @@ let selectedSnr = 10;
 let selectedSpacing = 3;
 let selectedScene = "scene_0000";
 let actualData = null;
+let frequencyData = null;
 let audioSource = null;
 const $ = (id) => document.getElementById(id);
 const dataScript = document.querySelector('script[src$="app.js"]');
 const dataUrl = dataScript ? new URL("data/results.json", dataScript.src).href : "data/results.json";
+const frequencyUrl = dataScript ? new URL("data/frequency_error.json", dataScript.src).href : "data/frequency_error.json";
 const group = () => GROUPS[selectedGroup];
 const entries = () =>
   group().cases
@@ -94,6 +96,25 @@ function referenceBasis(name, sample) {
 function formatAmplitude(value) {
   if (value === 0) return "0";
   return Math.abs(value) >= 0.001 ? value.toFixed(4) : value.toExponential(2);
+}
+
+function renderFrequencyBands() {
+  const container = $("band-chart");
+  if (!container || !frequencyData) return;
+  const cases = group().cases;
+  const values = cases.flatMap((caseId) => frequencyData.cases[caseId]?.bands ? Object.values(frequencyData.cases[caseId].bands).map((item) => item.p75_db || 0) : []);
+  const maxValue = Math.max(...values, 1);
+  container.innerHTML = frequencyData.bands.map((band, index) => {
+    const bars = cases.map((caseId, caseIndex) => {
+      const item = frequencyData.cases[caseId]?.bands?.[String(index)];
+      if (!item || item.median_db === null) return "";
+      const left = Math.max(0, (item.p25_db / maxValue) * 100);
+      const width = Math.max(1, ((item.p75_db - item.p25_db) / maxValue) * 100);
+      const median = Math.min(100, Math.max(0, (item.median_db / maxValue) * 100));
+      return '<div class="band-series"><span class="band-name">' + MODELS[caseId] + '</span><div class="band-track"><i style="left:' + left + '%;width:' + width + '%;background:' + group().colors[caseIndex] + '"></i><b style="left:' + median + '%;background:' + group().colors[caseIndex] + '"></b></div><em>' + item.median_db.toFixed(2) + ' dB</em></div>';
+    }).join("");
+    return '<div class="band-row"><strong>' + band.label + '</strong><div class="band-values">' + bars + '</div></div>';
+  }).join("");
 }
 
 function draw() {
@@ -191,11 +212,15 @@ function render() {
     })
     .join("");
   draw();
+  renderFrequencyBands();
 }
 
 async function boot() {
   try {
-    actualData = await (await fetch(dataUrl)).json();
+    [actualData, frequencyData] = await Promise.all([
+      fetch(dataUrl).then((response) => response.json()),
+      fetch(frequencyUrl).then((response) => response.json()),
+    ]);
     document.querySelector(".preview-badge").textContent = "gpuRIR / 60 SAMPLES";
     document.querySelector("#inspect .section-line>p").textContent = "Shared references with multiple direct RIR estimate branches.";
     document.querySelector(".sample-note").textContent = "Dashed line is the reference; solid lines are estimates. Both channels share the same sample and scoreboard values use the same report row.";

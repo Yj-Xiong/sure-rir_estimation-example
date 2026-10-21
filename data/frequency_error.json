@@ -1,6 +1,6 @@
 {
   "schema": "sure.rir.demo_frequency_acoustic_error.v2",
-  "source": "data/results.json normalized RIR traces, octave-band filtering",
+  "source": "native RIR WAVs from the six direct-estimate branches, normalized per channel before octave-band filtering",
   "sample_rate_hz": 16000,
   "metrics": [
     {

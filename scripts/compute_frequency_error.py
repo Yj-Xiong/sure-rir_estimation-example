@@ -153,7 +153,7 @@ def main() -> None:
         }}
     payload = {
         "schema": "sure.rir.demo_frequency_acoustic_error.v2",
-        "source": "data/results.json normalized RIR traces, octave-band filtering",
+        "source": "native RIR WAVs from the six direct-estimate branches, normalized per channel before octave-band filtering",
         "sample_rate_hz": SAMPLE_RATE,
         "metrics": [{"id": "rt60", "label": "RT60 MAE", "unit": "s"},
                     {"id": "c50", "label": "C50 MAE", "unit": "dB"},

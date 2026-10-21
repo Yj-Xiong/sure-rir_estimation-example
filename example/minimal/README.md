@@ -5,7 +5,7 @@ merge 核查使用三类小样例覆盖全部 RIR 评测指标：
 | 样例 | 通道 | 指标 |
 | --- | ---: | --- |
 | `monaural` | 1 | NPM、RT30、RT60、DRR、C50、C80、EDC |
-| `binaural` | 2 | 上述 acoustic 指标 + IACC full/early/late、ITD、ILD、IPD |
+| `binaural` | 2 | 上述 acoustic 指标 + IACC full/early/late、ITD、ILD、IPD、DOA |
 | `four_channel` | 4 | 上述 acoustic 指标 + ITD、ILD、IPD、DOA |
 
 四通道路径使用 `chN` 相对 `ch0` 的空间指标。双通道模型可以分两次推理，

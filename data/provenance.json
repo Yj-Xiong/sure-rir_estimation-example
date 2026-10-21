@@ -41,6 +41,7 @@
     "neubire_v1": {
       "config": "Rec-BIR/eval_results/variable_mspacing_fixedsnr_delta01_260922_bestnpm1_260929/checkpoint_snapshot/config.toml",
       "checkpoint": "Rec-BIR/eval_results/variable_mspacing_fixedsnr_delta01_260922_bestnpm1_260929/checkpoint_snapshot/best_npm_1.tar",
+      "checkpoint_sha256": "6ce20499d9c470336785d68549052b481c1d204f46c2b78f4164a66cc6b1ffd5",
       "outputs": ["channel 0 single", "native two-channel", "two passes merged to four channels"]
     }
   },

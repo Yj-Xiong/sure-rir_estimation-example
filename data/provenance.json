@@ -39,8 +39,8 @@
       "outputs": ["channel 0 single", "native two-channel separate L/R", "four-channel separate paths"]
     },
     "neubire_v1": {
-      "config": "Rec-BIR/eval_results/variable_mspacing_fixedsnr_delta01_sisnr001_bestnpm1_260929/checkpoint_snapshot/config.toml",
-      "checkpoint": "Rec-BIR/eval_results/variable_mspacing_fixedsnr_delta01_sisnr001_bestnpm1_260929/checkpoint_snapshot/best_npm_1.tar",
+      "config": "Rec-BIR/eval_results/variable_mspacing_fixedsnr_delta01_260922_bestnpm1_260929/checkpoint_snapshot/config.toml",
+      "checkpoint": "Rec-BIR/eval_results/variable_mspacing_fixedsnr_delta01_260922_bestnpm1_260929/checkpoint_snapshot/best_npm_1.tar",
       "outputs": ["channel 0 single", "native two-channel", "two passes merged to four channels"]
     }
   },

@@ -5,11 +5,11 @@ merge 核查使用三类小样例覆盖全部 RIR 评测指标：
 | 样例 | 通道 | 指标 |
 | --- | ---: | --- |
 | `monaural` | 1 | NPM、RT30、RT60、DRR、C50、C80、EDC |
-| `binaural` | 2 | 上述 acoustic 指标 + IACC、ITD、ILD、IPD |
+| `binaural` | 2 | 上述 acoustic 指标 + IACC full/early/late、ITD、ILD、IPD |
 | `four_channel` | 4 | 上述 acoustic 指标 + ITD、ILD、IPD、DOA |
 
 四通道路径使用 `chN` 相对 `ch0` 的空间指标。双通道模型可以分两次推理，
-再把两次结果合并为四通道输出；IACC 只在 `binaural` 样例中运行。
+再把两次结果合并为四通道输出；IACC full/early/late 只在 `binaural` 样例中运行。
 
 完整 pipeline ID、输入 contract 和报告字段见评测引擎的
 `docs/tasks/rir.md`。运行引擎测试：

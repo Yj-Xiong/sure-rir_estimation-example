@@ -5,7 +5,7 @@
 This example covers SURE's channel-aware RIR evaluation contract:
 
 - Rec-RIR and NeuBIRE -> monaural inference, scoring channel 0;
-- Rec-RIR and NeuBIRE -> binaural inference, with IACC and channel-0-relative spatial metrics;
+- Rec-RIR and NeuBIRE -> binaural inference, with IACC full/early/late and channel-0-relative spatial metrics;
 - Rec-RIR and NeuBIRE -> four-channel inference, with two-channel model passes merged into four paths.
 
 The **RIR estimation** task and its metrics are implemented in
@@ -13,7 +13,7 @@ The **RIR estimation** task and its metrics are implemented in
 
 - The bundles include `rir_npm`, `rt30_mae`, `rt60_mae`, `rir_drr_mae`,
   `rir_c50_mae`, `rir_c80_mae`, and `rir_edc_mae`;
-- binaural adds IACC, ITD, ILD, and IPD;
+- binaural adds IACC full/early/late, ITD, ILD, and IPD;
 - four-channel adds channel-0-relative ITD, ILD, IPD, and DOA.
 
 The default RIR bundle uses NPM and RT60 before optional spatial metrics. Scores are comparable only when the

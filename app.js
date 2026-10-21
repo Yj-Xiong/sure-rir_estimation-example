@@ -11,6 +11,12 @@ const GROUPS = {
     cases: ["rec_rir_separate", "neubire_v1_native"],
     colors: ["#d8894d", "#6b8fd6"],
   },
+  four_channel: {
+    label: "Four-channel",
+    note: "Rec-RIR and NeuBIRE estimates against four reference channels",
+    cases: ["rec_rir_four_channel", "neubire_v1_four_channel"],
+    colors: ["#d8894d", "#6b8fd6"],
+  },
 };
 
 const MODELS = {
@@ -18,6 +24,8 @@ const MODELS = {
   neubire_v1_single: "NeuBIRE",
   rec_rir_separate: "Rec-RIR separate",
   neubire_v1_native: "NeuBIRE",
+  rec_rir_four_channel: "Rec-RIR",
+  neubire_v1_four_channel: "NeuBIRE",
 };
 
 const METRIC_META = {
@@ -33,6 +41,17 @@ const METRIC_META = {
   itd_1s_mae: { label: "ITD", unit: "ms", precision: 3, range: 5 },
   ild_1s_mae: { label: "ILD", unit: "dB", precision: 2, range: 20 },
   ipd_1s_mae: { label: "IPD", unit: "rad", precision: 3, range: 3.2 },
+  rt30_mae: { label: "RT30 MAE", unit: "s", precision: 3, range: 0.6 },
+  rt60_mae: { label: "RT60 MAE", unit: "s", precision: 3, range: 0.6 },
+  rir_drr_mae: { label: "DRR MAE", unit: "dB", precision: 2, range: 10 },
+  rir_c50_mae: { label: "C50 MAE", unit: "dB", precision: 2, range: 10 },
+  rir_c80_mae: { label: "C80 MAE", unit: "dB", precision: 2, range: 10 },
+  rir_edc_mae: { label: "EDC MAE", unit: "dB", precision: 2, range: 20 },
+  rir_iacc_mae: { label: "IACC MAE", unit: "coefficient", precision: 3, range: 1 },
+  rir_itd_mae: { label: "ITD MAE", unit: "ms", precision: 3, range: 5 },
+  rir_ild_mae: { label: "ILD MAE", unit: "dB", precision: 2, range: 20 },
+  rir_ipd_mae: { label: "IPD MAE", unit: "rad", precision: 3, range: 3.2 },
+  rir_doa_mae: { label: "DOA MAE", unit: "degrees", precision: 2, range: 90 },
 };
 
 let selectedGroup = "binaural";
@@ -102,18 +121,26 @@ function renderFrequencyBands() {
   const container = $("band-chart");
   if (!container || !frequencyData) return;
   const cases = group().cases;
-  const values = cases.flatMap((caseId) => frequencyData.cases[caseId]?.bands ? Object.values(frequencyData.cases[caseId].bands).map((item) => item.p75_db || 0) : []);
-  const maxValue = Math.max(...values, 1);
-  container.innerHTML = frequencyData.bands.map((band, index) => {
-    const bars = cases.map((caseId, caseIndex) => {
-      const item = frequencyData.cases[caseId]?.bands?.[String(index)];
-      if (!item || item.median_db === null) return "";
-      const left = Math.max(0, (item.p25_db / maxValue) * 100);
-      const width = Math.max(1, ((item.p75_db - item.p25_db) / maxValue) * 100);
-      const median = Math.min(100, Math.max(0, (item.median_db / maxValue) * 100));
-      return '<div class="band-series"><span class="band-name">' + MODELS[caseId] + '</span><div class="band-track"><i style="left:' + left + '%;width:' + width + '%;background:' + group().colors[caseIndex] + '"></i><b style="left:' + median + '%;background:' + group().colors[caseIndex] + '"></b></div><em>' + item.median_db.toFixed(2) + ' dB</em></div>';
+  const metrics = frequencyData.metrics || [{ id: "spectrum", label: "Band error", unit: "dB" }];
+  container.innerHTML = metrics.map((metric) => {
+    const values = cases.flatMap((caseId) => frequencyData.cases[caseId]?.bands ? Object.values(frequencyData.cases[caseId].bands).map((item) => (item[metric.id]?.p75 ?? item.p75_db ?? 0)) : []);
+    const maxValue = Math.max(...values, 1e-6);
+    const rows = frequencyData.bands.map((band, index) => {
+      const bars = cases.map((caseId, caseIndex) => {
+        const bandData = frequencyData.cases[caseId]?.bands?.[String(index)];
+        const item = bandData?.[metric.id] || bandData;
+        const median = item?.median ?? item?.median_db;
+        const p25 = item?.p25 ?? item?.p25_db;
+        const p75 = item?.p75 ?? item?.p75_db;
+        if (!item || median === null || median === undefined) return "";
+        const left = Math.max(0, (p25 / maxValue) * 100);
+        const width = Math.max(1, ((p75 - p25) / maxValue) * 100);
+        const marker = Math.min(100, Math.max(0, (median / maxValue) * 100));
+        return '<div class="band-series"><span class="band-name">' + MODELS[caseId] + '</span><div class="band-track"><i style="left:' + left + '%;width:' + width + '%;background:' + group().colors[caseIndex] + '"></i><b style="left:' + marker + '%;background:' + group().colors[caseIndex] + '"></b></div><em>' + median.toFixed(metric.unit === "s" ? 3 : 2) + ' ' + metric.unit + '</em></div>';
+      }).join("");
+      return '<div class="band-row"><strong>' + band.label + '</strong><div class="band-values">' + bars + '</div></div>';
     }).join("");
-    return '<div class="band-row"><strong>' + band.label + '</strong><div class="band-values">' + bars + '</div></div>';
+    return '<div class="band-metric"><h3>' + metric.label + ' <small>' + metric.unit + '</small></h3>' + rows + '</div>';
   }).join("");
 }
 
@@ -121,7 +148,7 @@ function draw() {
   const canvas = $("wave");
   const ctx = canvas.getContext("2d");
   const width = canvas.clientWidth || 1200;
-  const channelCount = selectedGroup === "binaural" ? 2 : 1;
+  const channelCount = selectedGroup === "four_channel" ? 4 : (selectedGroup === "binaural" ? 2 : 1);
   const rowHeight = Math.max(170, width * 0.19);
   const rowGap = channelCount === 2 ? 24 : 0;
   const height = rowHeight * channelCount + rowGap;
@@ -178,7 +205,7 @@ function draw() {
     ctx.fillText("-" + formatAmplitude(axisPeak), plotLeft - 7, top + rowHeight - 4);
     ctx.textAlign = "left";
     ctx.font = "10px var(--mono), monospace";
-    ctx.fillText(channel === 0 ? "L / channel 0" : "R / channel 1", plotLeft + 8, top + 14);
+    ctx.fillText(channel === 0 ? "L / channel 0" : (channel === 1 ? "R / channel 1" : "channel " + channel), plotLeft + 8, top + 14);
     drawSeries(reference, "#f1f3e8", true, top, rowHeight, axisPeak);
     estimates.forEach((values, index) => drawSeries(values, group().colors[index], false, top, rowHeight, axisPeak));
   }
@@ -192,7 +219,7 @@ function render() {
   $("group-note").textContent = group().note;
   $("model-title").textContent = group().label + " comparison";
   $("model-note").textContent = "one reference plus " + currentEntries.length + " estimates";
-  $("score-title").textContent = selectedGroup === "binaural" ? "Base + spatial metrics" : "Base metrics";
+  $("score-title").textContent = selectedGroup === "single" ? "Acoustic metrics" : "Acoustic + spatial metrics";
   $("wave-legend").innerHTML =
     '<span class="legend-item"><i class="legend-reference"></i>Reference</span>' +
     currentEntries.map((entry, index) => '<span class="legend-item"><i style="background:' + group().colors[index] + '"></i>' + MODELS[entry.caseId] + "</span>").join("");

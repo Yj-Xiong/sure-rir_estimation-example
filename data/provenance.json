@@ -31,22 +31,22 @@
     "inference_note": "Use two passes for a two-channel model, then merge the four output paths."
   },
   "inference": {
-    "source_module": "Rec-BIR/scripts/evaluate_air_itd_gccphat_260817.py",
+    "source_module": "Rec-BIR/scripts/run_demo_recrir_neubire_three_cases.py",
     "path": "direct RIR estimator -> saved RIR; no MINT inverse, speech reconstruction, or acoustic speech scoring",
     "rec_rir": {
       "config": "fins-main/configs/recrir/first_channel/original_recrir_1ch_2chrender_ch0_dataset30mm_noise92_full50_bs2x2.toml",
       "checkpoint": "Rec-BIR/eval_results/unified_10testsets_recrir_1ch_baselines_with_iacc_260805/checkpoint_snapshots/official_recrir_epoch35.tar",
-      "outputs": ["channel 0 single", "native two-channel separate L/R"]
+      "outputs": ["channel 0 single", "native two-channel separate L/R", "four-channel separate paths"]
     },
     "neubire_v1": {
-      "config": "Rec-BIR/exp/3cmstep10w_shareddp_nocbam_rimagdelta01_8gpu4090_bs2x8_stepvalid2500_260922/2026-09-22-22-46-02.toml",
-      "checkpoint": "Rec-BIR/exp/3cmstep10w_shareddp_nocbam_rimagdelta01_8gpu4090_bs2x8_stepvalid2500_260922/ckpt/best_npm_1.tar",
-      "outputs": ["channel 0 single", "native two-channel"]
+      "config": "Rec-BIR/eval_results/variable_mspacing_fixedsnr_delta01_sisnr001_bestnpm1_260929/checkpoint_snapshot/config.toml",
+      "checkpoint": "Rec-BIR/eval_results/variable_mspacing_fixedsnr_delta01_sisnr001_bestnpm1_260929/checkpoint_snapshot/best_npm_1.tar",
+      "outputs": ["channel 0 single", "native two-channel", "two passes merged to four channels"]
     }
   },
   "scoring": {
     "npm": "Rec-BIR/scripts/evaluate_variable_mspacing_bci.py:npm_db, first 16000 samples, shared +/-256 sample lag, global scale-invariant projection error",
-    "acoustic": "Rec-BIR/scripts/compute_variable_mspacing_acoustic_errors.py, 1 s window, per-channel RT60/DRR/C50/EDC and optional IACC/spatial delay",
+    "acoustic": "sure-evaluation RIR bundle, 1 s window, per-channel RT30/RT60/DRR/C50/C80/EDC",
     "spatial_phase_level": "IPD/ILD are computed on the two-channel 1 s RIR FFT ratio relative to channel 0; IPD is circular phase error in radians and ILD is magnitude-ratio error in dB",
     "waveform_display": "Rec-BIR/scripts/waveform_alignment.py:shared_ch0_peak_crop, 2.5 ms pre-roll, then independent peak normalization per trace",
     "waveform_mae": "mean absolute error after the same crop and peak normalization",
@@ -54,13 +54,14 @@
   },
   "frequency_analysis": {
     "path": "data/frequency_error.json",
-    "source": "normalized waveform traces in data/results.json",
+    "source": "normalized native RIR WAVs from the six direct-estimate branches",
     "bands_hz": [[125, 250], [250, 500], [500, 1000], [1000, 2000], [2000, 4000], [4000, 8000]],
-    "error": "mean absolute magnitude-spectrum error in dB; distribution reports median and p25/p75"
+    "metrics": ["RT60 MAE", "C50 MAE", "EDC MAE"],
+    "error": "octave-band acoustic parameter MAE; distribution reports median and p25/p75"
   },
   "published_artifact": {
     "path": "data/results.json",
-    "contains": "60 samples per each of four comparison cases, downsampled normalized traces, scores, and provenance",
+    "contains": "60 samples per each of six comparison cases, downsampled normalized traces, scores, and provenance",
     "raw_model_outputs": "not committed; kept in the local analysis output root"
   }
 }

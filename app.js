@@ -245,6 +245,20 @@ function render() {
   renderFrequencyBands();
 }
 
+function groupSamples() {
+  const firstCase = group().cases[0];
+  return actualData.cases[firstCase]?.samples || [];
+}
+
+function updateSpacingOptions() {
+  const spacings = Array.from(new Set(groupSamples().map((sample) => sample.spacing_cm))).sort((left, right) => left - right);
+  $("spacing").innerHTML = spacings
+    .map((spacing) => '<option value="' + spacing + '">' + String(spacing).padStart(2, "0") + " cm</option>")
+    .join("");
+  if (!spacings.includes(selectedSpacing)) selectedSpacing = spacings[0];
+  $("spacing").value = selectedSpacing;
+}
+
 async function boot() {
   try {
     [actualData, frequencyData] = await Promise.all([
@@ -255,9 +269,7 @@ async function boot() {
     document.querySelector("#inspect .section-line>p").textContent = "Shared references with multiple direct RIR estimate branches.";
     document.querySelector(".sample-note").textContent = "Dashed line is the reference; solid lines are estimates. Both channels share the same sample and scoreboard values use the same report row.";
     updateSnrOptions();
-    $("spacing").innerHTML = Array.from(new Set(actualData.cases.rec_rir_single.samples.map((sample) => sample.spacing_cm)))
-      .map((spacing) => '<option value="' + spacing + '">' + String(spacing).padStart(2, "0") + " cm</option>")
-      .join("");
+    updateSpacingOptions();
     updateSampleOptions();
     render();
   } catch (error) {
@@ -266,7 +278,7 @@ async function boot() {
 }
 
 function updateSampleOptions() {
-  const samples = actualData.cases.rec_rir_single.samples.filter((sample) => sample.snr_db === selectedSnr && sample.spacing_cm === selectedSpacing);
+  const samples = groupSamples().filter((sample) => sample.snr_db === selectedSnr && sample.spacing_cm === selectedSpacing);
   $("sample").innerHTML = samples
     .map((sample) => '<option value="' + sample.scene_id + '">' + sample.scene_id + " / " + sample.sample_id + "</option>")
     .join("");
@@ -288,6 +300,8 @@ document.querySelectorAll("[data-group]").forEach((button) =>
     document.querySelectorAll("[data-group]").forEach((item) => item.classList.remove("active"));
     button.classList.add("active");
     selectedGroup = button.dataset.group;
+    updateSpacingOptions();
+    updateSampleOptions();
     render();
   }),
 );

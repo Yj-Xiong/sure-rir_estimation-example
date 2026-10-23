@@ -56,6 +56,7 @@ const METRIC_META = {
   rir_ipd_mae: { label: "IPD MAE", unit: "rad", precision: 3, range: 3.2 },
   rir_doa_mae: { label: "DOA MAE", unit: "degrees", precision: 2, range: 90 },
 };
+const CHANNEL_PAIR_METRICS = new Set(["rir_itd_mae", "rir_ild_mae", "rir_ipd_mae", "rir_doa_mae"]);
 
 let selectedGroup = "binaural";
 let selectedSnr = 10;
@@ -86,6 +87,16 @@ function displayMetric(name, value) {
   if (value === null || value === undefined || !Number.isFinite(value)) return "--";
   const meta = metricMeta(name);
   return (value * (meta.scale || 1)).toFixed(meta.precision) + " " + meta.unit;
+}
+
+function metricBasis(name, sample) {
+  if (CHANNEL_PAIR_METRICS.has(name) && sample.estimate_waveforms?.length > 2) {
+    return "mean of ch1/ch0 … ch" + (sample.estimate_waveforms.length - 1) + "/ch0 pairs";
+  }
+  if (name === "rir_iacc_full_mae") return "full RIR window";
+  if (name === "rir_iacc_early_mae") return "ch0 direct peak–80 ms";
+  if (name === "rir_iacc_late_mae") return "after ch0 direct peak +80 ms";
+  return referenceBasis(name, sample);
 }
 
 function referenceBasis(name, sample) {
@@ -208,7 +219,10 @@ function draw() {
     ctx.fillText("-" + formatAmplitude(axisPeak), plotLeft - 7, top + rowHeight - 4);
     ctx.textAlign = "left";
     ctx.font = "10px var(--mono), monospace";
-    ctx.fillText(channel === 0 ? "L / channel 0" : (channel === 1 ? "R / channel 1" : "channel " + channel), plotLeft + 8, top + 14);
+    const channelLabel = selectedGroup === "four_channel"
+      ? "channel " + channel
+      : (channel === 0 ? "L / channel 0" : "R / channel 1");
+    ctx.fillText(channelLabel, plotLeft + 8, top + 14);
     drawSeries(reference, "#f1f3e8", true, top, rowHeight, axisPeak);
     estimates.forEach((values, index) => drawSeries(values, group().colors[index], false, top, rowHeight, axisPeak));
   }
@@ -236,7 +250,7 @@ function render() {
         metrics.map((name) => {
           const value = entry.sample.scores[name];
           const best = Number.isFinite(value) && value === bestValues[name];
-          return '<span class="' + (best ? 'best' : '') + '"><b>' + metricMeta(name).label + '</b><em>' + displayMetric(name, value) + '</em><small>' + referenceBasis(name, entry.sample) + '</small></span>';
+          return '<span class="' + (best ? 'best' : '') + '"><b>' + metricMeta(name).label + '</b><em>' + displayMetric(name, value) + '</em><small>' + metricBasis(name, entry.sample) + '</small></span>';
         }).join("") +
         "</div></div>";
     })

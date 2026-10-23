@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Assemble fresh legacy and four-channel reports into the six page branches."""
+"""Assemble fresh legacy and four-channel reports into six page scenarios."""
 
 from __future__ import annotations
 
@@ -25,10 +25,10 @@ def main() -> None:
     cases = {**legacy.get("cases", {}), **four_channel.get("cases", {})}
     missing = [case for case in CASE_ORDER if case not in cases]
     if missing:
-        raise ValueError(f"missing page result branches: {missing}")
+        raise ValueError(f"missing page result scenarios: {missing}")
     counts = {case: len(cases[case].get("samples", [])) for case in CASE_ORDER}
     if set(counts.values()) != {60}:
-        raise ValueError(f"each page branch must contain 60 samples: {counts}")
+        raise ValueError(f"each page scenario must contain 60 samples: {counts}")
     payload = {
         "schema": "sure.rir.demo.results.v6",
         "status": "fresh_reproduction",

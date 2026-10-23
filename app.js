@@ -150,7 +150,7 @@ function applyStaticLocale() {
     "#rules .section-line h2": "评测规则",
     "#rules .section-line>p": "统一 JSONL 格式，按通道数使用对应指标。",
     ".rule-grid article:nth-child(1) h3": "基础 RIR 质量",
-    ".rule-grid article:nth-child(1) p": "先计算每个通道分支的 NPM、RT30、RT60 和 EDC，再添加空间指标。",
+    ".rule-grid article:nth-child(1) p": "先计算每个通道分支的 NPM、RT30、RT60、DRR、C50、C80 和 EDC，再添加空间指标。",
     ".rule-grid article:nth-child(2) h3": "空间指标汇总",
     ".rule-grid article:nth-child(2) p": "IACC 仅用于双通道，分别计算全段、早期和晚期窗口。ITD、ILD、IPD 和 DOA 逐一比较 chN 与 ch0，再对通道对误差取平均。",
     ".rule-grid article:nth-child(3) h3": "数据来源",
@@ -178,7 +178,7 @@ function applyStaticLocale() {
     ".repro-steps li:nth-child(3) p": "Rec-RIR 逐通道运行；NeuBIRE 分两组双通道运行。两者均以同一直达峰裁剪锚点合并四条输出路径。",
     ".repro-steps li:nth-child(4) h3": "评估并汇总全部六个场景",
     ".repro-steps li:nth-child(4) .repro-step-head span": "360 条模型结果 · CPU 队列",
-    ".repro-steps li:nth-child(4) p": "四个单/双通道场景使用已发布的 Rec-BIR/FiNS 一秒评测协议，两个四通道场景使用固定版本的 SURE RIR 指标集合。CPU 任务汇总候选 JSON，并从完整 RIR WAV 计算分频段误差。",
+    ".repro-steps li:nth-child(4) p": "四个单/双通道场景保留 Rec-BIR/FiNS 一秒评测分数，再用固定版本的 SURE 链路补充 RT30、C80 和双通道 DOA。两个四通道场景使用完整的 SURE RIR 指标集合。CPU 任务汇总候选 JSON，并从完整 RIR WAV 计算分频段误差。",
     ".repro-steps li:nth-child(5) h3": "验证候选数据",
     ".repro-steps li:nth-child(5) .repro-step-head span": "六个场景 · 每场景 60 条",
     ".repro-steps li:nth-child(5) p": "评分任务在完成前检查分支 ID、样本顺序、指标均值、波形形状、有限分数以及原始 WAV 的频段数据。",
@@ -221,8 +221,14 @@ function applyStaticLocale() {
 
 applyStaticLocale();
 const dataScript = document.querySelector("script[data-rir-app]");
-const dataUrl = dataScript ? new URL("data/results.json", dataScript.src).href : "data/results.json";
-const frequencyUrl = dataScript ? new URL("data/frequency_error.json", dataScript.src).href : "data/frequency_error.json";
+const assetVersion = dataScript ? new URL(dataScript.src).searchParams.get("v") : null;
+function dataAsset(name) {
+  const url = new URL(name, dataScript ? dataScript.src : window.location.href);
+  if (assetVersion) url.searchParams.set("v", assetVersion);
+  return url.href;
+}
+const dataUrl = dataAsset("data/results.json");
+const frequencyUrl = dataAsset("data/frequency_error.json");
 const group = () => GROUPS[selectedGroup];
 const entries = () =>
   group().cases
@@ -268,27 +274,41 @@ function referenceBasis(name, sample) {
   const ref = sample.reference_metrics || {};
   const pred = sample.prediction_metrics || {};
   const scalarMap = {
+    rt30_mae: ["rt30_1s", "s", 1],
     rt60_1s_mae: ["rt60_1s", "s", 1000],
     drr_1s_mae: ["drr_1s", "dB", 1],
     c50_1s_mae: ["c50_1s", "dB", 1],
+    rir_c80_mae: ["c80_1s", "dB", 1],
     iacc_full_1s_mae: ["iacc_full_1s", "", 1],
     iacc_early_1s_mae: ["iacc_early_1s", "", 1],
     iacc_late_1s_mae: ["iacc_late_1s", "", 1],
     itd_1s_mae: ["itd_1s_ms", "ms", 1],
     ild_1s_mae: ["ild_1s_db", "dB", 1],
     ipd_1s_mae: ["ipd_1s_rad", "rad", 1],
+    rir_doa_mae: ["doa_1s_deg", "°", 1],
   };
   const mapping = scalarMap[name];
-  if (!mapping || !Number.isFinite(ref[mapping[0]]) || !Number.isFinite(pred[mapping[0]])) {
+  if (!mapping) {
     if (name === "rir_npm") return localize("lag-invariant pair", "延迟不变的通道对");
     if (name === "rir_l1_mae") return localize("normalized traces", "归一化波形");
     if (name === "edc_1s_mae") return localize("decay curves", "能量衰减曲线");
     return localize("reference / estimate recorded", "已记录参考值 / 估计值");
   }
   const [, unit, scale] = mapping;
-  const precision = unit === "ms" ? 3 : unit === "dB" ? 2 : 3;
-  return localize("ref ", "参考 ") + (ref[mapping[0]] * scale).toFixed(precision) + (unit ? " " + unit : "") +
-    localize(" / pred ", " / 估计 ") + (pred[mapping[0]] * scale).toFixed(precision) + (unit ? " " + unit : "");
+  const precision = unit === "dB" || unit === "°" ? 2 : 3;
+  const format = (value) => {
+    if (Array.isArray(value)) {
+      const channels = value.map((item, index) => Number.isFinite(item)
+        ? "ch" + index + " " + (item * scale).toFixed(precision) : null).filter(Boolean);
+      return channels.length ? channels.join(", ") : null;
+    }
+    return Number.isFinite(value) ? (value * scale).toFixed(precision) : null;
+  };
+  const reference = format(ref[mapping[0]]);
+  const prediction = format(pred[mapping[0]]);
+  if (!reference || !prediction) return localize("reference / estimate recorded", "已记录参考值 / 估计值");
+  return localize("ref ", "参考 ") + reference + (unit ? " " + unit : "") +
+    localize(" / pred ", " / 估计 ") + prediction + (unit ? " " + unit : "");
 }
 
 function formatAmplitude(value) {

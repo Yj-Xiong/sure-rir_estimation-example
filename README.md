@@ -23,9 +23,12 @@ The **RIR estimation** task and its metrics are implemented in
 The shared acoustic bundle uses NPM, RT30, RT60, DRR, C50, C80, and EDC before
 optional spatial metrics. Scores are comparable only when the canonical
 metric, channel branch, sample-rate/window policy, and pipeline ID
-match; mono reports must not be mixed with binaural spatial reports. Each
-model/output scenario contains 60 rows. The four monaural/binaural scenarios use
-`VariableMSpacingFixedSNR` scenes `scene_0000` and `scene_0025` at 10/20/30 dB
+match; mono reports must not be mixed with binaural spatial reports. The
+monaural/binaural page scores retain the historical Rec-BIR protocol and add
+RT30, C80, and binaural DOA from the pinned SURE evaluator. These four cases
+record source pipeline IDs per metric; each scenario contains 60 rows. The four
+monaural/binaural scenarios use `VariableMSpacingFixedSNR` scenes `scene_0000`
+and `scene_0025` at 10/20/30 dB
 and ten spacings. The two four-channel scenarios use the separate
 `four_mic_fixed_v2` selection, with two rows per SNR-spacing pair.
 

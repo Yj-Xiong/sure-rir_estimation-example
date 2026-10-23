@@ -6,10 +6,10 @@ It regenerates 60 samples for each scenario:
 
 | Scenario | Inference | Reported metrics |
 | --- | --- | --- |
-| Rec-RIR monaural | channel 0 | normalized waveform MAE, NPM, RT60, DRR, C50, EDC |
+| Rec-RIR monaural | channel 0 | normalized waveform MAE, NPM, RT30, RT60, DRR, C50, C80, EDC |
 | NeuBIRE monaural | score channel 0 from the native two-channel estimate | same acoustic metrics |
-| Rec-RIR binaural | independent channel 0/1 passes | acoustic metrics + IACC full/early/late, ITD, ILD, IPD |
-| NeuBIRE binaural | native two-channel pass | acoustic metrics + IACC full/early/late, ITD, ILD, IPD |
+| Rec-RIR binaural | independent channel 0/1 passes | acoustic metrics + IACC full/early/late, ITD, ILD, IPD, DOA |
+| NeuBIRE binaural | native two-channel pass | acoustic metrics + IACC full/early/late, ITD, ILD, IPD, DOA |
 | Rec-RIR four-channel | four paths | acoustic metrics + channel-0-relative ITD, ILD, IPD, DOA |
 | NeuBIRE four-channel | two two-channel passes | acoustic metrics + channel-0-relative ITD, ILD, IPD, DOA |
 
@@ -124,8 +124,10 @@ other four outputs are useful for checking the shared inference implementation.
 
 ## 5. Score, assemble, and verify on the CPU queue
 
-The legacy report uses the one-second Rec-BIR/FiNS acoustic and spatial
-protocol. The four-channel report uses the pinned SURE RIR bundle. The scoring
+The legacy report retains the one-second Rec-BIR/FiNS acoustic and spatial
+scores, then adds RT30, C80, and binaural DOA from the pinned SURE RIR pipeline
+on the same peak-calibrated one-second RIRs. The four-channel report uses the
+full pinned SURE RIR bundle. The scoring
 script writes into a separate output directory and checks all six scenario IDs,
 60 samples per scenario, metric means, waveform shapes, and native-WAV frequency
 analysis before it exits successfully.
@@ -135,21 +137,18 @@ outside model inputs; this calibration happens after inference.
 
 ```bash
 export OUTPUT_ROOT="$RECBIR_ROOT/NeuSIRI/data/rir_demo_runs/page_report_60"
-JOB=rir_page_report_$(date +%Y%m%d_%H%M%S)
-LOG="$RECBIR_ROOT/NeuSIRI/logs/demo/$JOB.JOB.log"
-mkdir -p "$(dirname "$LOG")"
-vc submit --nopassenv \
-  --image docker.v2.aispeech.com/hpc/ai_on_device_base-nsp:1.1.1 \
-  --partition pdcpu --mem-per-task 32G --cpu-per-task 8 \
-  --project neusiri --job "$JOB" JOB=1:1 "$LOG" \
-  --cmd "EXAMPLE_ROOT='$EXAMPLE_ROOT' RECBIR_ROOT='$RECBIR_ROOT' LEGACY_RUN='$LEGACY_RUN' FOUR_RUN='$FOUR_RUN' MODEL_PYTHON='$MODEL_PYTHON' SCORING_PYTHON='$SCORING_PYTHON' SURE_EVAL='$SURE_EVAL' OUTPUT_ROOT='$OUTPUT_ROOT' bash '$EXAMPLE_ROOT/example/score_page.sh' > '$LOG' 2>&1"
+bash "$EXAMPLE_ROOT/example/submit_page_scoring.sh"
 ```
 
-Record the job ID and wait for successful completion. The candidate page files
+The submission script uses the `pdcpu` queue with 8 CPUs and 32 GB of memory,
+and prints the job ID, log path, and output path. Record the job ID and wait for
+successful completion. The candidate page files
 are `$OUTPUT_ROOT/results.json` and `$OUTPUT_ROOT/frequency_error.json`.
-The first four cases carry a `recbir.legacy_rir_1s.*` protocol ID because
-their page scores use the historical Rec-BIR/FiNS protocol. The last two carry
-the SURE pipeline ID from their report.
+The first four cases retain a `recbir.legacy_rir_1s.*` primary protocol ID and
+record the supplemental SURE pipeline ID and a source pipeline for every metric.
+Their `pipeline_metric_map` covers every applicable metric in the submitted RIR
+bundle; normalized waveform MAE remains an additional display metric. The last
+two cases carry the SURE pipeline ID from their report.
 
 ## 6. Review the candidate result before publishing
 

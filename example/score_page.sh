@@ -11,9 +11,26 @@ set -euo pipefail
 
 mkdir -p "$OUTPUT_ROOT"
 "$SCORING_PYTHON" "$EXAMPLE_ROOT/scripts/prepare_four_scoring.py" --run "$FOUR_RUN"
+"$SCORING_PYTHON" "$EXAMPLE_ROOT/scripts/prepare_legacy_supplemental.py" \
+    --run "$LEGACY_RUN" --output "$OUTPUT_ROOT/legacy_sure"
 
 base=rir_npm,rt30_mae,rt60_mae,rir_drr_mae,rir_c50_mae,rir_c80_mae,rir_edc_mae
 multi="$base,rir_itd_mae,rir_ild_mae,rir_ipd_mae,rir_doa_mae"
+for model in rec_rir neubire; do
+    for mode in monaural binaural; do
+        case_dir="$OUTPUT_ROOT/legacy_sure/$model/$mode"
+        metrics=rt30_mae,rir_c80_mae
+        if [[ "$mode" == binaural ]]; then
+            metrics="$metrics,rir_doa_mae"
+        fi
+        mkdir -p "$case_dir/evaluation"
+        "$SURE_EVAL" metric describe rir --metrics "$metrics" \
+            --output "$case_dir/pipeline.json" --json
+        "$SURE_EVAL" metric run --pipeline "$case_dir/pipeline.json" \
+            --samples-jsonl "$case_dir/samples.jsonl" \
+            --output-dir "$case_dir/evaluation" --json
+    done
+done
 for model in rec_rir neubire; do
     case_dir="$FOUR_RUN/$model/four_channel"
     mkdir -p "$case_dir/scoring/evaluation"
@@ -26,7 +43,8 @@ done
 
 PYTHONPATH="${SCORING_EXTRA_PYTHONPATH:+$SCORING_EXTRA_PYTHONPATH:}$RECBIR_ROOT:$RECBIR_ROOT/../fins-main${PYTHONPATH:+:$PYTHONPATH}" \
     "$SCORING_PYTHON" "$EXAMPLE_ROOT/scripts/build_legacy_demo_results.py" \
-    --run "$LEGACY_RUN" --output "$OUTPUT_ROOT/legacy_results.json"
+    --run "$LEGACY_RUN" --supplemental-root "$OUTPUT_ROOT/legacy_sure" \
+    --output "$OUTPUT_ROOT/legacy_results.json"
 "$SCORING_PYTHON" "$EXAMPLE_ROOT/scripts/build_demo_results_from_reports.py" \
     --run "$FOUR_RUN" --cases rec_rir_four_channel neubire_v1_four_channel \
     --output "$OUTPUT_ROOT/four_channel_results.json"

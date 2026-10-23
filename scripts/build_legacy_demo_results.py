@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Score the published monaural and binaural branches from fresh RIR WAVs."""
+"""Score legacy RIRs and add the missing SURE pipeline metrics."""
 
 from __future__ import annotations
 
@@ -31,13 +31,75 @@ CASE_MAP = {
     "rec_rir_separate": ("rec_rir", "binaural", "Rec-RIR separate", "binaural"),
     "neubire_v1_native": ("neubire", "binaural", "NeuBIRE", "binaural"),
 }
-BASE_METRICS = ("rir_l1_mae", "rir_npm", "rt60_1s_mae", "drr_1s_mae", "c50_1s_mae", "edc_1s_mae")
+BASE_METRICS = (
+    "rir_l1_mae", "rir_npm", "rt30_mae", "rt60_1s_mae", "drr_1s_mae",
+    "c50_1s_mae", "rir_c80_mae", "edc_1s_mae",
+)
 SPATIAL_METRICS = (
     "iacc_full_1s_mae", "iacc_early_1s_mae", "iacc_late_1s_mae",
-    "itd_1s_mae", "ild_1s_mae", "ipd_1s_mae",
+    "itd_1s_mae", "ild_1s_mae", "ipd_1s_mae", "rir_doa_mae",
 )
+SUPPLEMENTAL_METRICS = {
+    "monaural": ("rt30_mae", "rir_c80_mae"),
+    "binaural": ("rt30_mae", "rir_c80_mae", "rir_doa_mae"),
+}
+PIPELINE_METRIC_NAMES = {
+    "rir_npm": "rir_npm",
+    "rt30_mae": "rt30_mae",
+    "rt60_1s_mae": "rt60_mae",
+    "drr_1s_mae": "rir_drr_mae",
+    "c50_1s_mae": "rir_c50_mae",
+    "rir_c80_mae": "rir_c80_mae",
+    "edc_1s_mae": "rir_edc_mae",
+    "iacc_full_1s_mae": "rir_iacc_full_mae",
+    "iacc_early_1s_mae": "rir_iacc_early_mae",
+    "iacc_late_1s_mae": "rir_iacc_late_mae",
+    "itd_1s_mae": "rir_itd_mae",
+    "ild_1s_mae": "rir_ild_mae",
+    "ipd_1s_mae": "rir_ipd_mae",
+    "rir_doa_mae": "rir_doa_mae",
+}
 BASE_PROTOCOL = "recbir.legacy_rir_1s.acoustic.v1"
 SPATIAL_PROTOCOL = "recbir.legacy_rir_1s.binaural.v1"
+
+
+def load_supplemental_report(path: Path, metrics: tuple[str, ...], sample_ids: list[str]) -> tuple[str, dict]:
+    report = json.loads(path.read_text(encoding="utf-8"))
+    per_metric = {}
+    for node in report["pipeline_trace"]:
+        result = node["details"]["result"]
+        name = result["metric_name"]
+        rows = {str(row["sample_id"]): row for row in result["per_sample"]}
+        if len(rows) != len(sample_ids) or set(rows) != set(sample_ids):
+            raise ValueError(f"supplemental report sample IDs differ for {name}: {path}")
+        per_metric[name] = rows
+    if set(per_metric) != set(metrics):
+        raise ValueError(f"supplemental metrics differ in {path}: {sorted(per_metric)}")
+    return report["pipeline_id"], per_metric
+
+
+def add_supplemental_results(sample: dict, per_metric: dict, channels: int) -> None:
+    sample_id = sample["sample_id"]
+    for metric, rows in per_metric.items():
+        result = rows[sample_id]
+        sample["scores"][metric] = float(result["score"])
+        if metric in {"rt30_mae", "rir_c80_mae"}:
+            field, reference_field, prediction_field = (
+                ("rt30_1s", "reference_rt30", "prediction_rt30") if metric == "rt30_mae"
+                else ("c80_1s", "reference_c", "prediction_c")
+            )
+            reference_values = [None] * channels
+            prediction_values = [None] * channels
+            for channel_row in result["channels"]:
+                channel = int(channel_row["channel"])
+                reference_values[channel] = float(channel_row[reference_field])
+                prediction_values[channel] = float(channel_row[prediction_field])
+            sample["reference_metrics"][field] = reference_values
+            sample["prediction_metrics"][field] = prediction_values
+        elif metric == "rir_doa_mae":
+            pair = result["pairs"][0]
+            sample["reference_metrics"]["doa_1s_deg"] = float(pair["reference_doa"])
+            sample["prediction_metrics"]["doa_1s_deg"] = float(pair["prediction_doa"])
 
 
 def fit_length(signal: np.ndarray) -> np.ndarray:
@@ -150,6 +212,7 @@ def score_sample(reference: np.ndarray, estimate: np.ndarray) -> dict[str, float
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run", type=Path, required=True)
+    parser.add_argument("--supplemental-root", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     cases = {}
@@ -158,6 +221,10 @@ def main() -> None:
         rows = [json.loads(line) for line in manifest.read_text(encoding="utf-8").splitlines() if line.strip()]
         if not rows:
             raise ValueError(f"empty case manifest: {manifest}")
+        supplemental_pipeline_id, supplemental = load_supplemental_report(
+            args.supplemental_root / model / mode / "evaluation" / "report.json",
+            SUPPLEMENTAL_METRICS[mode], [row["sample_id"] for row in rows],
+        )
         rendered = []
         for row in rows:
             reference, reference_rate = sf.read(row["reference_rir"], always_2d=True, dtype="float64")
@@ -169,7 +236,7 @@ def main() -> None:
                 raise ValueError(f"invalid channel count: {row['sample_id']}")
             reference, estimate = reference.T, estimate.T
             estimate = match_reference_peaks(reference, estimate)
-            rendered.append({
+            sample = {
                 "sample_id": row["sample_id"],
                 "scene_id": row["metadata"]["scene_id"],
                 "spacing_cm": row["metadata"]["mic_spacing_cm"],
@@ -179,14 +246,25 @@ def main() -> None:
                 "estimate_waveforms": display_waveforms(estimate),
                 "reference_metrics": side_metrics(reference),
                 "prediction_metrics": side_metrics(estimate),
-            })
+            }
+            add_supplemental_results(sample, supplemental, channels)
+            rendered.append(sample)
         metric_names = BASE_METRICS + (SPATIAL_METRICS if mode == "binaural" else ())
+        protocol_id = SPATIAL_PROTOCOL if mode == "binaural" else BASE_PROTOCOL
         cases[case_id] = {
             "status": "direct_rir_protocol_report",
             "model": label,
             "branch": branch,
             "channel_layout": "mono" if mode == "monaural" else "binaural_lr",
-            "pipeline_id": SPATIAL_PROTOCOL if mode == "binaural" else BASE_PROTOCOL,
+            "pipeline_id": protocol_id,
+            "supplemental_pipeline_id": supplemental_pipeline_id,
+            "pipeline_metric_map": {
+                PIPELINE_METRIC_NAMES[name]: name for name in metric_names if name in PIPELINE_METRIC_NAMES
+            },
+            "metric_pipeline_ids": {
+                name: supplemental_pipeline_id if name in SUPPLEMENTAL_METRICS[mode] else protocol_id
+                for name in metric_names
+            },
             "metrics": metric_names,
             "means": {name: float(np.mean([sample["scores"][name] for sample in rendered])) for name in metric_names},
             "samples": rendered,

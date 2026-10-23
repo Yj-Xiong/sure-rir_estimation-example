@@ -6,3 +6,4 @@ runs/
 .runtime/
 weights/
 .validation/
+data/legacy_demo_selection.jsonl

@@ -1,0 +1,9 @@
+{
+  "schema": "sure.rir.legacy_demo_selection.v1",
+  "source_manifest": "variableMspacingFixedSNR_30scenes_260928/test_manifest.jsonl",
+  "sample_rate_hz": 16000,
+  "snr_db": [10, 20, 30],
+  "scene_ids": ["scene_0000", "scene_0025"],
+  "microphone_spacing_cm": [3, 6, 9, 12, 15, 18, 21, 24, 27, 30],
+  "sample_count": 60
+}

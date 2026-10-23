@@ -1,9 +1,9 @@
 # NeuBIRE RIR reproduction
 
-This guide describes the direct-RIR comparison run used for the four-channel
-NeuBIRE result in the [demo](https://yj-xiong.github.io/sure-rir_estimation-example/).
-It uses the 60-row four-microphone selection committed in this repository and
-the NeuBIRE checkpoint recorded in [`../data/provenance.json`](../data/provenance.json).
+This guide describes the NeuBIRE direct-RIR inference used by the four-channel
+branch in the [demo](https://yj-xiong.github.io/sure-rir_estimation-example/).
+The complete six-branch page reproduction, including monaural and binaural
+Rec-RIR/NeuBIRE runs, is in [`README.md`](README.md).
 
 The checkpoint, NeuBIRE workspace, and source test audio are not distributed
 here. Reproduction requires access to the matching `Rec-BIR` workspace and its
@@ -11,15 +11,6 @@ here. Reproduction requires access to the matching `Rec-BIR` workspace and its
 runs Rec-RIR as the comparison baseline, so its config and checkpoint must be
 available. The [Rec-RIR implementation](https://github.com/Audio-WestlakeU/Rec-RIR)
 and [paper](https://arxiv.org/abs/2509.15628) are public.
-
-## Published result scope
-
-The page contains six comparison branches. The four-channel Rec-RIR and
-NeuBIRE branches use the current 60-row four-microphone run described here.
-The monaural and binaural branches were restored from an earlier demo result
-set. Rerunning the current script produces fresh estimates for all three
-channel modes and does not recreate those archived monaural and binaural
-scores. The page provenance records this distinction.
 
 The four-channel selection contains 60 rows: SNR 10, 20, and 30 dB; ten
 adjacent microphone spacings from 0.02 to 0.20 m; and two rows per SNR-spacing
@@ -178,19 +169,10 @@ that every report has 60 per-sample results for each requested metric. In
 multichannel reports, ITD, ILD, IPD, and DOA include one pair for each
 `chN` relative to `ch0`; the aggregate score is the mean over those pairs.
 
-To create browser-format data from the reports, use the checked-in conversion
-scripts. Review the generated JSON before publishing it. The merge command
-keeps the currently restored monaural/binaural records and replaces only the
-four-channel branches:
-
-```bash
-python3 "$EXAMPLE_ROOT/scripts/build_demo_results_from_reports.py" \
-  --run "$RUN_ROOT" --output "$RUN_ROOT/browser_results_current.json"
-python3 "$EXAMPLE_ROOT/scripts/merge_demo_results.py" \
-  --previous "$EXAMPLE_ROOT/data/results.json" \
-  --current "$RUN_ROOT/browser_results_current.json" \
-  --output "$RUN_ROOT/browser_results_merged.json"
-```
+The complete page assembly is described in [`README.md`](README.md): build the
+fresh legacy report, build the fresh four-channel report, then run
+`scripts/assemble_demo_results.py` to require all six branches and 60 rows per
+branch before publishing `data/results.json`.
 
 ## 6. Compare with the browser data
 

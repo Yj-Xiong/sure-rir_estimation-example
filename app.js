@@ -13,7 +13,7 @@ const GROUPS = {
   },
   four_channel: {
     label: "Four-channel",
-    note: "Rec-RIR and NeuBIRE estimates against four reference channels",
+    note: "Rec-RIR separate and NeuBIRE separate estimates against four reference channels",
     cases: ["rec_rir_four_channel", "neubire_v1_four_channel"],
     colors: ["#d8894d", "#6b8fd6"],
   },
@@ -24,8 +24,8 @@ const MODELS = {
   neubire_v1_single: "NeuBIRE",
   rec_rir_separate: "Rec-RIR separate",
   neubire_v1_native: "NeuBIRE",
-  rec_rir_four_channel: "Rec-RIR",
-  neubire_v1_four_channel: "NeuBIRE",
+  rec_rir_four_channel: "Rec-RIR separate",
+  neubire_v1_four_channel: "NeuBIRE separate",
 };
 
 const METRIC_META = {

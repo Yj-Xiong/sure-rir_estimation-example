@@ -57,9 +57,11 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--run", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--cases", nargs="*", choices=tuple(CASE_MAP), default=list(CASE_MAP))
     args = parser.parse_args()
     cases, sample_count = {}, None
-    for case_id, (model, branch, model_label, branch_label) in CASE_MAP.items():
+    for case_id in args.cases:
+        model, branch, model_label, branch_label = CASE_MAP[case_id]
         root = args.run / model / branch
         samples = [json.loads(line) for line in (root / "samples.jsonl").read_text(encoding="utf-8").splitlines()]
         report = json.loads((root / "scoring" / "evaluation" / "report.json").read_text(encoding="utf-8"))

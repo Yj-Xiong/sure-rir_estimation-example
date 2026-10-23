@@ -1,132 +1,190 @@
-# Rec-RIR 的 SURE Harness 复现
+# Reproduce the complete RIR example
 
-本页复现 20 条 Rec-RIR Harness fixture。浏览器中的 NeuBIRE 直接 RIR
-推理和 60 条评分步骤见[NeuBIRE 复现教程](NEUBIRE_REPRODUCTION.md)。
-Rec-RIR 论文《Monaural Blind Room Impulse Response Identification via DNN-based
-Reverberant Speech Reconstruction in STFT Domain》见[arXiv](https://arxiv.org/abs/2509.15628)，
-官方实现见[代码仓库](https://github.com/Audio-WestlakeU/Rec-RIR)。
+This is the end-to-end reproduction entry point for the six branches shown on
+the [GitHub Pages demo](https://yj-xiong.github.io/sure-rir_estimation-example/).
+It regenerates 60 samples for each of these branches:
 
-本目录提供 20 条 Rec-RIR 单通道 RIR 估计链路：
+| Branch | Inference | Reported metrics |
+| --- | --- | --- |
+| Rec-RIR monaural | channel 0 | normalized waveform MAE, NPM, RT60, DRR, C50, EDC |
+| NeuBIRE monaural | score channel 0 from the native two-channel estimate | same acoustic metrics |
+| Rec-RIR binaural | independent channel 0/1 passes | acoustic metrics + IACC full/early/late, ITD, ILD, IPD |
+| NeuBIRE binaural | native two-channel pass | acoustic metrics + IACC full/early/late, ITD, ILD, IPD |
+| Rec-RIR four-channel | four paths | acoustic metrics + channel-0-relative ITD, ILD, IPD, DOA |
+| NeuBIRE four-channel | two two-channel passes | acoustic metrics + channel-0-relative ITD, ILD, IPD, DOA |
 
-```text
-SURE Harness Runtime
-  -> Rec-RIR 模型环境
-  -> estimate_rir MCP 推理
-  -> SURE RIR bridge
-  -> evaluate_predictions.py
-  -> Evaluation Runtime
-  -> pipeline bundle
-  -> report.json
-```
+The first four branches use the fixed `VariableMSpacingFixedSNR` selection;
+the last two use the four-microphone selection. Both selections are generated
+from manifests rather than copied from `data/results.json`.
 
-模型 MCP 只接收输入音频和输出路径；reference RIR 由 Harness bridge
-传给评测器。网页 `data/results.json` 使用 60 条固定 SNR 数据和 NPM
-pipeline，本目录使用 20 条 fixture 数据和
-`rir_nmse`/`rir_corr`/`rt60_mae`。
+Model checkpoints, input audio, reference RIRs, and generated WAV files stay in
+the local `Rec-BIR` workspace. Only the bounded JSON report is copied into the
+example repository after validation.
 
-## 1. 获取源码和运行时
-
-需要 Git、`uv`、Bash 和 Python 依赖下载权限。以下命令在同一个工作目录执行。
-`SURE_SOURCE` 指向包含指定提交的 SURE 源码，评测引擎子模块从个人 fork 获取。
+## 1. Get the sources
 
 ```bash
-RIR_EXAMPLE="/absolute/path/to/sure-rir_estimation-example/example"
-SURE_SOURCE="/absolute/path/to/sure-harness"
-git clone --no-checkout "$SURE_SOURCE" sure-rir-repro
-git -C sure-rir-repro checkout 73975931da1353c3b97a422e796612d8b363fe3b
-git -C sure-rir-repro config submodule.sure/external/sure-evaluation.url https://github.com/Yj-Xiong/sure-evaluation.git
-git -C sure-rir-repro submodule update --init sure/external/sure-evaluation
-git -C sure-rir-repro/sure/external/sure-evaluation rev-parse HEAD
+git clone https://github.com/Yj-Xiong/sure-rir_estimation-example.git
+git clone https://github.com/Yj-Xiong/sure-evaluation.git sure-evaluation
+git -C sure-evaluation checkout 39b4146
+export MODEL_PYTHON="/absolute/path/to/python-with-recbir-dependencies"
+"$MODEL_PYTHON" -m venv sure-evaluation/.venv
+sure-evaluation/.venv/bin/python -m pip install --upgrade pip setuptools wheel
+sure-evaluation/.venv/bin/python -m pip install -e 'sure-evaluation[audio]'
 
-SURE_REPO="$PWD/sure-rir-repro"
-HARNESS_PYTHON_BIN=$(python3 "$SURE_REPO/sure/runtime/harness/bootstrap.py")
-"$HARNESS_PYTHON_BIN" --version
+export EXAMPLE_ROOT="$PWD/sure-rir_estimation-example"
+export RECBIR_ROOT="/absolute/path/to/Rec-BIR"
+export DATA_ROOT="/absolute/path/to/variableMspacingFixedSNR_30scenes_260928"
+export SCORING_PYTHON="/absolute/path/to/python-with-recbir-and-fins-metric-dependencies"
+export SURE_EVAL="$PWD/sure-evaluation/.venv/bin/sure-eval"
 ```
 
-评测引擎提交为 `8041b1249c5d0ce39a96c72cab01e49b09cc87e9`。
-`bootstrap.py` 根据锁文件准备 Harness Runtime。后续命令使用
-`$HARNESS_PYTHON_BIN`。首次安装会下载 Python 3.11 和依赖。
+Use the same `Rec-BIR` checkout for both model families. The public Rec-RIR
+source is [Audio-WestlakeU/Rec-RIR](https://github.com/Audio-WestlakeU/Rec-RIR);
+the NeuBIRE checkpoint and implementation are recorded in
+[`../data/provenance.json`](../data/provenance.json).
+The model environment needs the Rec-BIR inference dependencies. The scoring
+environment also needs NumPy, SciPy, SoundFile, PyTorch, and the local FiNS
+metric module. The saved run was checked with NumPy 1.26.4 and SciPy 1.11.4.
+Check `import scipy.special` in both interpreters before submitting jobs. If
+using an existing environment with an incompatible SciPy installation, set
+`MODEL_EXTRA_PYTHONPATH` and `SCORING_EXTRA_PYTHONPATH` to a directory containing
+the compatible SciPy wheel; the submission scripts pass these paths to the
+cluster workers.
 
-## 2. 准备 Rec-RIR 模型
+## 2. Select the exact 60-row sets
+
+The legacy selection is two scenes (`scene_0000`, `scene_0025`) at ten spacings
+and SNR 10/20/30 dB, two rows per spacing/SNR combination. The four-microphone
+selection is ten adjacent spacings from 0.02 to 0.20 m, two rows per spacing/SNR
+combination.
 
 ```bash
-MODEL_SOURCE="/absolute/path/to/Rec-RIR"
-git clone --no-checkout "$MODEL_SOURCE" rec-rir-source
-git -C rec-rir-source checkout 6914eea792f0117e39f87510ffbda7cd04dffbbb
-MODEL_REPO="$PWD/rec-rir-source"
+python3 "$EXAMPLE_ROOT/scripts/select_legacy_demo.py" \
+  --dataset-root "$DATA_ROOT" \
+  --output "$EXAMPLE_ROOT/data/legacy_demo_selection.jsonl"
 
-MODEL_CHECKPOINT="$MODEL_REPO/ckpt/epoch35.tar"
-sha256sum "$MODEL_CHECKPOINT"
-
-uv venv --python 3.10 .venv-rir-model
-MODEL_PYTHON="$PWD/.venv-rir-model/bin/python"
-uv pip install --python "$MODEL_PYTHON" \
-  'torch==2.2.0' 'torchaudio==2.2.0' 'mamba-ssm==2.1.0' \
-  'causal-conv1d==1.4.0' 'numpy==1.26.4' 'soundfile==0.13.1' \
-  'toml==0.10.2' 'tqdm==4.68.2' 'jsonargparse==4.48.0' 'matplotlib==3.10.8'
+python3 "$EXAMPLE_ROOT/scripts/select_four_mic_demo.py" \
+  --manifest "$RECBIR_ROOT/NeuSIRI/data/four_mic_fixed_v2/test/test_manifest.jsonl" \
+  --output "$EXAMPLE_ROOT/data/four_mic_demo_selection.json"
 ```
 
-checkpoint SHA-256:
-`afe36e477f6fb3656d162d906a47da2d40a789634b476564266fc1ba36037478`。
-模型提交、权重哈希和输出目录由脚本检查。`mamba-ssm` 和
-`causal-conv1d` 需要与 PyTorch/CUDA 匹配；安装 CUDA 扩展时使用集群作业。
-模型权重不包含在本示例仓库中。模型依赖和 Harness/Evaluation 依赖分别安装。
+Both commands must report 60 selected rows. The generated legacy JSONL must
+have the same sample IDs as the four legacy branches in the final report.
 
-模型依赖版本：PyTorch 2.2.0、torchaudio 2.2.0、NumPy 1.26.4，CUDA 12.1
-wheel。`MODEL_SOURCE` 可指向 `Audio-WestlakeU/Rec-RIR`。
+## 3. Run legacy monaural and binaural inference
 
-安装后运行适配器检查：
+Run this command through the cluster queue. It produces four directories under
+`$LEGACY_RUN`: Rec-RIR/NeuBIRE x monaural/binaural. It does not use the saved
+page data as input.
 
 ```bash
-"$MODEL_PYTHON" "$RIR_EXAMPLE/test_example.py"
+export LEGACY_RUN="$RECBIR_ROOT/NeuSIRI/data/rir_demo_runs/legacy_60"
+export RECRIR_CONFIG="$RECBIR_ROOT/../fins-main/configs/recrir/first_channel/original_recrir_1ch_2chrender_ch0_dataset30mm_noise92_full50_bs2x2.toml"
+export RECRIR_CHECKPOINT="$RECBIR_ROOT/eval_results/unified_10testsets_recrir_1ch_baselines_with_iacc_260805/checkpoint_snapshots/official_recrir_epoch35.tar"
+export NEUBIRE_DIR="$RECBIR_ROOT/eval_results/variable_mspacing_fixedsnr_delta01_260922_bestnpm1_260929/checkpoint_snapshot"
+export NEUBIRE_CONFIG="$NEUBIRE_DIR/config.toml"
+export NEUBIRE_CHECKPOINT="$NEUBIRE_DIR/best_npm_1.tar"
+sha256sum "$NEUBIRE_CHECKPOINT"
+
+JOB=rir_legacy_60_$(date +%Y%m%d_%H%M%S)
+LOG="$RECBIR_ROOT/NeuSIRI/logs/demo/$JOB.JOB.log"
+mkdir -p "$(dirname "$LOG")"
+vc submit --nopassenv --enable-rdma 1 \
+  --image docker.v2.aispeech.com/hpc/ai_on_device_base-nsp:1.1.1 \
+  --partition pdgpu-4090 --gpu-per-task 1 --mem-per-task 32G --cpu-per-task 8 \
+  --project neusiri --job "$JOB" JOB=1:1 "$LOG" \
+  --cmd "cd '$RECBIR_ROOT' && export PYTHONPATH='$RECBIR_ROOT':\${PYTHONPATH:-} && '$MODEL_PYTHON' '$EXAMPLE_ROOT/scripts/run_legacy_demo_inference.py' --selection '$EXAMPLE_ROOT/data/legacy_demo_selection.jsonl' --output '$LEGACY_RUN' --recrir-config '$RECRIR_CONFIG' --recrir-checkpoint '$RECRIR_CHECKPOINT' --neubire-config '$NEUBIRE_CONFIG' --neubire-checkpoint '$NEUBIRE_CHECKPOINT' --device cuda:0"
 ```
 
-## 3. 推理和评测
+The output must contain four `samples.jsonl` files with 60 rows each. The
+NeuBIRE monaural uses channel 0 from the same native pair as its binaural
+branch; the Rec-RIR binaural path runs the one-channel model independently on
+channels 0 and 1. This follows the samples currently published on the page.
 
-以下命令逐条处理 20 条输入，需要在已分配的集群 GPU/CPU 作业内执行。
-输出目录需位于作业可写的共享存储。
+## 4. Run four-channel inference
+
+Use the existing direct-RIR runner for the two current four-channel branches:
 
 ```bash
-"$HARNESS_PYTHON_BIN" "$RIR_EXAMPLE/run_example.py" \
-  --repo "$SURE_REPO" \
-  --model-repo "$MODEL_REPO" \
-  --checkpoint "$MODEL_CHECKPOINT" \
-  --model-python "$MODEL_PYTHON" \
-  --device cuda:0 \
-  --output-dir "$PWD/rir-run-001"
+export FOUR_RUN="$RECBIR_ROOT/NeuSIRI/data/rir_demo_runs/four_channel_60"
+JOB=rir_four_channel_60_$(date +%Y%m%d_%H%M%S)
+LOG="$RECBIR_ROOT/NeuSIRI/logs/demo/$JOB.JOB.log"
+mkdir -p "$(dirname "$LOG")"
+vc submit --nopassenv --enable-rdma 1 \
+  --image docker.v2.aispeech.com/hpc/ai_on_device_base-nsp:1.1.1 \
+  --partition pdgpu-4090 --gpu-per-task 1 --mem-per-task 32G --cpu-per-task 8 \
+  --project neusiri --job "$JOB" JOB=1:1 "$LOG" \
+  --cmd "cd '$RECBIR_ROOT' && export PYTHONPATH='$RECBIR_ROOT':\${PYTHONPATH:-} && '$MODEL_PYTHON' scripts/run_demo_recrir_neubire_three_cases.py --selection '$EXAMPLE_ROOT/data/four_mic_demo_selection.json' --output '$FOUR_RUN' --device cuda:0"
 ```
 
-`--device cpu` 可用于支持 CPU 依赖的环境。输出目录必须不存在。
-脚本校验 20 条输入及 channel-0 reference 的 SHA-256，然后调用 Rec-RIR
-`inference.py` 生成 16 kHz 单通道 RIR。Harness bridge 按 `sample_id`
-对齐 prediction 和 reference，评分 `rir_nmse`、`rir_corr`、`rt60_mae`，
-并运行版本化 pipeline：
+This run writes the six model/channel directories. Use only the two
+`four_channel` directories for the page's final four-channel branches. The
+other four outputs are useful for checking the shared inference implementation.
 
-```text
-rir.any.multi.rir_nmse.rir_nmse_v1__rir_corr.rir_corr_v1__rt60_mae.rt60_mae_v1
-```
+## 5. Score, assemble, and verify on the CPU queue
 
-检查输出：
+The legacy report uses the one-second Rec-BIR/FiNS acoustic and spatial
+protocol. The four-channel report uses the pinned SURE RIR bundle. The scoring
+script writes into a separate output directory and checks all six branch IDs,
+60 samples per branch, metric means, waveform shapes, and native-WAV frequency
+analysis before it exits successfully.
+Legacy scoring first matches each estimate channel's peak amplitude to
+its reference channel, as in the published protocol. Reference RIRs remain
+outside model inputs; this calibration happens after inference.
 
 ```bash
-"$HARNESS_PYTHON_BIN" -m json.tool "$PWD/rir-run-001/summary.json"
-"$HARNESS_PYTHON_BIN" -m json.tool "$PWD/rir-run-001/evaluation/report.json"
+export OUTPUT_ROOT="$RECBIR_ROOT/NeuSIRI/data/rir_demo_runs/page_report_60"
+JOB=rir_page_report_$(date +%Y%m%d_%H%M%S)
+LOG="$RECBIR_ROOT/NeuSIRI/logs/demo/$JOB.JOB.log"
+mkdir -p "$(dirname "$LOG")"
+vc submit --nopassenv \
+  --image docker.v2.aispeech.com/hpc/ai_on_device_base-nsp:1.1.1 \
+  --partition pdcpu --mem-per-task 32G --cpu-per-task 8 \
+  --project neusiri --job "$JOB" JOB=1:1 "$LOG" \
+  --cmd "EXAMPLE_ROOT='$EXAMPLE_ROOT' RECBIR_ROOT='$RECBIR_ROOT' LEGACY_RUN='$LEGACY_RUN' FOUR_RUN='$FOUR_RUN' MODEL_PYTHON='$MODEL_PYTHON' SCORING_PYTHON='$SCORING_PYTHON' SURE_EVAL='$SURE_EVAL' OUTPUT_ROOT='$OUTPUT_ROOT' bash '$EXAMPLE_ROOT/example/score_page.sh' > '$LOG' 2>&1"
 ```
 
-输出目录包含 MCP 日志、预测 WAV、输入清单、运行时身份、模型环境、Harness
-评分 payload、pipeline 描述和 report。使用 `--resume` 可从已校验的
-`infer-contract.json` 继续评分；重新推理时使用新的输出目录。
+Record the job ID and wait for successful completion. The candidate page files
+are `$OUTPUT_ROOT/results.json` and `$OUTPUT_ROOT/frequency_error.json`.
+The first four cases carry a `recbir.legacy_rir_1s.*` protocol ID because
+their page scores use the historical Rec-BIR/FiNS protocol. The last two carry
+the SURE pipeline ID from their report.
 
-## 文件
+## 6. Review the candidate result before publishing
 
-`fixture/provenance.json` 和 `fixture/sha256.json` 记录数据来源、选样和哈希。
-`fixture/cases/` 保存四种通道分支的输入、输出和部分报告。
-`harness-run/` 保存 20 条运行的报告、pipeline 身份和环境信息。
+```bash
+python3 -m json.tool "$OUTPUT_ROOT/results.json" >/dev/null
+python3 -m json.tool "$OUTPUT_ROOT/frequency_error.json" >/dev/null
+python3 "$EXAMPLE_ROOT/example/test_example.py"
+node --check "$EXAMPLE_ROOT/app.js"
+git -C "$EXAMPLE_ROOT" diff --check
+```
 
-四麦 demo 的 60 条选择见仓库根目录的
-`data/four_mic_demo_selection.json`，来源为
-`Rec-BIR/NeuSIRI/data/four_mic_fixed_v2/test/test_manifest.jsonl`。
-选择规则为 10/20/30 dB、每个相邻间距 2 条，共 60 条；四通道模型输出可由
-双通道模型两次推理后合并。
+The checked-in page data combines a fixed-SNR monaural/binaural run with a
+four-microphone run. A fresh six-branch run can differ numerically, so compare
+the candidate scores with the published JSON before replacing it:
 
-网页数据和本目录使用不同的数据集、引擎版本和指标定义，分数分别解释。
+```bash
+python3 "$EXAMPLE_ROOT/scripts/compare_page_results.py" \
+  --published "$EXAMPLE_ROOT/data/results.json" \
+  --candidate "$OUTPUT_ROOT/results.json"
+```
+
+After reviewing the differences, publish the two candidate JSON files
+together:
+
+```bash
+install -m 644 "$OUTPUT_ROOT/results.json" "$EXAMPLE_ROOT/data/results.json"
+install -m 644 "$OUTPUT_ROOT/frequency_error.json" "$EXAMPLE_ROOT/data/frequency_error.json"
+git -C "$EXAMPLE_ROOT" diff --check
+```
+
+The reference arrays and prediction WAVs remain outside the public repository.
+
+## Harness-only fixture
+
+The separate [`harness-run/`](harness-run/README.md) fixture is a small
+20-row MCP contract test. It is useful for Harness CI, but it is not the data
+source for the six browser branches and is not a substitute for this complete
+reproduction flow.

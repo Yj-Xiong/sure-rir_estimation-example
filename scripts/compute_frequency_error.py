@@ -4,17 +4,17 @@
 from __future__ import annotations
 
 import json
-import os
+import argparse
 from pathlib import Path
 
 import numpy as np
 import soundfile as sf
+from scipy.signal import butter, sosfilt
 
 
 ROOT = Path(__file__).resolve().parents[1]
 RESULTS = ROOT / "data/results.json"
 OUTPUT = ROOT / "data/frequency_error.json"
-RAW_RUN = Path(os.environ["SURE_RIR_RAW_RUN"]) if os.environ.get("SURE_RIR_RAW_RUN") else None
 BANDS = ((125, 250), (250, 500), (500, 1000), (1000, 2000), (2000, 4000), (4000, 8000))
 SAMPLE_RATE = 16000
 EPSILON = 1e-12
@@ -28,14 +28,12 @@ def normalize(signal: np.ndarray) -> np.ndarray:
 
 def bandpass(signal: np.ndarray, low: float, high: float) -> np.ndarray:
     nyquist = SAMPLE_RATE / 2.0
-    low = max(20.0, float(low)) / nyquist
-    high = min(nyquist * 0.98, float(high)) / nyquist
-    if not 0.0 < low < high < 1.0 or signal.size < 64:
+    low = max(20.0, float(low))
+    high = min(nyquist * 0.98, float(high))
+    if not 0.0 < low < high < nyquist or signal.size < 64:
         return np.full_like(signal, np.nan, dtype=np.float64)
-    frequencies = np.fft.rfftfreq(signal.size, 1.0 / SAMPLE_RATE)
-    mask = (frequencies >= low * nyquist) & (frequencies < high * nyquist)
-    spectrum = np.fft.rfft(signal)
-    return np.fft.irfft(spectrum * mask, n=signal.size)
+    sections = butter(4, (low, high), btype="bandpass", fs=SAMPLE_RATE, output="sos")
+    return sosfilt(sections, signal)
 
 
 def edc_db(signal: np.ndarray) -> np.ndarray:
@@ -116,24 +114,36 @@ def band_metric_errors(reference: list[float], estimate: list[float], low: float
 
 
 def main() -> None:
-    source = json.loads(RESULTS.read_text(encoding="utf-8"))
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--results", type=Path, default=RESULTS)
+    parser.add_argument("--output", type=Path, default=OUTPUT)
+    parser.add_argument("--legacy-run", type=Path)
+    parser.add_argument("--four-channel-run", type=Path)
+    args = parser.parse_args()
+    if bool(args.legacy_run) != bool(args.four_channel_run):
+        parser.error("both --legacy-run and --four-channel-run are required for native WAV analysis")
+    source = json.loads(args.results.read_text(encoding="utf-8"))
     metric_units = {"rt60": "s", "c50": "dB", "edc": "dB"}
     cases = {}
     for case_id, case in source["cases"].items():
         values = {metric: {str(index): [] for index in range(len(BANDS))} for metric in metric_units}
         raw_manifest = None
-        if RAW_RUN is not None:
-            raw_case = {"rec_rir_single": ("rec_rir", "monaural"),
-                        "neubire_v1_single": ("neubire", "monaural"),
-                        "rec_rir_separate": ("rec_rir", "binaural"),
-                        "neubire_v1_native": ("neubire", "binaural"),
-                        "rec_rir_four_channel": ("rec_rir", "four_channel"),
-                        "neubire_v1_four_channel": ("neubire", "four_channel")}.get(case_id)
-            if raw_case:
-                raw_manifest = {json.loads(line)["sample_id"]: json.loads(line)
-                                for line in (RAW_RUN / raw_case[0] / raw_case[1] / "samples.jsonl").read_text(encoding="utf-8").splitlines()}
+        if args.legacy_run is not None:
+            raw_case = {"rec_rir_single": (args.legacy_run, "rec_rir", "monaural"),
+                        "neubire_v1_single": (args.legacy_run, "neubire", "monaural"),
+                        "rec_rir_separate": (args.legacy_run, "rec_rir", "binaural"),
+                        "neubire_v1_native": (args.legacy_run, "neubire", "binaural"),
+                        "rec_rir_four_channel": (args.four_channel_run, "rec_rir", "four_channel"),
+                        "neubire_v1_four_channel": (args.four_channel_run, "neubire", "four_channel")}.get(case_id)
+            if raw_case is None:
+                raise ValueError(f"unknown case for raw RIR analysis: {case_id}")
+            manifest = raw_case[0] / raw_case[1] / raw_case[2] / "samples.jsonl"
+            raw_manifest = {row["sample_id"]: row for line in manifest.read_text(encoding="utf-8").splitlines()
+                            if line.strip() for row in (json.loads(line),)}
         for sample in case["samples"]:
-            if raw_manifest and sample["sample_id"] in raw_manifest:
+            if raw_manifest is not None:
+                if sample["sample_id"] not in raw_manifest:
+                    raise ValueError(f"missing raw RIR for {case_id}/{sample['sample_id']}")
                 raw = raw_manifest[sample["sample_id"]]
                 ref_audio, _ = sf.read(raw["reference_rir"], always_2d=True, dtype="float64")
                 pred_audio, _ = sf.read(raw["prediction_rir"], always_2d=True, dtype="float64")
@@ -153,7 +163,7 @@ def main() -> None:
         }}
     payload = {
         "schema": "sure.rir.demo_frequency_acoustic_error.v2",
-        "source": "native RIR WAVs from the six direct-estimate branches, normalized per channel before octave-band filtering",
+        "source": "native RIR WAVs from all six branches, normalized per channel before causal Butterworth octave-band filtering",
         "sample_rate_hz": SAMPLE_RATE,
         "metrics": [{"id": "rt60", "label": "RT60 MAE", "unit": "s"},
                     {"id": "c50", "label": "C50 MAE", "unit": "dB"},
@@ -161,8 +171,13 @@ def main() -> None:
         "bands": [{"label": f"{low / 1000:g}-{high / 1000:g} kHz", "low_hz": low, "high_hz": high} for low, high in BANDS],
         "cases": cases,
     }
-    OUTPUT.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
-    print(json.dumps({"output": str(OUTPUT), "cases": len(cases), "bands": len(BANDS)}, indent=2))
+    payload["source"] = (
+        "native RIR WAVs from all six branches, normalized per channel before causal Butterworth octave-band filtering"
+        if args.legacy_run else "downsampled browser traces, normalized per channel before causal Butterworth octave-band filtering"
+    )
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    args.output.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps({"output": str(args.output), "cases": len(cases), "bands": len(BANDS)}, indent=2))
 
 
 if __name__ == "__main__":

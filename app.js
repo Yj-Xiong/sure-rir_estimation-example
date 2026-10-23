@@ -118,7 +118,7 @@ function applyStaticLocale() {
     ".hero-specs div:nth-child(2) small": "固定信噪比与四麦克风数据集",
     ".hero-specs div:nth-child(3) span": "指标",
     ".hero-specs div:nth-child(3) strong": "声学 + 空间",
-    "#coverage-title": "一条评测链路，四种使用路径",
+    "#coverage-title": "一条评测链路，多种使用路径",
     ".coverage .section-line>p": "统一的报告格式用于比较单通道与多通道模型的不同输出路径。",
     ".coverage-intro .mini-label": "评测覆盖范围",
     ".coverage-intro h3": "跨分支评测",

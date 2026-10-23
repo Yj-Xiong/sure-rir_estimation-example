@@ -15,3 +15,4 @@
 .repro-intro{display:block}
 .repro-intro p{max-width:none}
 .repro-links{margin-top:18px}
+.language-bar{border-bottom:1px solid var(--line);background:#edf2ed}.language-bar-inner{width:min(1180px,calc(100% - 44px));min-height:38px;margin:auto;display:flex;align-items:center;justify-content:flex-end}.language-switch{display:inline-flex;align-items:center;margin:0;gap:0;border:1px solid #c9d6cd;border-radius:4px;overflow:hidden;font:11px var(--mono)}.language-switch a{min-width:64px;padding:6px 12px;text-align:center;text-decoration:none;color:#486052}.language-switch a+a{border-left:1px solid #c9d6cd}.language-switch a:hover{background:#dfece2}.language-switch a[aria-current="page"]{background:#416f59;color:#fff;font-weight:600}@media(max-width:650px){.language-bar-inner{width:calc(100% - 30px)}}

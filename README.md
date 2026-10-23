@@ -1,6 +1,7 @@
 # SURE RIR Estimation Example
 
-**[Open the demo](https://yj-xiong.github.io/sure-rir_estimation-example/)** ·
+**[English demo](https://yj-xiong.github.io/sure-rir_estimation-example/?lang=en)** ·
+[中文页面](https://yj-xiong.github.io/sure-rir_estimation-example/?lang=zh) ·
 [Example repository](https://github.com/Yj-Xiong/sure-rir_estimation-example) ·
 [Reproduce all six branches](example/README.md) ·
 [NeuBIRE four-channel details](example/NEUBIRE_REPRODUCTION.md)

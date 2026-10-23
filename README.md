@@ -6,7 +6,7 @@
 [Reproduce all six scenarios](example/README.md) ·
 [NeuBIRE four-channel details](example/NEUBIRE_REPRODUCTION.md)
 
-This example covers SURE's channel-aware RIR evaluation contract:
+This example covers SURE's spatial-aware RIR evaluation contract:
 
 - Rec-RIR monaural inference and NeuBIRE channel-0 projection from a native pair;
 - Rec-RIR and NeuBIRE -> binaural inference, with IACC full/early/late and channel-0-relative spatial metrics;

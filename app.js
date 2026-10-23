@@ -100,7 +100,7 @@ function applyStaticLocale() {
   if (!IS_ZH) return;
 
   document.title = "RIR / SURE 评测示例";
-  document.querySelector('meta[name="description"]').content = "SURE RIR 通道感知评测示例";
+  document.querySelector('meta[name="description"]').content = "SURE RIR 空间感知评测示例";
   const copy = {
     ".wordmark em": "RIR 示例",
     '.header nav a[href="#inspect"]': "结果",
@@ -109,9 +109,9 @@ function applyStaticLocale() {
     '.header nav a[href="#reproduce"]': "复现",
     '.header nav a[href^="https://github.com/Yj-Xiong/sure-rir_estimation-example"]': "仓库 ↗",
     ".preview-badge": "网页预览",
-    ".hero .kicker": "通道感知评测 / 001",
+    ".hero .kicker": "空间感知评测 / 001",
     ".hero h1 span": "结果可追溯。",
-    ".hero .hero-copy": "SURE RIR 估计任务的评测示例。对比单通道、双通道和四通道结果，并查看相同参考 RIR 下的逐通道指标。",
+    ".hero .hero-copy": "SURE RIR 估计任务的评测示例。对比单通道、双通道和四通道结果，并查看相同参考 RIR 下的声学与空间指标。",
     ".hero-specs div:nth-child(1) span": "测试样本",
     ".hero-specs div:nth-child(1) small": "信噪比 × 样本对 × 间距",
     ".hero-specs div:nth-child(2) span": "采样率",

@@ -3,7 +3,7 @@
 **[English demo](https://yj-xiong.github.io/sure-rir_estimation-example/index.html?lang=en)** ·
 [中文页面](https://yj-xiong.github.io/sure-rir_estimation-example/index.html?lang=zh) ·
 [Example repository](https://github.com/Yj-Xiong/sure-rir_estimation-example) ·
-[Reproduce all six branches](example/README.md) ·
+[Reproduce all six scenarios](example/README.md) ·
 [NeuBIRE four-channel details](example/NEUBIRE_REPRODUCTION.md)
 
 This example covers SURE's channel-aware RIR evaluation contract:
@@ -24,12 +24,12 @@ The shared acoustic bundle uses NPM, RT30, RT60, DRR, C50, C80, and EDC before
 optional spatial metrics. Scores are comparable only when the canonical
 metric, channel branch, sample-rate/window policy, and pipeline ID
 match; mono reports must not be mixed with binaural spatial reports. Each
-browser branch contains 60 rows. The monaural and binaural branches use
+model/output scenario contains 60 rows. The four monaural/binaural scenarios use
 `VariableMSpacingFixedSNR` scenes `scene_0000` and `scene_0025` at 10/20/30 dB
-and ten spacings. Four-channel branches use the separate
+and ten spacings. The two four-channel scenarios use the separate
 `four_mic_fixed_v2` selection, with two rows per SNR-spacing pair.
 
-The complete six-branch workflow is in [`example/README.md`](example/README.md).
+The complete six-scenario workflow is in [`example/README.md`](example/README.md).
 The focused NeuBIRE four-channel details are in
 [`example/NEUBIRE_REPRODUCTION.md`](example/NEUBIRE_REPRODUCTION.md). The
 separate 20-row Harness fixture is retained under
@@ -60,7 +60,7 @@ Repository layout follows the SURE example convention:
 index.html / styles.css / app.js   GitHub Pages demo
 data/results.json                   actual six-case report summary
 example/fixture/                    original data, predictions and provenance
-example/README.md                   complete six-branch reproduction
+example/README.md                   complete six-scenario reproduction
 example/NEUBIRE_REPRODUCTION.md     NeuBIRE four-channel inference details
 example/submit_*.sh                cluster inference and scoring entry points
 example/expected.json               pipeline identity and metric expectations

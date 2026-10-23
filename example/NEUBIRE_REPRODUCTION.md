@@ -1,8 +1,8 @@
 # NeuBIRE RIR reproduction
 
 This guide describes the NeuBIRE direct-RIR inference used by the four-channel
-branch in the [demo](https://yj-xiong.github.io/sure-rir_estimation-example/).
-The complete six-branch page reproduction, including monaural and binaural
+scenario in the [demo](https://yj-xiong.github.io/sure-rir_estimation-example/).
+The complete six-scenario page reproduction, including monaural and binaural
 Rec-RIR/NeuBIRE runs, is in [`README.md`](README.md).
 
 The checkpoint, NeuBIRE workspace, and source test audio are not distributed
@@ -171,8 +171,8 @@ multichannel reports, ITD, ILD, IPD, and DOA include one pair for each
 
 The complete page assembly is described in [`README.md`](README.md): build the
 fresh legacy report, build the fresh four-channel report, then run
-`scripts/assemble_demo_results.py` to require all six branches and 60 rows per
-branch before publishing `data/results.json`.
+`scripts/assemble_demo_results.py` to require all six scenarios and 60 rows per
+scenario before publishing `data/results.json`.
 
 ## 6. Compare with the browser data
 

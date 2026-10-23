@@ -1,10 +1,10 @@
 # Reproduce the complete RIR example
 
-This is the end-to-end reproduction entry point for the six branches shown on
+This is the end-to-end reproduction entry point for the six model/output scenarios shown on
 the [GitHub Pages demo](https://yj-xiong.github.io/sure-rir_estimation-example/).
-It regenerates 60 samples for each of these branches:
+It regenerates 60 samples for each scenario:
 
-| Branch | Inference | Reported metrics |
+| Scenario | Inference | Reported metrics |
 | --- | --- | --- |
 | Rec-RIR monaural | channel 0 | normalized waveform MAE, NPM, RT60, DRR, C50, EDC |
 | NeuBIRE monaural | score channel 0 from the native two-channel estimate | same acoustic metrics |
@@ -13,7 +13,7 @@ It regenerates 60 samples for each of these branches:
 | Rec-RIR four-channel | four paths | acoustic metrics + channel-0-relative ITD, ILD, IPD, DOA |
 | NeuBIRE four-channel | two two-channel passes | acoustic metrics + channel-0-relative ITD, ILD, IPD, DOA |
 
-The first four branches use the fixed `VariableMSpacingFixedSNR` selection;
+The four monaural/binaural scenarios use the fixed `VariableMSpacingFixedSNR` selection;
 the last two use the four-microphone selection. Both selections are generated
 from manifests rather than copied from `data/results.json`.
 
@@ -70,7 +70,7 @@ python3 "$EXAMPLE_ROOT/scripts/select_four_mic_demo.py" \
 ```
 
 Both commands must report 60 selected rows. The generated legacy JSONL must
-have the same sample IDs as the four legacy branches in the final report.
+have the same sample IDs as the four legacy scenarios in the final report.
 
 ## 3. Run legacy monaural and binaural inference
 
@@ -99,12 +99,12 @@ vc submit --nopassenv --enable-rdma 1 \
 
 The output must contain four `samples.jsonl` files with 60 rows each. The
 NeuBIRE monaural uses channel 0 from the same native pair as its binaural
-branch; the Rec-RIR binaural path runs the one-channel model independently on
+scenario; the Rec-RIR binaural path runs the one-channel model independently on
 channels 0 and 1. This follows the samples currently published on the page.
 
 ## 4. Run four-channel inference
 
-Use the existing direct-RIR runner for the two current four-channel branches:
+Use the existing direct-RIR runner for the two four-channel scenarios:
 
 ```bash
 export FOUR_RUN="$RECBIR_ROOT/NeuSIRI/data/rir_demo_runs/four_channel_60"
@@ -119,15 +119,15 @@ vc submit --nopassenv --enable-rdma 1 \
 ```
 
 This run writes the six model/channel directories. Use only the two
-`four_channel` directories for the page's final four-channel branches. The
+`four_channel` directories for the page's final four-channel scenarios. The
 other four outputs are useful for checking the shared inference implementation.
 
 ## 5. Score, assemble, and verify on the CPU queue
 
 The legacy report uses the one-second Rec-BIR/FiNS acoustic and spatial
 protocol. The four-channel report uses the pinned SURE RIR bundle. The scoring
-script writes into a separate output directory and checks all six branch IDs,
-60 samples per branch, metric means, waveform shapes, and native-WAV frequency
+script writes into a separate output directory and checks all six scenario IDs,
+60 samples per scenario, metric means, waveform shapes, and native-WAV frequency
 analysis before it exits successfully.
 Legacy scoring first matches each estimate channel's peak amplitude to
 its reference channel, as in the published protocol. Reference RIRs remain
@@ -162,7 +162,7 @@ git -C "$EXAMPLE_ROOT" diff --check
 ```
 
 The checked-in page data combines a fixed-SNR monaural/binaural run with a
-four-microphone run. A fresh six-branch run can differ numerically, so compare
+four-microphone run. A fresh six-scenario run can differ numerically, so compare
 the candidate scores with the published JSON before replacing it:
 
 ```bash
@@ -186,5 +186,5 @@ The reference arrays and prediction WAVs remain outside the public repository.
 
 The separate [`harness-run/`](harness-run/README.md) fixture is a small
 20-row MCP contract test. It is useful for Harness CI, but it is not the data
-source for the six browser branches and is not a substitute for this complete
+source for the six browser scenarios and is not a substitute for this complete
 reproduction flow.

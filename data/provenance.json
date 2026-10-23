@@ -75,7 +75,7 @@
   "published_artifact": {
     "path": "data/results.json",
     "contains": "60 samples per each of six comparison cases, downsampled normalized traces, scores, and provenance",
-    "result_scope": "Monaural and binaural branches were rerun on the 60-row fixed-SNR selection; four-channel branches use the 60-row four-microphone checkpoint run. All six branches were rescored and assembled together.",
+    "result_scope": "Four monaural/binaural scenarios were rerun on the 60-row fixed-SNR selection; two four-channel scenarios use the 60-row four-microphone checkpoint run. All six scenarios were rescored and assembled together.",
     "evaluation_engine_commit": "39b41462a5d5f9b82f6e1d0e00d531843168ff6e",
     "raw_model_outputs": "not committed; kept in the local analysis output root"
   }

@@ -220,7 +220,7 @@ function applyStaticLocale() {
 }
 
 applyStaticLocale();
-const dataScript = document.querySelector('script[src$="app.js"]');
+const dataScript = document.querySelector("script[data-rir-app]");
 const dataUrl = dataScript ? new URL("data/results.json", dataScript.src).href : "data/results.json";
 const frequencyUrl = dataScript ? new URL("data/frequency_error.json", dataScript.src).href : "data/frequency_error.json";
 const group = () => GROUPS[selectedGroup];

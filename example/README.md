@@ -1,5 +1,11 @@
 # Rec-RIR 的 SURE Harness 复现
 
+本页复现 20 条 Rec-RIR Harness fixture。浏览器中的 NeuBIRE 直接 RIR
+推理和 60 条评分步骤见[NeuBIRE 复现教程](NEUBIRE_REPRODUCTION.md)。
+Rec-RIR 论文《Monaural Blind Room Impulse Response Identification via DNN-based
+Reverberant Speech Reconstruction in STFT Domain》见[arXiv](https://arxiv.org/abs/2509.15628)，
+官方实现见[代码仓库](https://github.com/Audio-WestlakeU/Rec-RIR)。
+
 本目录提供 20 条 Rec-RIR 单通道 RIR 估计链路：
 
 ```text

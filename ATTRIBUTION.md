@@ -3,10 +3,10 @@
 ## Evaluation contract
 
 The RIR task, JSONL contract, route IDs, and scoring nodes are provided by
-[SURE](https://github.com/PigeonDan1/sure) and its
-[sure-evaluation](https://github.com/PigeonDan1/sure-evaluation) engine.
-The live evaluation path remains in `sure-harness`; this repository contains
-the visual example and reproduction pointers.
+[SURE](https://github.com/Yj-Xiong/sure) and its
+[sure-evaluation](https://github.com/Yj-Xiong/sure-evaluation) engine.
+This repository contains the browser example, fixtures, and reproduction
+instructions.
 
 ## Data
 
@@ -20,6 +20,10 @@ paths are not redistributed; file hashes are recorded in
 
 ## Models
 
-Rec-RIR and NeuBIRE-MINT are referenced as evaluation model adapters. Their
-weights and runtime licenses are governed by their respective upstream model
-repositories and are not included here.
+[Rec-RIR](https://github.com/Audio-WestlakeU/Rec-RIR) is an upstream model
+baseline; see its [paper](https://arxiv.org/abs/2509.15628). NeuBIRE inference
+uses the implementation and checkpoint recorded in
+[`data/provenance.json`](data/provenance.json). Model weights and private
+workspace files are not included in this example repository. See the
+[NeuBIRE reproduction guide](example/NEUBIRE_REPRODUCTION.md) for the exact
+workspace paths and run steps.

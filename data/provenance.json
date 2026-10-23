@@ -1,6 +1,14 @@
 {
   "schema": "sure.rir.demo_data_provenance.v1",
   "purpose": "Provenance for data/results.json browser preview",
+  "sources": {
+    "example_repository": "https://github.com/Yj-Xiong/sure-rir_estimation-example",
+    "rec_rir_code": "https://github.com/Audio-WestlakeU/Rec-RIR",
+    "rec_rir_paper": "https://arxiv.org/abs/2509.15628",
+    "sure_harness": "https://github.com/Yj-Xiong/sure",
+    "sure_evaluation": "https://github.com/Yj-Xiong/sure-evaluation",
+    "neubire_runner": "Rec-BIR/scripts/run_demo_recrir_neubire_three_cases.py"
+  },
   "dataset": {
     "name": "VariableMSpacingFixedSNR_30scenes_260928",
     "manifest": "data/variableMspacingFixedSNR_30scenes_260928/test_manifest.jsonl",
@@ -64,6 +72,7 @@
   "published_artifact": {
     "path": "data/results.json",
     "contains": "60 samples per each of six comparison cases, downsampled normalized traces, scores, and provenance",
+    "result_scope": "Monaural and binaural cases are restored from their earlier demo results; the four-channel cases use the current four-microphone NeuBIRE checkpoint run.",
     "raw_model_outputs": "not committed; kept in the local analysis output root"
   }
 }

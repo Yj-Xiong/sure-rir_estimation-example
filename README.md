@@ -6,6 +6,10 @@
 [Reproduce all six scenarios](example/README.md) ·
 [NeuBIRE four-channel details](example/NEUBIRE_REPRODUCTION.md)
 
+Scan to open the [Chinese demo](https://yj-xiong.github.io/sure-rir_estimation-example/index.html?lang=zh):
+
+<a href="assets/demo-zh-qr.png"><img src="assets/demo-zh-qr.png" alt="QR code for the Chinese RIR demo" width="220"></a>
+
 This example covers SURE's spatial-aware RIR evaluation contract:
 
 - Rec-RIR monaural inference and NeuBIRE channel-0 projection from a native pair;

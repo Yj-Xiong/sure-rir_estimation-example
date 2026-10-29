@@ -21,7 +21,7 @@
       <ol class="repro-steps repro-summary-steps">
         <li><div class="repro-step-head"><h3>Prepare sources and selections</h3><span>60 legacy + 60 four-microphone rows</span></div><p>Use the pinned evaluation engine, existing Rec-BIR model workspace and checkpoints, and both test manifests. Prepare dependencies in a CPU allocation; the exact prerequisites are in the <a href="https://github.com/Yj-Xiong/sure-rir_estimation-example/blob/main/example/README.md">reproduction guide</a>.</p><pre>git clone https://github.com/Yj-Xiong/sure-rir_estimation-example.git
 git clone https://github.com/Yj-Xiong/sure-evaluation.git
-git -C sure-evaluation checkout 39b4146
+git -C sure-evaluation checkout ab5598a6f621fbcc2fa222926e9f63674c561d48
 export MODEL_PYTHON="/absolute/path/to/model-python-3.10"
 "$MODEL_PYTHON" -m venv sure-evaluation/.venv
 sure-evaluation/.venv/bin/python -m pip install --upgrade pip setuptools wheel

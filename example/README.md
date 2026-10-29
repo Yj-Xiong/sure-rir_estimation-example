@@ -26,7 +26,7 @@ example repository after validation.
 ```bash
 git clone https://github.com/Yj-Xiong/sure-rir_estimation-example.git
 git clone https://github.com/Yj-Xiong/sure-evaluation.git sure-evaluation
-git -C sure-evaluation checkout 39b4146
+git -C sure-evaluation checkout ab5598a6f621fbcc2fa222926e9f63674c561d48
 export MODEL_PYTHON="/absolute/path/to/python-with-recbir-dependencies"
 "$MODEL_PYTHON" -m venv sure-evaluation/.venv
 sure-evaluation/.venv/bin/python -m pip install --upgrade pip setuptools wheel
@@ -150,13 +150,11 @@ Their `pipeline_metric_map` covers every applicable metric in the submitted RIR
 bundle; normalized waveform MAE remains an additional display metric. The last
 two cases carry the SURE pipeline ID from their report.
 
-The checked-in page JSON uses evaluator commit `39b4146` for exact historical
-reproduction. The reviewed evaluator is merged at `ab5598a`; use that commit
-for a fresh rerun, compare the resulting scores, and update the provenance
-commit only together with the regenerated JSON. The v1 ITD and DOA metrics use
-a fixed +/-1 ms lag search. Array delays outside that window are not a valid
-interpretation of this protocol and need a separately versioned geometry-based
-pipeline.
+The checked-in page JSON was regenerated with reviewed evaluator commit
+`ab5598a` and passed the six-scenario reproduction checks. The v1 ITD and DOA
+metrics use a fixed +/-1 ms lag search. Array delays outside that window are not
+a valid interpretation of this protocol and need a separately versioned
+geometry-based pipeline.
 
 ## 6. Review the candidate result before publishing
 

@@ -125,7 +125,7 @@ runtime; the task documents atomic single-metric routes as well as bundles.
 ```bash
 SURE_EVAL_ROOT="$PWD/sure-evaluation"
 git clone https://github.com/PigeonDan1/sure-evaluation.git "$SURE_EVAL_ROOT"
-git -C "$SURE_EVAL_ROOT" checkout 39b4146
+git -C "$SURE_EVAL_ROOT" checkout ab5598a6f621fbcc2fa222926e9f63674c561d48
 python3 -m venv "$SURE_EVAL_ROOT/.venv-rir"
 "$SURE_EVAL_ROOT/.venv-rir/bin/python" -m pip install -e "${SURE_EVAL_ROOT}[audio]"
 SURE_EVAL="$SURE_EVAL_ROOT/.venv-rir/bin/sure-eval"
@@ -139,12 +139,11 @@ bundle adds the three IACC windows and channel-0-relative ITD, ILD, IPD, and
 DOA. The four-channel bundle adds the same channel-0-relative spatial
 metrics, without IACC because IACC requires exactly two channels.
 
-The checked-in browser results use evaluator commit `39b4146`; the reviewed
-evaluator is merged at `ab5598a`. A fresh run with the merged evaluator must be
-rescored and provenance-updated together. The v1 ITD and DOA implementation
-uses a fixed +/-1 ms lag search. Delays outside that window are out of scope
-for this protocol; use a separately versioned geometry-based evaluator for
-larger arrays or delays.
+The checked-in browser results were regenerated with reviewed evaluator commit
+`ab5598a` and passed the six-scenario reproduction checks. The v1 ITD and DOA
+implementation uses a fixed +/-1 ms lag search. Delays outside that window are
+out of scope for this protocol; use a separately versioned geometry-based
+evaluator for larger arrays or delays.
 
 ```bash
 BASE_METRICS="rir_npm,rt30_mae,rt60_mae,rir_drr_mae,rir_c50_mae,rir_c80_mae,rir_edc_mae"

@@ -61,6 +61,7 @@
     "acoustic": "monaural and binaural retain historical Rec-BIR/FiNS 1 s scores, with RT30 and C80 supplemented by the pinned sure-evaluation RIR pipeline; four-channel uses the full pinned SURE RIR bundle",
     "supplemental_spatial": "binaural DOA is scored by the pinned sure-evaluation pipeline on the same one-second peak-calibrated RIR pairs",
     "iacc": "full, early (ch0 direct peak through 80 ms), and late (after 80 ms) windows using +/-1 ms normalized cross-correlation",
+    "spatial_protocol_boundary": "v1 ITD and DOA use a fixed +/-1 ms lag search; array delays outside that window are out of scope and require a separately versioned geometry-based protocol",
     "spatial_phase_level": "IPD/ILD are computed on the two-channel 1 s RIR FFT ratio relative to channel 0; IPD is circular phase error in radians and ILD is magnitude-ratio error in dB",
     "waveform_display": "Rec-BIR/scripts/waveform_alignment.py:shared_ch0_peak_crop, 2.5 ms pre-roll, then independent peak normalization per trace",
     "waveform_mae": "mean absolute error after the same crop and peak normalization",
@@ -78,6 +79,7 @@
     "contains": "60 samples per each of six comparison cases, downsampled normalized traces, scores, and provenance",
     "result_scope": "Four monaural/binaural scenarios were rerun on the 60-row fixed-SNR selection; two four-channel scenarios use the 60-row four-microphone checkpoint run. All six scenarios were rescored and assembled together.",
     "evaluation_engine_commit": "39b41462a5d5f9b82f6e1d0e00d531843168ff6e",
+    "reviewed_evaluation_engine_commit": "ab5598a6f621fbcc2fa222926e9f63674c561d48",
     "raw_model_outputs": "not committed; kept in the local analysis output root"
   }
 }

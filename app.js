@@ -152,7 +152,7 @@ function applyStaticLocale() {
     ".rule-grid article:nth-child(1) h3": "基础 RIR 质量",
     ".rule-grid article:nth-child(1) p": "先计算每个通道分支的 NPM、RT30、RT60、DRR、C50、C80 和 EDC，再添加空间指标。",
     ".rule-grid article:nth-child(2) h3": "空间指标汇总",
-    ".rule-grid article:nth-child(2) p": "IACC 仅用于双通道，分别计算全段、早期和晚期窗口。ITD、ILD、IPD 和 DOA 逐一比较 chN 与 ch0，再对通道对误差取平均。",
+    ".rule-grid article:nth-child(2) p": "IACC 仅用于双通道，分别计算全段、早期和晚期窗口。ITD、ILD、IPD 和 DOA 逐一比较 chN 与 ch0，再对通道对误差取平均。v1 的 ITD/DOA 搜索窗为 +/-1 ms；更大的阵列延迟需要单独的几何协议。",
     ".rule-grid article:nth-child(3) h3": "数据来源",
     ".rule-grid article:nth-child(3) p": "参考 RIR 不进入模型输入。报告保留评测链路、节点 ID 和逐通道对结果。",
     "#reproduce .section-line h2": "复现页面全部结果",

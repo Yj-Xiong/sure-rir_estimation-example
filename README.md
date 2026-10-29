@@ -51,6 +51,10 @@ result cases. Model checkpoints and private paths stay outside the repository;
 the browser data contains only bounded waveform samples and scores.
 The exact source dataset, sample selection, checkpoints, preprocessing, and
 scoring protocol are recorded in [`data/provenance.json`](data/provenance.json).
+The checked-in browser scores were produced with evaluator commit `39b4146`.
+The reviewed evaluator is now merged at `ab5598a`; rerun the scoring workflow
+before replacing the published JSON so the new evaluator identity and scores are
+recorded together.
 Rec-RIR is described in “Monaural Blind Room Impulse Response Identification
 via DNN-based Reverberant Speech Reconstruction in STFT Domain”
 ([paper](https://arxiv.org/abs/2509.15628)) and released at

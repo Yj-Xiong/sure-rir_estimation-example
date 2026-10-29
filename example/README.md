@@ -150,6 +150,14 @@ Their `pipeline_metric_map` covers every applicable metric in the submitted RIR
 bundle; normalized waveform MAE remains an additional display metric. The last
 two cases carry the SURE pipeline ID from their report.
 
+The checked-in page JSON uses evaluator commit `39b4146` for exact historical
+reproduction. The reviewed evaluator is merged at `ab5598a`; use that commit
+for a fresh rerun, compare the resulting scores, and update the provenance
+commit only together with the regenerated JSON. The v1 ITD and DOA metrics use
+a fixed +/-1 ms lag search. Array delays outside that window are not a valid
+interpretation of this protocol and need a separately versioned geometry-based
+pipeline.
+
 ## 6. Review the candidate result before publishing
 
 ```bash

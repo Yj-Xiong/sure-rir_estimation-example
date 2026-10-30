@@ -22,3 +22,20 @@ PYTHONPATH=src python -m pytest -q tests/test_rir_task.py
 
 测试 `test_rir_minimal_examples_cover_every_registered_metric` 会生成短时
 合成 RIR，执行三类样例并断言指标集合覆盖全部注册指标。
+
+## Reproduce the new ISO routes
+
+After installing the ISO metric branch of `sure-evaluation`, run the same
+CLI contract against generated 1/2/4-channel fixtures:
+
+```bash
+python3 example/minimal/reproduce_iso3382.py \
+  --sure-eval "$PWD/sure-evaluation/.venv/bin/sure-eval"
+```
+
+The script executes `metric describe`, `metric run`, and report validation for
+each channel count. It checks EDT, broadband EDT, EDT/C80/D50/Ts JND, the base
+RIR metrics, and the applicable spatial metrics. Each JND result must contain
+its own `within_one_jnd_percent`; IACC is only requested for the two-channel
+case. Generated fixtures and reports remain under `.sure-rir-iso3382-minimal/`
+and are not part of the repository.

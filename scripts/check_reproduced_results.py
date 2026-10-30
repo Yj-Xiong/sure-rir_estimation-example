@@ -18,9 +18,10 @@ CASE_CHANNELS = {
     "neubire_v1_four_channel": 4,
 }
 CHANNEL_LAYOUTS = {1: "monaural", 2: "binaural", 4: "four_channel"}
-COVERAGE = json.loads(
+COVERAGE_FILE = json.loads(
     (Path(__file__).resolve().parent.parent / "example/minimal/pipeline_coverage.json").read_text(encoding="utf-8")
-)["samples"]
+)
+COVERAGE = COVERAGE_FILE.get("page_samples", COVERAGE_FILE["samples"])
 
 
 def check_results(results: dict, legacy_ids: list[str], four_ids: list[str]) -> None:

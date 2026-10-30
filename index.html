@@ -35,7 +35,7 @@ python3 "$EXAMPLE_ROOT/scripts/select_four_mic_demo.py" --manifest "$RECBIR_ROOT
 bash "$EXAMPLE_ROOT/example/submit_legacy.sh"</pre></li>
         <li><div class="repro-step-head"><h3>Run the two four-channel scenarios</h3><span>Rec-RIR and NeuBIRE · 4090 queue</span></div><p>Rec-RIR runs each channel separately. NeuBIRE runs two two-channel passes. Both combine four output paths using one shared crop anchor.</p><pre>export FOUR_RUN="$RECBIR_ROOT/NeuSIRI/data/rir_demo_runs/four_channel_60"
 bash "$EXAMPLE_ROOT/example/submit_four_channel.sh"</pre></li>
-        <li><div class="repro-step-head"><h3>Score and assemble all six scenarios</h3><span>360 model results · CPU queue</span></div><p>The four monaural/binaural scenarios retain their one-second Rec-BIR/FiNS scores and add RT30, C80, EDT, broadband EDT, metric-level EDT/C80/D50/Ts JND, and binaural DOA from the pinned SURE pipeline. The two four-channel scenarios use the full SURE RIR bundle. Each JND metric reports its own within-one-JND percentage; there is no combined cross-metric pass rate. The CPU job assembles the candidate JSON and computes frequency-band errors from full RIR WAVs.</p><pre>export SCORING_PYTHON="/absolute/path/to/scoring-python"
+        <li><div class="repro-step-head"><h3>Score and assemble all six scenarios</h3><span>360 model results · CPU queue</span></div><p>The four monaural/binaural scenarios retain their one-second Rec-BIR/FiNS scores and add RT30, C80, and binaural DOA from the pinned SURE pipeline. The two four-channel scenarios use the full SURE RIR bundle. The CPU job assembles the historical browser JSON and computes frequency-band errors from full RIR WAVs.</p><pre>export SCORING_PYTHON="/absolute/path/to/scoring-python"
 export SURE_EVAL="$PWD/sure-evaluation/.venv/bin/sure-eval"
 export OUTPUT_ROOT="$RECBIR_ROOT/NeuSIRI/data/rir_demo_runs/page_report_60"
 bash "$EXAMPLE_ROOT/example/submit_page_scoring.sh"</pre></li>
@@ -47,6 +47,8 @@ install -m 644 "$OUTPUT_ROOT/results.json" "$EXAMPLE_ROOT/data/results.json"
 install -m 644 "$OUTPUT_ROOT/frequency_error.json" "$EXAMPLE_ROOT/data/frequency_error.json"
 node --check "$EXAMPLE_ROOT/app.js"
 git -C "$EXAMPLE_ROOT" diff --check</pre></li>
+        <li><div class="repro-step-head"><h3>Reproduce ISO EDT and JND</h3><span>1 / 2 / 4 channels · metric-level pass rates</span></div><p>The minimal fixture runs the new octave-band EDT, broadband EDT, and EDT/C80/D50/Ts JND routes through the same describe, run, report contract. Each JND metric reports its own within-one-JND percentage; invalid decay fits fail explicitly.</p><pre>python3 "$EXAMPLE_ROOT/example/minimal/reproduce_iso3382.py" \
+  --sure-eval "$SURE_EVAL"</pre></li>
       </ol>
     </section>
   </main><footer><span>SURE / RIR evaluation example</span><a href="https://github.com/Yj-Xiong/sure-rir_estimation-example/blob/main/example/NEUBIRE_REPRODUCTION.md">NeuBIRE reproduction ↗</a><a href="https://github.com/Audio-WestlakeU/Rec-RIR">Rec-RIR source ↗</a><a href="https://github.com/Yj-Xiong/sure-rir_estimation-example">example repository ↗</a><a href="https://github.com/Yj-Xiong/sure">SURE Harness ↗</a></footer>

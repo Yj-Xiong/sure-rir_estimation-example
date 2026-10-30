@@ -125,11 +125,12 @@ other four outputs are useful for checking the shared inference implementation.
 ## 5. Score, assemble, and verify on the CPU queue
 
 The legacy report retains the one-second Rec-BIR/FiNS acoustic and spatial
-scores, then adds RT30, C80, EDT, broadband EDT, EDT/C80/D50/Ts JND, and
-binaural DOA from the pinned SURE RIR pipeline on the same peak-calibrated
-one-second RIRs. The four-channel report uses the full pinned SURE RIR bundle.
-Each JND metric reports its own within-one-JND percentage; there is no combined
-cross-metric pass rate. The scoring
+scores, then adds RT30, C80, and binaural DOA from the pinned SURE RIR pipeline
+on the same peak-calibrated one-second RIRs. The four-channel report uses the
+full pinned SURE RIR bundle. The browser JSON remains a historical six-scenario
+artifact; the new ISO routes are reproduced by the dedicated minimal workflow
+below so invalid decay samples are reported explicitly instead of being hidden.
+The scoring
 script writes into a separate output directory and checks all six scenario IDs,
 60 samples per scenario, metric means, waveform shapes, and native-WAV frequency
 analysis before it exits successfully.
@@ -188,6 +189,22 @@ git -C "$EXAMPLE_ROOT" diff --check
 ```
 
 The reference arrays and prediction WAVs remain outside the public repository.
+
+## 7. Reproduce ISO 3382 EDT and JND routes
+
+The merge-check fixture runs the new routes end to end on mono, binaural, and
+four-channel RIRs. It executes `metric describe`, `metric run`, and report
+validation, and checks the independent within-one-JND percentage for EDT, C80,
+D50, and Ts:
+
+```bash
+python3 "$EXAMPLE_ROOT/example/minimal/reproduce_iso3382.py" \
+  --sure-eval "$SURE_EVAL"
+```
+
+The evaluator fails explicitly when a channel has no valid decay fit. The
+leaderboard analysis may instead report that metric as `valid/total`; those are
+different aggregation layers and should not be silently mixed.
 
 ## Harness-only fixture
 

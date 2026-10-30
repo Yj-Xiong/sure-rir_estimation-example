@@ -53,18 +53,18 @@
     },
     {
       "path": "example/README.md",
-      "sha256": "abe053b13ae3a33604615f591903374a599e80b7aa36ff387aad9b48dbd74900",
-      "bytes": 10247
+      "sha256": "1c057f72c76bd822c52c94e1fd822d5338edc627d2d6ea5d519224ee41c8412e",
+      "bytes": 10924
     },
     {
       "path": "example/minimal/README.md",
-      "sha256": "e7553e8b46f369e45daeaafb8897fa7a4678d870117da282454c6f6ef4a8e5fe",
-      "bytes": 1088
+      "sha256": "f3201079ba867d1e41ea82bd88e5d97a416ad8148b1d0892cfc5ba51ff5f8d9e",
+      "bytes": 1797
     },
     {
       "path": "example/minimal/pipeline_coverage.json",
-      "sha256": "71556576c75df45fec04ad32fb300ce4019b2a82e0a47057cdda95bea664d998",
-      "bytes": 1461
+      "sha256": "133846ed2fedf3574f762a22eac8d23305eaec2fb21382a3491cf79bb6f99caf",
+      "bytes": 2051
     },
     {
       "path": "example/adapter/config.toml",
@@ -1103,8 +1103,8 @@
     },
     {
       "path": "index.html",
-      "sha256": "9d587e0b8d7de2de024386b3055a66dadc4baf24b008ff30fd7b2b3fcd4438e3",
-      "bytes": 13269
+      "sha256": "e477f4b89818a80d43942d282ac86027b5e7f38778501bb0ec7159e188158727",
+      "bytes": 13611
     },
     {
       "path": "styles.css",

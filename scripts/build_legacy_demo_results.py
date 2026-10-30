@@ -35,17 +35,13 @@ BASE_METRICS = (
     "rir_l1_mae", "rir_npm", "rt30_mae", "rt60_1s_mae", "drr_1s_mae",
     "c50_1s_mae", "rir_c80_mae", "edc_1s_mae",
 )
-ISO_METRICS = (
-    "rir_edt_m_mae", "rir_edt_broadband_mae", "rir_edt_jnd_mae",
-    "rir_c80_jnd_mae", "rir_d50_jnd_mae", "rir_ts_jnd_mae",
-)
 SPATIAL_METRICS = (
     "iacc_full_1s_mae", "iacc_early_1s_mae", "iacc_late_1s_mae",
     "itd_1s_mae", "ild_1s_mae", "ipd_1s_mae", "rir_doa_mae",
 )
 SUPPLEMENTAL_METRICS = {
-    "monaural": ("rt30_mae", "rir_c80_mae", *ISO_METRICS),
-    "binaural": ("rt30_mae", "rir_c80_mae", "rir_doa_mae", *ISO_METRICS),
+    "monaural": ("rt30_mae", "rir_c80_mae"),
+    "binaural": ("rt30_mae", "rir_c80_mae", "rir_doa_mae"),
 }
 PIPELINE_METRIC_NAMES = {
     "rir_npm": "rir_npm",
@@ -62,12 +58,6 @@ PIPELINE_METRIC_NAMES = {
     "ild_1s_mae": "rir_ild_mae",
     "ipd_1s_mae": "rir_ipd_mae",
     "rir_doa_mae": "rir_doa_mae",
-    "rir_edt_m_mae": "rir_edt_m_mae",
-    "rir_edt_broadband_mae": "rir_edt_broadband_mae",
-    "rir_edt_jnd_mae": "rir_edt_jnd_mae",
-    "rir_c80_jnd_mae": "rir_c80_jnd_mae",
-    "rir_d50_jnd_mae": "rir_d50_jnd_mae",
-    "rir_ts_jnd_mae": "rir_ts_jnd_mae",
 }
 BASE_PROTOCOL = "recbir.legacy_rir_1s.acoustic.v1"
 SPATIAL_PROTOCOL = "recbir.legacy_rir_1s.binaural.v1"
@@ -259,7 +249,7 @@ def main() -> None:
             }
             add_supplemental_results(sample, supplemental, channels)
             rendered.append(sample)
-        metric_names = BASE_METRICS + ISO_METRICS + (SPATIAL_METRICS if mode == "binaural" else ())
+        metric_names = BASE_METRICS + (SPATIAL_METRICS if mode == "binaural" else ())
         protocol_id = SPATIAL_PROTOCOL if mode == "binaural" else BASE_PROTOCOL
         cases[case_id] = {
             "status": "direct_rir_protocol_report",

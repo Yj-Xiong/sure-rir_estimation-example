@@ -14,12 +14,12 @@ mkdir -p "$OUTPUT_ROOT"
 "$SCORING_PYTHON" "$EXAMPLE_ROOT/scripts/prepare_legacy_supplemental.py" \
     --run "$LEGACY_RUN" --output "$OUTPUT_ROOT/legacy_sure"
 
-base=rir_npm,rt30_mae,rt60_mae,rir_drr_mae,rir_c50_mae,rir_c80_mae,rir_edc_mae,rir_edt_m_mae,rir_edt_broadband_mae,rir_edt_jnd_mae,rir_c80_jnd_mae,rir_d50_jnd_mae,rir_ts_jnd_mae
+base=rir_npm,rt30_mae,rt60_mae,rir_drr_mae,rir_c50_mae,rir_c80_mae,rir_edc_mae
 multi="$base,rir_itd_mae,rir_ild_mae,rir_ipd_mae,rir_doa_mae"
 for model in rec_rir neubire; do
     for mode in monaural binaural; do
         case_dir="$OUTPUT_ROOT/legacy_sure/$model/$mode"
-        metrics=rt30_mae,rir_c80_mae,rir_edt_m_mae,rir_edt_broadband_mae,rir_edt_jnd_mae,rir_c80_jnd_mae,rir_d50_jnd_mae,rir_ts_jnd_mae
+        metrics=rt30_mae,rir_c80_mae
         if [[ "$mode" == binaural ]]; then
             metrics="$metrics,rir_doa_mae"
         fi

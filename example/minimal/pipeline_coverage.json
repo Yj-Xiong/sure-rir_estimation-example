@@ -3,16 +3,16 @@
   "samples": {
     "monaural": {
       "channel_count": 1,
-      "metrics": ["rir_npm", "rt30_mae", "rt60_mae", "rir_drr_mae", "rir_c50_mae", "rir_c80_mae", "rir_edc_mae"]
+      "metrics": ["rir_npm", "rt30_mae", "rt60_mae", "rir_drr_mae", "rir_c50_mae", "rir_c80_mae", "rir_edc_mae", "rir_edt_m_mae", "rir_edt_broadband_mae", "rir_edt_jnd_mae", "rir_c80_jnd_mae", "rir_d50_jnd_mae", "rir_ts_jnd_mae"]
     },
     "binaural": {
       "channel_count": 2,
-      "metrics": ["rir_npm", "rt30_mae", "rt60_mae", "rir_drr_mae", "rir_c50_mae", "rir_c80_mae", "rir_edc_mae", "rir_iacc_full_mae", "rir_iacc_early_mae", "rir_iacc_late_mae", "rir_itd_mae", "rir_ild_mae", "rir_ipd_mae", "rir_doa_mae"]
+      "metrics": ["rir_npm", "rt30_mae", "rt60_mae", "rir_drr_mae", "rir_c50_mae", "rir_c80_mae", "rir_edc_mae", "rir_edt_m_mae", "rir_edt_broadband_mae", "rir_edt_jnd_mae", "rir_c80_jnd_mae", "rir_d50_jnd_mae", "rir_ts_jnd_mae", "rir_iacc_full_mae", "rir_iacc_early_mae", "rir_iacc_late_mae", "rir_itd_mae", "rir_ild_mae", "rir_ipd_mae", "rir_doa_mae"]
     },
     "four_channel": {
       "channel_count": 4,
-      "metrics": ["rir_npm", "rt30_mae", "rt60_mae", "rir_drr_mae", "rir_c50_mae", "rir_c80_mae", "rir_edc_mae", "rir_itd_mae", "rir_ild_mae", "rir_ipd_mae", "rir_doa_mae"]
+      "metrics": ["rir_npm", "rt30_mae", "rt60_mae", "rir_drr_mae", "rir_c50_mae", "rir_c80_mae", "rir_edc_mae", "rir_edt_m_mae", "rir_edt_broadband_mae", "rir_edt_jnd_mae", "rir_c80_jnd_mae", "rir_d50_jnd_mae", "rir_ts_jnd_mae", "rir_itd_mae", "rir_ild_mae", "rir_ipd_mae", "rir_doa_mae"]
     }
   },
-  "all_metrics": ["rir_npm", "rt30_mae", "rt60_mae", "rir_drr_mae", "rir_c50_mae", "rir_c80_mae", "rir_edc_mae", "rir_iacc_full_mae", "rir_iacc_early_mae", "rir_iacc_late_mae", "rir_itd_mae", "rir_ild_mae", "rir_ipd_mae", "rir_doa_mae"]
+  "all_metrics": ["rir_npm", "rt30_mae", "rt60_mae", "rir_drr_mae", "rir_c50_mae", "rir_c80_mae", "rir_edc_mae", "rir_edt_m_mae", "rir_edt_broadband_mae", "rir_edt_jnd_mae", "rir_c80_jnd_mae", "rir_d50_jnd_mae", "rir_ts_jnd_mae", "rir_iacc_full_mae", "rir_iacc_early_mae", "rir_iacc_late_mae", "rir_itd_mae", "rir_ild_mae", "rir_ipd_mae", "rir_doa_mae"]
 }

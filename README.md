@@ -20,7 +20,8 @@ The **RIR estimation** task and its metrics are implemented in
 [`sure-evaluation`](https://github.com/Yj-Xiong/sure-evaluation):
 
 - The bundles include `rir_npm`, `rt30_mae`, `rt60_mae`, `rir_drr_mae`,
-  `rir_c50_mae`, `rir_c80_mae`, and `rir_edc_mae`;
+  `rir_c50_mae`, `rir_c80_mae`, `rir_edc_mae`, octave-band and broadband EDT,
+  and ISO 3382 EDT/C80/D50/Ts JND routes;
 - binaural adds IACC full/early/late, ITD, ILD, IPD, and DOA;
 - four-channel adds channel-0-relative ITD, ILD, IPD, and DOA.
 
@@ -44,7 +45,8 @@ separate 20-row Harness fixture is retained under
 
 The merge-check fixture is documented in
 [`example/minimal/README.md`](example/minimal/README.md). It covers acoustic,
-binaural, and four-channel spatial metrics with three small synthetic cases.
+binaural, four-channel spatial metrics, octave-band/broadband EDT, and the four
+metric-level JND pass rates with three small synthetic cases.
 
 The page is a static GitHub Pages artifact. It loads six real 60-row direct-RIR
 result cases. Model checkpoints and private paths stay outside the repository;

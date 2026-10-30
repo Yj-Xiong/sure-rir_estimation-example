@@ -1,15 +1,17 @@
 # RIR 最小指标样例
 
-merge 核查使用三类小样例覆盖全部 RIR 评测指标：
+merge 核查使用三类小样例覆盖全部 RIR 评测指标，包括 ISO 3382 EDT 和 JND 路线：
 
 | 样例 | 通道 | 指标 |
 | --- | ---: | --- |
-| `monaural` | 1 | NPM、RT30、RT60、DRR、C50、C80、EDC |
-| `binaural` | 2 | 上述 acoustic 指标 + IACC full/early/late、ITD、ILD、IPD、DOA |
-| `four_channel` | 4 | 上述 acoustic 指标 + ITD、ILD、IPD、DOA |
+| `monaural` | 1 | acoustic + octave-band/broadband EDT + EDT/C80/D50/Ts JND |
+| `binaural` | 2 | 上述指标 + IACC full/early/late、ITD、ILD、IPD、DOA |
+| `four_channel` | 4 | 上述指标 + ITD、ILD、IPD、DOA |
 
-四通道路径使用 `chN` 相对 `ch0` 的空间指标。双通道模型可以分两次推理，
-再把两次结果合并为四通道输出；IACC full/early/late 只在 `binaural` 样例中运行。
+ISO 3382 JND 指标在 1、2、4 通道上都逐通道计算并取通道均值；每项指标
+单独报告 within-one-JND 通过率。四通道空间路径使用 `chN` 相对 `ch0` 的
+指标。双通道模型可以分两次推理，再把两次结果合并为四通道输出；IACC
+full/early/late 只在 `binaural` 样例中运行。
 
 完整 pipeline ID、输入 contract 和报告字段见评测引擎的
 `docs/tasks/rir.md`。运行引擎测试：

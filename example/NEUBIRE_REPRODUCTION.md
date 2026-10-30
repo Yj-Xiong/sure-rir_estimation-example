@@ -124,8 +124,8 @@ runtime; the task documents atomic single-metric routes as well as bundles.
 
 ```bash
 SURE_EVAL_ROOT="$PWD/sure-evaluation"
-git clone https://github.com/PigeonDan1/sure-evaluation.git "$SURE_EVAL_ROOT"
-git -C "$SURE_EVAL_ROOT" checkout ab5598a6f621fbcc2fa222926e9f63674c561d48
+git clone -b feat/rir-iso3382-jnd https://github.com/Yj-Xiong/sure-evaluation.git "$SURE_EVAL_ROOT"
+git -C "$SURE_EVAL_ROOT" checkout 36ebf1e1b91a16308125489f0e77c3b1407201eb
 python3 -m venv "$SURE_EVAL_ROOT/.venv-rir"
 "$SURE_EVAL_ROOT/.venv-rir/bin/python" -m pip install -e "${SURE_EVAL_ROOT}[audio]"
 SURE_EVAL="$SURE_EVAL_ROOT/.venv-rir/bin/sure-eval"
@@ -134,7 +134,8 @@ SURE_EVAL="$SURE_EVAL_ROOT/.venv-rir/bin/sure-eval"
 
 ## 5. Score each model and channel mode
 
-The base bundle reports NPM, RT30, RT60, DRR, C50, C80, and EDC. The binaural
+The base bundle reports NPM, RT30, RT60, DRR, C50, C80, EDC, octave-band EDT,
+broadband EDT, and metric-level EDT/C80/D50/Ts JND. The binaural
 bundle adds the three IACC windows and channel-0-relative ITD, ILD, IPD, and
 DOA. The four-channel bundle adds the same channel-0-relative spatial
 metrics, without IACC because IACC requires exactly two channels.
@@ -146,7 +147,7 @@ out of scope for this protocol; use a separately versioned geometry-based
 evaluator for larger arrays or delays.
 
 ```bash
-BASE_METRICS="rir_npm,rt30_mae,rt60_mae,rir_drr_mae,rir_c50_mae,rir_c80_mae,rir_edc_mae"
+BASE_METRICS="rir_npm,rt30_mae,rt60_mae,rir_drr_mae,rir_c50_mae,rir_c80_mae,rir_edc_mae,rir_edt_m_mae,rir_edt_broadband_mae,rir_edt_jnd_mae,rir_c80_jnd_mae,rir_d50_jnd_mae,rir_ts_jnd_mae"
 BINAURAL_METRICS="$BASE_METRICS,rir_iacc_full_mae,rir_iacc_early_mae,rir_iacc_late_mae,rir_itd_mae,rir_ild_mae,rir_ipd_mae,rir_doa_mae"
 MULTICHANNEL_METRICS="$BASE_METRICS,rir_itd_mae,rir_ild_mae,rir_ipd_mae,rir_doa_mae"
 

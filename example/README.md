@@ -6,12 +6,12 @@ It regenerates 60 samples for each scenario:
 
 | Scenario | Inference | Reported metrics |
 | --- | --- | --- |
-| Rec-RIR monaural | channel 0 | normalized waveform MAE, NPM, RT30, RT60, DRR, C50, C80, EDC |
-| NeuBIRE monaural | score channel 0 from the native two-channel estimate | same acoustic metrics |
-| Rec-RIR binaural | independent channel 0/1 passes | acoustic metrics + IACC full/early/late, ITD, ILD, IPD, DOA |
-| NeuBIRE binaural | native two-channel pass | acoustic metrics + IACC full/early/late, ITD, ILD, IPD, DOA |
-| Rec-RIR four-channel | four paths | acoustic metrics + channel-0-relative ITD, ILD, IPD, DOA |
-| NeuBIRE four-channel | two two-channel passes | acoustic metrics + channel-0-relative ITD, ILD, IPD, DOA |
+| Rec-RIR monaural | channel 0 | normalized waveform MAE, acoustic metrics, EDT, broadband EDT, EDT/C80/D50/Ts JND |
+| NeuBIRE monaural | score channel 0 from the native two-channel estimate | same metrics |
+| Rec-RIR binaural | independent channel 0/1 passes | acoustic + EDT/JND + IACC full/early/late, ITD, ILD, IPD, DOA |
+| NeuBIRE binaural | native two-channel pass | acoustic + EDT/JND + IACC full/early/late, ITD, ILD, IPD, DOA |
+| Rec-RIR four-channel | four paths | acoustic + EDT/JND + channel-0-relative ITD, ILD, IPD, DOA |
+| NeuBIRE four-channel | two two-channel passes | acoustic + EDT/JND + channel-0-relative ITD, ILD, IPD, DOA |
 
 The four monaural/binaural scenarios use the fixed `VariableMSpacingFixedSNR` selection;
 the last two use the four-microphone selection. Both selections are generated
@@ -25,8 +25,8 @@ example repository after validation.
 
 ```bash
 git clone https://github.com/Yj-Xiong/sure-rir_estimation-example.git
-git clone https://github.com/Yj-Xiong/sure-evaluation.git sure-evaluation
-git -C sure-evaluation checkout ab5598a6f621fbcc2fa222926e9f63674c561d48
+git clone -b feat/rir-iso3382-jnd https://github.com/Yj-Xiong/sure-evaluation.git sure-evaluation
+git -C sure-evaluation checkout 36ebf1e1b91a16308125489f0e77c3b1407201eb
 export MODEL_PYTHON="/absolute/path/to/python-with-recbir-dependencies"
 "$MODEL_PYTHON" -m venv sure-evaluation/.venv
 sure-evaluation/.venv/bin/python -m pip install --upgrade pip setuptools wheel
@@ -125,9 +125,11 @@ other four outputs are useful for checking the shared inference implementation.
 ## 5. Score, assemble, and verify on the CPU queue
 
 The legacy report retains the one-second Rec-BIR/FiNS acoustic and spatial
-scores, then adds RT30, C80, and binaural DOA from the pinned SURE RIR pipeline
-on the same peak-calibrated one-second RIRs. The four-channel report uses the
-full pinned SURE RIR bundle. The scoring
+scores, then adds RT30, C80, EDT, broadband EDT, EDT/C80/D50/Ts JND, and
+binaural DOA from the pinned SURE RIR pipeline on the same peak-calibrated
+one-second RIRs. The four-channel report uses the full pinned SURE RIR bundle.
+Each JND metric reports its own within-one-JND percentage; there is no combined
+cross-metric pass rate. The scoring
 script writes into a separate output directory and checks all six scenario IDs,
 60 samples per scenario, metric means, waveform shapes, and native-WAV frequency
 analysis before it exits successfully.
